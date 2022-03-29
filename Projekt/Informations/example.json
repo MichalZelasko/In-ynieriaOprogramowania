@@ -1,0 +1,152 @@
+{
+    "general_info" : {
+        "chart_number" : "liczba wykresów",
+        "number_of_screens" : "1 | 2 | 3 | etc.",
+        "zooming" : "True | False",
+        "scale_changeable" : "True | False",
+        "automatic_refresh" : "True | False",
+        "refresh_time" : "czas po którym następuje automatyczne odświeżenie",
+        "user_refresh" : "True | False"
+    },
+    "screen_info" : {
+        "screen1" : {
+            "layout" : "vertcial | horizontal | separate_pages",
+            "tile_size" : "w procentach całego ekranu",
+            "charts" : {
+                "chart1" : {
+                    "vertical" : {
+                        "size" : "rozmiar w kafelkach",
+                        "position" : "położenie też w kafelkach"
+                    },
+                    "horizontal" : {
+                        "size" : "rozmiar w kafelkach",
+                        "position" : "położenie też w kafelkach"
+                    },
+                    "url_list" : {
+                        "url1" : "adres url 1",
+                        "url2" : "adres url 2",
+                        "..." : "lista adresów url danych, które chcemy nanieść na wykres - lista bo możemy w jednym układzie współrzędnych wiele wykresów"
+                    },
+                    "color_list" : {
+                        "color1" : "zielony | czerwony | niebieski | etc.",
+                        "color2" : "zielony | czerwony | niebieski | etc.",
+                        "..." : "lista kolorów odpowiadającym danym z kolejnych adresów url"
+                    },
+                    "name" : "nazwa wykresu",
+                    "type" : "scatter | histogram | etc.",
+                    "date" : {
+                        "date_start" : "od kiedy dane wyświetlać",
+                        "date_end" : "do kiedy dane wyświetlać, default: teraz"
+                    },
+                    "scale" : {
+                        "low" : "zakres wartości na wykresie",
+                        "high" : ""
+                    },
+                    "unit" : "jednostka podstawowa na wykresie",
+                    "unit_conversion" : "enabled | disabled",
+                    "enabled_units" : "None | lista dozwolonych jednostek"
+                }
+            },
+            "displayed_live_values" : {
+                "value1" : {
+                    "url" : "adres url",
+                    "name" : "nazwa wykresu",
+                    "scale" : "zakres wartości na wykresie",
+                    "unit" : "jednostka podstawowa na wykresie",
+                    "unit_conversion" : "enabled | disabled",
+                    "enabled_units" : "None | lista dozwolonych jednostek"
+                },
+                "value2" : {
+                    "url" : "adres url",
+                    "type" : "int | real | string | etc.",
+                    "name" : "nazwa wykresu",
+                    "scale" : "zakres wartości na wykresie",
+                    "unit" : "jednostka podstawowa na wykresie",
+                    "unit_conversion" : "enabled | disabled",
+                    "enabled_units" : "None | lista dozwolonych jednostek"
+                }
+            }
+        },
+        "screen2" : {
+            "layout" : "vertcial | horizontal | separate_pages",
+            "charts" : {
+                "chart1" : {
+                    "vertical" : {
+                        "size" : "rozmiar w kafelkach",
+                        "position" : "położenie też w kafelkach"
+                    },
+                    "horizontal" : {
+                        "size" : "rozmiar w kafelkach",
+                        "position" : "położenie też w kafelkach"
+                    },
+                    "url_list" : {
+                        "url1" : "adres url 1",
+                        "url2" : "adres url 2",
+                        "..." : "lista adresów url danych, które chcemy nanieść na wykres - lista bo możemy w jednym układzie współrzędnych wiele wykresów"
+                    },
+                    "color_list" : {
+                        "color1" : "zielony | czerwony | niebieski | etc.",
+                        "color2" : "zielony | czerwony | niebieski | etc.",
+                        "..." : "lista kolorów odpowiadającym danym z kolejnych adresów url"
+                    },
+                    "name" : "nazwa wykresu",
+                    "type" : "scatter | histogram | etc.",
+                    "date" : {
+                        "date_start" : "od kiedy dane wyświetlać",
+                        "date_end" : "do kiedy dane wyświetlać, default: teraz"
+                    },
+                    "scale" : {
+                        "low" : "zakres wartości na wykresie",
+                        "high" : ""
+                    },
+                    "unit" : "jednostka podstawowa na wykresie",
+                    "unit_conversion" : "enabled | disabled",
+                    "enabled_units" : "None | lista dozwolonych jednostek"
+                },
+                "chart2" : {
+                    "vertical" : {
+                        "size" : "rozmiar w kafelkach",
+                        "position" : "położenie też w kafelkach"
+                    },
+                    "horizontal" : {
+                        "size" : "rozmiar w kafelkach",
+                        "position" : "położenie też w kafelkach"
+                    },
+                    "url_list" : {
+                        "url1" : "adres url 1",
+                        "url2" : "adres url 2",
+                        "..." : "lista adresów url danych, które chcemy nanieść na wykres - lista bo możemy w jednym układzie współrzędnych wiele wykresów"
+                    },
+                    "color_list" : {
+                        "color1" : "zielony | czerwony | niebieski | etc.",
+                        "color2" : "zielony | czerwony | niebieski | etc.",
+                        "..." : "lista kolorów odpowiadającym danym z kolejnych adresów url"
+                    },
+                    "name" : "nazwa wykresu",
+                    "type" : "scatter | histogram | etc.",
+                    "date" : {
+                        "date_start" : "od kiedy dane wyświetlać",
+                        "date_end" : "do kiedy dane wyświetlać, default: teraz"
+                    },
+                    "scale" : {
+                        "low" : "zakres wartości na wykresie",
+                        "high" : ""
+                    },
+                    "unit" : "jednostka podstawowa na wykresie",
+                    "unit_conversion" : "enabled | disabled",
+                    "enabled_units" : "None | lista dozwolonych jednostek"
+                }
+            },
+            "displayed_live_values" : {
+                "value1" : {
+                    "url" : "adres url",
+                    "name" : "nazwa wykresu",
+                    "scale" : "zakres wartości na wykresie",
+                    "unit" : "jednostka podstawowa na wykresie",
+                    "unit_conversion" : "enabled | disabled",
+                    "enabled_units" : "None | lista dozwolonych jednostek"
+                }
+            }
+        }
+    }
+}
