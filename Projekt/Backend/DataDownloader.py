@@ -2,16 +2,17 @@ import requests
 import json
 import csv
 
-def getDataFromRes(res, dataDict, dataName):
-    if dataDict == "":
-        return res['data'][dataName]
-    else:
-        return res['data'][dataDict][dataName]
+def getDataFromRes(res, dataDestination):
+    dataName = "data"
+    curr = res[dataName]
+    for dest in dataDestination:
+        curr = curr[dest]
+    return curr
 def getTimeStamp(res):
     timeStampName = "timestamp"
     return res[timeStampName]
 
-def main(url, dataDict, dataName):
+def main(url, dataDestination):
     response = requests.get(url, timeout=30)
     response.raise_for_status()
     j = json.loads(response.content)
@@ -22,12 +23,14 @@ def main(url, dataDict, dataName):
     timesTab = []
     resultsName = "results"
     for res in j[resultsName]:
-        valueTab.append(getDataFromRes(res, dataDict, dataName))
+        valueTab.append(getDataFromRes(res, dataDestination))
         timeStamp = getTimeStamp(res)
-        (date, time) = timeStamp.split('T')
-        formatedTime = time.split('+')[0].split('.')[0]
-        formatedDateTime = date + "-" + formatedTime
-        timesTab.append(formatedDateTime)
+        # (date, time) = timeStamp.split('T')
+        # formatedTime = time.split('+')[0].split('.')[0]
+        # formatedDateTime = date + "-" + formatedTime
+        timesTab.append(timeStamp)
+
+
 
 
     f = open('output.csv', 'w')
@@ -38,9 +41,8 @@ def main(url, dataDict, dataName):
 
 if __name__ == "__main__":
     url = "https://datahub.ki.agh.edu.pl/api/endpoints/70/data/"
-    dataDict = "heater"
-    dataName = "tempSet"
-    main(url, dataDict, dataName)
+    dataDestination = ["heater", "tempSet"]
+    main(url, dataDestination)
     #
     # dataDict = ""
     # dataName = "tun0IP"
