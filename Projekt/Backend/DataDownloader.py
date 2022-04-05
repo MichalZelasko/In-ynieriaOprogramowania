@@ -20,23 +20,26 @@ def main(url, dataDestination):
     js = json.dumps(j, indent = 2)
     # print(js)
     valueTab = []
-    timesTab = []
+    dateTab = []
     resultsName = "results"
     for res in j[resultsName]:
         valueTab.append(getDataFromRes(res, dataDestination))
         timeStamp = getTimeStamp(res)
-        # (date, time) = timeStamp.split('T')
-        # formatedTime = time.split('+')[0].split('.')[0]
-        # formatedDateTime = date + "-" + formatedTime
-        timesTab.append(timeStamp)
+        dateTab.append(timeStamp)
 
 
 
 
-    f = open('output.csv', 'w')
-    writer = csv.writer(f)
-    writer.writerow(timesTab)
-    writer.writerow(valueTab)
+
+    # f = open('output.csv', 'w')
+    # writer = csv.writer(f)
+    # writer.writerow(timesTab)
+    # writer.writerow(valueTab)
+
+    dateValue = {"info":[], "data":[{"date": dateTab[i], "value": valueTab[i]} for i in range(len(valueTab)) ] }
+    with open("data.json", "w") as write_file:
+        json.dump(dateValue, write_file, indent=4)
+
 
 
 if __name__ == "__main__":
