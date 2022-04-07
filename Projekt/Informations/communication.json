@@ -1,0 +1,52 @@
+{
+    "chart" : {
+        "is_chart" : "True | False",
+        "vertical" : {
+            "size" : "rozmiar w kafelkach",
+            "position" : "położenie też w kafelkach"
+        },
+        "horizontal" : {
+            "size" : "rozmiar w kafelkach",
+            "position" : "położenie też w kafelkach"
+        },
+        "color_list" : {
+            "color1" : "zielony | czerwony | niebieski | etc.",
+            "color2" : "zielony | czerwony | niebieski | etc.",
+            "..." : "lista kolorów odpowiadającym danym z kolejnych adresów url"
+        },
+        "name" : "nazwa wykresu",
+        "type" : "scatter | histogram | etc.",
+        "function1" :{
+            "data" : {
+                "point1" : {
+                    "x" : "time",
+                    "y" : "value of"
+                },
+                "point2" : {
+                    "x" : "time",
+                    "y" : "value of"
+                },
+                "point3" : {
+                    "x" : "time",
+                    "y" : "value of"
+                }
+            }
+        },
+        "function2" :{
+            "data" : {
+                "point1" : {
+                    "x" : "time",
+                    "y" : "value of"
+                },
+                "point2" : {
+                    "x" : "time",
+                    "y" : "value of"
+                },
+                "point3" : {
+                    "x" : "time",
+                    "y" : "value of"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,191 @@
+{
+    "general_info" : {                                                          //całość general_info do generalne plik konfiguracyjny
+        "chart_number" : "liczba wykresów",
+        "number_of_screens" : "1 | 2 | 3 | etc.",
+        "zooming" : "True | False",
+        "scale_changeable" : "True | False",
+        "automatic_refresh" : "True | False",
+        "refresh_time" : "czas po którym następuje automatyczne odświeżenie",
+        "user_refresh" : "True | False"
+    },
+    "screen_info" : {                                                           //w konfiguracji generalnej dodajemy poszczególne screeny i następujące pola dla kązdego screena idą do tego pliku
+        "screen1" : {                                                           //oflagowania wymaga informacja o tym czy na danym ekranie mamy 
+            "layout" : "vertcial | horizontal | separate_pages",                //general_info
+            "tile_size" : "w procentach całego ekranu",                         //general_info
+            "charts" : {                                                        //wszystko co w charts do danych do poszczególnych wykresów z wyjątkiem url_list
+                "chart1" : {
+                    "vertical" : {
+                        "size" : "rozmiar w kafelkach",
+                        "position" : "położenie też w kafelkach"
+                    },
+                    "horizontal" : {
+                        "size" : "rozmiar w kafelkach",
+                        "position" : "położenie też w kafelkach"
+                    },
+                    "url_list" : {                                              //tego front-end nie potrzebuje
+                        "url1" : "adres url 1",
+                        "data_destination_1" : {
+                            "key1" : "klucz 1",
+                            "key2" : "klucz 2",
+                            "key3" : "klucz 3",
+                            "key4" : "..."
+                        },
+                        "url2" : "adres url 2",
+                        "data_destination_2" : {
+                            "key1" : "klucz 1",
+                            "key2" : "klucz 2",
+                            "key3" : "klucz 3",
+                            "key4" : "..."
+                        },
+                        "..." : "lista adresów url danych, które chcemy nanieść na wykres - lista bo możemy w jednym układzie współrzędnych wiele wykresów"
+                    },
+                    "color_list" : {
+                        "color1" : "zielony | czerwony | niebieski | etc.",
+                        "color2" : "zielony | czerwony | niebieski | etc.",
+                        "..." : "lista kolorów odpowiadającym danym z kolejnych adresów url"
+                    },
+                    "name" : "nazwa wykresu",
+                    "type" : "scatter | histogram | etc.",
+                    "date" : {
+                        "date_start" : "od kiedy dane wyświetlać",
+                        "date_end" : "do kiedy dane wyświetlać, default: teraz"
+                    },
+                    "scale" : {
+                        "low" : "zakres wartości na wykresie",
+                        "high" : ""
+                    },
+                    "unit" : "jednostka podstawowa na wykresie",
+                    "unit_conversion" : "enabled | disabled",
+                    "enabled_units" : "None | lista dozwolonych jednostek",
+                    "size_x" : "rozmiar w kafelkach na osi x",
+                    "size_y" : "rozmiar w kafelkach na osi y"
+                }
+            },
+            "displayed_live_values" : {
+                "value1" : {                        //traktujemy tak jak wykres tylko dodane musi być pole wskazujące na to czy mamy doczynienia z wykresem czy tylko daną do wyświetlenia
+                    "url" : "adres url",
+                    "data_destination" : {
+                        "key1" : "klucz 1",
+                        "key2" : "klucz 2",
+                        "key3" : "klucz 3",
+                        "key4" : "..."
+                    },
+                    "name" : "nazwa wykresu",
+                    "scale" : "zakres wartości",
+                    "unit" : "jednostka podstawowa",
+                    "unit_conversion" : "enabled | disabled",
+                    "enabled_units" : "None | lista dozwolonych jednostek",
+                    "size_x" : "rozmiar w kafelkach na osi x",
+                    "size_y" : "rozmiar w kafelkach na osi y"
+                },
+                "value2" : {
+                    "url" : "adres url",
+                    "data_destination" : {
+                        "key1" : "klucz 1",
+                        "key2" : "klucz 2",
+                        "key3" : "klucz 3",
+                        "key4" : "..."
+                    },
+                    "type" : "int | real | string | etc.",
+                    "name" : "nazwa wykresu",
+                    "scale" : "zakres wartoście",
+                    "unit" : "jednostka podstawowa",
+                    "unit_conversion" : "enabled | disabled",
+                    "enabled_units" : "None | lista dozwolonych jednostek",
+                    "size_x" : "rozmiar w kafelkach na osi x",
+                    "size_y" : "rozmiar w kafelkach na osi y"
+                }
+            }
+        },
+        "screen2" : {
+            "screen1" : {
+                "layout" : "vertcial | horizontal | separate_pages",
+                "tile_size" : "w procentach całego ekranu",
+                "charts" : {
+                    "chart1" : {
+                        "vertical" : {
+                            "size" : "rozmiar w kafelkach",
+                            "position" : "położenie też w kafelkach"
+                        },
+                        "horizontal" : {
+                            "size" : "rozmiar w kafelkach",
+                            "position" : "położenie też w kafelkach"
+                        },
+                        "url_list" : {
+                            "url1" : "adres url 1",
+                            "data_destination_1" : {
+                                "key1" : "klucz 1",
+                                "key2" : "klucz 2",
+                                "key3" : "klucz 3",
+                                "key4" : "..."
+                            },
+                            "url2" : "adres url 2",
+                            "data_destination_2" : {
+                                "key1" : "klucz 1",
+                                "key2" : "klucz 2",
+                                "key3" : "klucz 3",
+                                "key4" : "..."
+                            },
+                            "..." : "lista adresów url danych, które chcemy nanieść na wykres - lista bo możemy w jednym układzie współrzędnych wiele wykresów"
+                        },
+                        "color_list" : {
+                            "color1" : "zielony | czerwony | niebieski | etc.",
+                            "color2" : "zielony | czerwony | niebieski | etc.",
+                            "..." : "lista kolorów odpowiadającym danym z kolejnych adresów url"
+                        },
+                        "name" : "nazwa wykresu",
+                        "type" : "scatter | histogram | etc.",
+                        "date" : {
+                            "date_start" : "od kiedy dane wyświetlać",
+                            "date_end" : "do kiedy dane wyświetlać, default: teraz"
+                        },
+                        "scale" : {
+                            "low" : "zakres wartości na wykresie",
+                            "high" : ""
+                        },
+                        "unit" : "jednostka podstawowa na wykresie",
+                        "unit_conversion" : "enabled | disabled",
+                        "enabled_units" : "None | lista dozwolonych jednostek",
+                        "size_x" : "rozmiar w kafelkach na osi x",
+                        "size_y" : "rozmiar w kafelkach na osi y"
+                    }
+                },
+                "displayed_live_values" : {
+                    "value1" : {
+                        "url" : "adres url",
+                        "data_destination" : {
+                            "key1" : "klucz 1",
+                            "key2" : "klucz 2",
+                            "key3" : "klucz 3",
+                            "key4" : "..."
+                        },
+                        "name" : "nazwa wykresu",
+                        "scale" : "zakres wartości na wykresie",
+                        "unit" : "jednostka podstawowa na wykresie",
+                        "unit_conversion" : "enabled | disabled",
+                        "enabled_units" : "None | lista dozwolonych jednostek"
+                        "size_x" : "rozmiar w kafelkach na osi x",
+                        "size_y" : "rozmiar w kafelkach na osi y"
+                    },
+                    "value2" : {
+                        "url" : "adres url",
+                        "data_destination" : {
+                            "key1" : "klucz 1",
+                            "key2" : "klucz 2",
+                            "key3" : "klucz 3",
+                            "key4" : "..."
+                        },
+                        "type" : "int | real | string | etc.",
+                        "name" : "nazwa wykresu",
+                        "scale" : "zakres wartości na wykresie",
+                        "unit" : "jednostka podstawowa na wykresie",
+                        "unit_conversion" : "enabled | disabled",
+                        "enabled_units" : "None | lista dozwolonych jednostek",
+                        "size_x" : "rozmiar w kafelkach na osi x",
+                        "size_y" : "rozmiar w kafelkach na osi y"
+                    }
+                }
+            }
+        }
+    }
+}

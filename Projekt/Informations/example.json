@@ -12,6 +12,7 @@
         "screen1" : {
             "layout" : "vertcial | horizontal | separate_pages",
             "tile_size" : "w procentach całego ekranu",
+            "chart_on_screen_number" : "liczba wykresów na ekranie",
             "charts" : {
                 "chart1" : {
                     "vertical" : {
@@ -69,6 +70,8 @@
         },
         "screen2" : {
             "layout" : "vertcial | horizontal | separate_pages",
+            "tile_size" : "w procentach całego ekranu",
+            "chart_on_screen_number" : "liczba wykresów na ekranie",
             "charts" : {
                 "chart1" : {
                     "vertical" : {

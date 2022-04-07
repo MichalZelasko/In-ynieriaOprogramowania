@@ -1,0 +1,18 @@
+{
+    "general_info" : {
+        "chart_number" : "liczba wykresów",
+        "number_of_screens" : "1 | 2 | 3 | etc.",
+        "zooming" : "True | False",
+        "scale_changeable" : "True | False",
+        "automatic_refresh" : "True | False",
+        "refresh_time" : "czas po którym następuje automatyczne odświeżenie",
+        "user_refresh" : "True | False"
+    },
+    "screen_info" : {
+        "screen1" : {
+            "layout" : "vertcial | horizontal | separate_pages",
+            "tile_size" : "w procentach całego ekranu",
+            "chart_on_screen_number" : "liczba wykresów na ekranie"
+        }
+    }
+}
