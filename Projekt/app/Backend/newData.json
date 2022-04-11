@@ -1,6 +1,29 @@
 {
-    "info": [],
+    "info": [
+        {
+            "is_chart": "True",
+            "vertical": {
+                "size": "rozmiar w kafelkach",
+                "position": "po\u0139\u201ao\u0139\u013denie te\u0139\u013d w kafelkach"
+            },
+            "horizontal": {
+                "size": "rozmiar w kafelkach",
+                "position": "po\u0139\u201ao\u0139\u013denie te\u0139\u013d w kafelkach"
+            },
+            "color_list": {
+                "color1": "zielony | czerwony | niebieski | etc.",
+                "color2": "zielony | czerwony | niebieski | etc.",
+                "...": "lista kolor\u0102\u0142w odpowiadaj\u00c4\u2026cym danym z kolejnych adres\u0102\u0142w url"
+            },
+            "name": "nazwa wykresu",
+            "type": "scatter | histogram | etc."
+        }
+    ],
     "data": [
+        {
+            "date": "2022-04-11T17:43:13+02:00",
+            "value": 3.3760547637939453
+        },
         {
             "date": "2022-04-11T17:28:11+02:00",
             "value": 4.160449028015137
@@ -96,10 +119,6 @@
         {
             "date": "2022-04-11T05:07:14+02:00",
             "value": 4.072950839996338
-        },
-        {
-            "date": "2022-04-11T04:52:14+02:00",
-            "value": 3.8455398082733154
         }
     ]
 }
