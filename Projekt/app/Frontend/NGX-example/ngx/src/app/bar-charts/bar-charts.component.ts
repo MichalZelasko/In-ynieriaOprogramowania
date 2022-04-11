@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TreeMapModule } from '@swimlane/ngx-charts';
-import { productSales, productSalesMulti } from '../data/products';
+import { productSales, productSalesMulti,testjson } from '../data/products';
 
 @Component({
   selector: 'app-bar-charts',
@@ -11,12 +11,13 @@ export class BarChartsComponent implements OnInit {
 
   productS: any[];
   productSM: any[];
-  view: [number, number] = [700,370];
-  colorScheme = { domain: ['#32a852', '#4f2459', '#4336a8', '#7c337d', '#bdb953'] };
+  testjs: any[];
+  view: [number, number] = [900,570];
+  colorScheme = { domain: ['#020305', '#4f2459', '#4336a8', '#7c337d', '#bdb953'] };
   gradient: boolean = false;
   xAxis: boolean = true;
   yAxis: boolean = true;
-  legendTitle: string = "Products";
+  legendTitle: string = "Productsss";
   legendTitleMulti: string = "Months";
   legendPosition: string = "below";
   legend: boolean = true;
@@ -33,8 +34,10 @@ export class BarChartsComponent implements OnInit {
   constructor() { 
     this.productS = productSales;
     this.productSM = productSalesMulti;
+    this.testjs = testjson;
     Object.assign(this.productS, productSales);
     Object.assign(this.productSM, productSalesMulti);
+    Object.assign(this.testjs, testjson);
   }
 
   ngOnInit(): void {
