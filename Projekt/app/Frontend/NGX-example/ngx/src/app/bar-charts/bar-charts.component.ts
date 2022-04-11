@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TreeMapModule } from '@swimlane/ngx-charts';
-import { productSales, productSalesMulti,testjson } from '../data/products';
+import { productSales, productSalesMulti, testjson } from '../data/products';
 
-declare var require: any
+declare var require: any;
 
 @Component({
   selector: 'app-bar-charts',
@@ -40,7 +40,7 @@ export class BarChartsComponent implements OnInit {
     this.productSM = productSalesMulti;
     this.testjs = testjson;
     this.actualData = [];
-    //this.actualData = null;
+    
     //Object.assign(this.productS, productSales);
     //Object.assign(this.productSM, productSalesMulti);
     //Object.assign(this.testjs, testjson);
@@ -49,18 +49,7 @@ export class BarChartsComponent implements OnInit {
   getData(): void{
     var json = require('../../../../../../resources/data.json');
 
-    console.log(json.data);
-    console.log(json.data[1]);
-
-    var i = 0;
-    for (const x in json.data) {
-      this.actualData[0] = x;
-      i++;
-    }
-
-    //var dat = <any[]> JSON.parse(json.data);
-
-    //this.actualData = dat;
+    this.actualData = json.data;
   }
 
   ngOnInit(): void {
