@@ -18,7 +18,7 @@ def main(url, dataDestination, dateToStart, confPath):
     response = requests.get(url, timeout=30)
     response.raise_for_status()
     j = json.loads(response.content)
-    print(j)
+    # print(j)
     js = json.dumps(j, indent = 2)
     # print(js)
     valueTab = []
@@ -51,16 +51,11 @@ def main(url, dataDestination, dateToStart, confPath):
     info["type"] = chart_data["type"]
 
 
-    print(info)
-
-
-    # f = open('output.csv', 'w')
-    # writer = csv.writer(f)
-    # writer.writerow(timesTab)
-    # writer.writerow(valueTab)
+    # print(info)
 
     dateValue = {"info":[info], "data":[{"name": dateTab[i], "value": valueTab[i]} for i in range(len(valueTab)) ] }
-    with open("newData.json", "w") as write_file:
+    path_to_save = "../resources/data.json"
+    with open(path_to_save, "w") as write_file:
         json.dump(dateValue, write_file, indent=4)
 
 
