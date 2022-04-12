@@ -17,21 +17,21 @@ export class BarChartsComponent implements OnInit {
   actualData: any[];
 
   view: [number, number] = [900,570];
-  colorScheme = { domain: ['#020305', '#4f2459', '#4336a8', '#7c337d', '#bdb953'] };
+  colorScheme = { domain: ['#596d5f', '#5d7765', '#60816b', '#638c70', '#679676', '#6aa17c', '#6cab82', '#6fb688', '#72c18e'] };
   gradient: boolean = false;
   xAxis: boolean = true;
   yAxis: boolean = true;
-  legendTitle: string = "Productsss";
+  legendTitle: string = "Products";
   legendTitleMulti: string = "Months";
   legendPosition: string = "below";
   legend: boolean = true;
   showXAxisLabel: boolean = true;
   showYAxisLabel: boolean = true;
-  xAxisLabel: string = "Products";
-  yAxisLabel: string = "Sales";
+  xAxisLabel: string = "Date";
+  yAxisLabel: string = "Tepmerature";
   showGridLines: boolean = true;
   showDataLabel: boolean = true;
-  barPadding: number = 5;
+  barPadding: number = 3;
   tooltipDisabled: boolean = false;
   roundEdges: boolean = false;
 
