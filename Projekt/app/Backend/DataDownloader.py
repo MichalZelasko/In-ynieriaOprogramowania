@@ -60,7 +60,7 @@ def main(url, dataDestination, dateToStart, confPath):
     # writer.writerow(valueTab)
 
     dateValue = {"info":[info], "data":[{"name": dateTab[i], "value": valueTab[i]} for i in range(len(valueTab)) ] }
-    with open("data.json", "w") as write_file:
+    with open("newData.json", "w") as write_file:
         json.dump(dateValue, write_file, indent=4)
 
 
