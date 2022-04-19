@@ -68,6 +68,17 @@
                         "color2" : "zielony | czerwony | niebieski | etc.",
                         "..." : "lista kolorow odpowiadajacym danym z kolejnych adresow url"
                     },
+                    "data_names" : [
+                        {
+                            "data_name": "nazwa zmiennej"
+                        },
+                        {
+                            "data_name": "nazwa zmiennej"
+                        },
+                        {
+                            "...": "lista nazw zmiennych"
+                        }
+                    ],
                     "name" : "nazwa wykresu",
                     "type" : "scatter | histogram | etc.",
                     "date" : {
@@ -97,7 +108,7 @@
                                 "...": "rest of destination"
                             }
                         ],
-                    "name" : "nazwa wykresu",
+                    "name" : "nazwa wykresu jednocześnie zmiennej",
                     "scale" : "zakres wartości na wykresie",
                     "unit" : "jednostka podstawowa na wykresie",
                     "unit_conversion" : "enabled | disabled",
@@ -117,7 +128,7 @@
                             }
                         ],
                     "type" : "int | real | string | etc.",
-                    "name" : "nazwa wykresu",
+                    "name" : "nazwa wykresu jednocześnie zmiennej",
                     "scale" : "zakres wartości na wykresie",
                     "unit" : "jednostka podstawowa na wykresie",
                     "unit_conversion" : "enabled | disabled",
@@ -184,6 +195,17 @@
                         "color2" : "zielony | czerwony | niebieski | etc.",
                         "..." : "lista kolorów odpowiadającym danym z kolejnych adresów url"
                     },
+                    "data_names" : [
+                        {
+                            "data_name": "nazwa zmiennej"
+                        },
+                        {
+                            "data_name": "nazwa zmiennej"
+                        },
+                        {
+                            "...": "lista nazw zmiennych"
+                        }
+                    ],
                     "name" : "nazwa wykresu",
                     "type" : "scatter | histogram | etc.",
                     "date" : {
@@ -252,6 +274,17 @@
                         "color2" : "zielony | czerwony | niebieski | etc.",
                         "..." : "lista kolorów odpowiadającym danym z kolejnych adresów url"
                     },
+                    "data_names" : [
+                        {
+                            "data_name": "nazwa zmiennej"
+                        },
+                        {
+                            "data_name": "nazwa zmiennej"
+                        },
+                        {
+                            "...": "lista nazw zmiennych"
+                        }
+                    ],
                     "name" : "nazwa wykresu",
                     "type" : "scatter | histogram | etc.",
                     "date" : {
@@ -281,7 +314,7 @@
                                 "...": "rest of destination"
                             }
                         ],
-                    "name" : "nazwa wykresu",
+                    "name" : "nazwa wykresu jednocześnie zmiennej",
                     "scale" : "zakres wartości na wykresie",
                     "unit" : "jednostka podstawowa na wykresie",
                     "unit_conversion" : "enabled | disabled",

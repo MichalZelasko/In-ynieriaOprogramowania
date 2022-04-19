@@ -1,6 +1,6 @@
 {
     "general_info" : {
-        "chart_number" : 3
+        "chart_number" : 2,
         "number_of_screens" : 1,
         "zooming" : false,
         "scale_changeable" : false,
@@ -50,6 +50,17 @@
                         "color2" : "zielony | czerwony | niebieski | etc.",
                         "..." : "lista kolorow odpowiadajacym danym z kolejnych adresow url"
                     },
+                    "data_names" : [
+                        {
+                            "data_name": "nazwa zmiennej"
+                        },
+                        {
+                            "data_name": "nazwa zmiennej"
+                        },
+                        {
+                            "...": "lista nazw zmiennych"
+                        }
+                    ],
                     "name" : "nazwa wykresu",
                     "type" : "scatter | histogram | etc.",
                     "date" : {
@@ -76,7 +87,7 @@
                                 "dest": "locName"
                             }
                         ],
-                    "name" : "nazwa wykresu",
+                    "name" : "nazwa wykresu jednocześnie zmiennej",
                     "scale" : "zakres wartości na wykresie",
                     "unit" : "jednostka podstawowa na wykresie",
                     "unit_conversion" : "enabled | disabled",
