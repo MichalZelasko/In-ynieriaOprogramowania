@@ -28,6 +28,23 @@
                         "url2" : "adres url 2",
                         "..." : "lista adresow url danych, ktore chcemy naniesc na wykres - lista bo mozemy w jednym układzie wspolrzednych wiele wykresow"
                     },
+                    "data_destination_list" : {
+                        "data_destination1" : {
+                                "dest1" : "destination 1",
+                                "dest2" : "destination 2",
+                                "..." : "rest of destination"
+                            },
+                        "data_destination2" : {
+                                "dest1" : "destination 1",
+                                "dest2" : "destination 2",
+                                "..." : "rest of destination"
+                            },
+                        "rest of destinations..." : {
+                                "dest1" : "destination 1",
+                                "dest2" : "destination 2",
+                                "..." : "rest of destination"
+                            }
+                    },
                     "color_list" : {
                         "color1" : "zielony | czerwony | niebieski | etc.",
                         "color2" : "zielony | czerwony | niebieski | etc.",
@@ -51,6 +68,11 @@
             "displayed_live_values" : {
                 "value1" : {
                     "url" : "adres url",
+                    "data_destination" : {
+                                "dest1" : "destination 1",
+                                "dest2" : "destination 2",
+                                "..." : "rest of destination"
+                            },
                     "name" : "nazwa wykresu",
                     "scale" : "zakres wartości na wykresie",
                     "unit" : "jednostka podstawowa na wykresie",
@@ -59,6 +81,11 @@
                 },
                 "value2" : {
                     "url" : "adres url",
+                    "data_destination" : {
+                                "dest1" : "destination 1",
+                                "dest2" : "destination 2",
+                                "..." : "rest of destination"
+                            },
                     "type" : "int | real | string | etc.",
                     "name" : "nazwa wykresu",
                     "scale" : "zakres wartości na wykresie",

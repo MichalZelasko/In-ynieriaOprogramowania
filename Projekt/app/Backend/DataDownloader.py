@@ -52,6 +52,8 @@ def main(url, dataDestination, dateToStart, confPath, filePath, is_chart = True,
         oldData = []
         info = {}
         is_chart = "True"
+        json_file = open(confPath)
+        json_data = json.load(json_file)
 
         chart_data = json_data["screen_info"]["screen1"]["charts"]["chart1"]
         # print(chart_data)
@@ -71,7 +73,7 @@ def main(url, dataDestination, dateToStart, confPath, filePath, is_chart = True,
         response.raise_for_status()
         j = json.loads(response.content)
         # print(j)
-        js = json.dumps(j, indent = 2)
+        # js = json.dumps(j, indent = 2)
         # print(js)
         resultsName = "results"
         url = getNext(j)
@@ -88,8 +90,7 @@ def main(url, dataDestination, dateToStart, confPath, filePath, is_chart = True,
 
     data = newData + oldData
 
-    json_file =  open(confPath)
-    json_data = json.load(json_file)
+
     if update :
         dateValue = {"info" : info, "data" : data}
     else :
@@ -104,7 +105,7 @@ def main(url, dataDestination, dateToStart, confPath, filePath, is_chart = True,
 if __name__ == "__main__" :
     url = "https://datahub.ki.agh.edu.pl/api/endpoints/70/data/"
     dataDestination = ["heater", "tempSet"]
-    dateToStart = "2022-04-15T08:27:34+02:00"
+    dateToStart = "2022-04-19T08:27:34+02:00"
     confPath = os.path.realpath(os.path.join(os.path.dirname(__file__), '..', '..', 'Informations', 'example.json'))
     main(url, dataDestination, dateToStart, confPath, "../resources/data.json", True, True)
 
