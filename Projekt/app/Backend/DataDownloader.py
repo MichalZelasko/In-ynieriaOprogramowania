@@ -90,8 +90,10 @@ def main(url, dataDestination, dateToStart, confPath, filePath, is_chart = True,
 
     json_file =  open(confPath)
     json_data = json.load(json_file)
-
-    dateValue = {"info" : [info], "data" : data}
+    if update :
+        dateValue = {"info" : info, "data" : data}
+    else :
+        dateValue = {"info" : [info], "data" : data}
     # path_to_save = "../resources/data.json"
     # zastąpione prze filePath
     with open(filePath, "w") as write_file :
