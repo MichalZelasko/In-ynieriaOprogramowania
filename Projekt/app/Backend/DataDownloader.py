@@ -25,7 +25,7 @@ def getInfo(res) :
 
 def getOldData(res) :
     data = "data"
-    return res["data"]
+    return res[data]
 
 def getLastDate(res) :
     index = 0
@@ -56,8 +56,6 @@ def main(url, dataDestination, dateToStart, confPath, filePath, is_chart = True,
         json_data = json.load(json_file)
 
         chart_data = json_data["screen_info"]["screen1"]["charts"]["chart1"]
-        # print(chart_data)
-        # chart_data.pop("url_list")
 
         info["is_chart"] = is_chart
         info["vertical"] = chart_data["vertical"]
@@ -65,6 +63,8 @@ def main(url, dataDestination, dateToStart, confPath, filePath, is_chart = True,
         info["color_list"] = chart_data["color_list"]
         info["name"] = chart_data["name"]
         info["type"] = chart_data["type"]
+
+        info = [info]
 
     # print(info)
 
@@ -94,7 +94,7 @@ def main(url, dataDestination, dateToStart, confPath, filePath, is_chart = True,
     if update :
         dateValue = {"info" : info, "data" : data}
     else :
-        dateValue = {"info" : [info], "data" : data}
+        dateValue = {"info" : info, "data" : data}
     # path_to_save = "../resources/data.json"
     # zastąpione prze filePath
     with open(filePath, "w") as write_file :
@@ -106,7 +106,7 @@ if __name__ == "__main__" :
     url = "https://datahub.ki.agh.edu.pl/api/endpoints/70/data/"
     dataDestination = ["heater", "tempSet"]
     dateToStart = "2022-04-19T08:27:34+02:00"
-    confPath = os.path.realpath(os.path.join(os.path.dirname(__file__), '..', '..', 'Informations', 'example.json'))
+    confPath = "../../Informations/template.json"
     main(url, dataDestination, dateToStart, confPath, "../resources/data.json", True, True)
 
 
