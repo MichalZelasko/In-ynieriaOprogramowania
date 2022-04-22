@@ -40,7 +40,27 @@ def getOldFile(filePath) :
     lastDate = getLastDate(oldData)
     return info, oldData, lastDate
 
-def main(url, dataDestination, dateToStart, confPath, filePath, is_chart = True, update = False) :
+def downloadSingleChart(chart, chartNum):
+    for i in range(len(chart["url_list"])):
+        num = str(i + 1)
+        urlKey = "url" + num
+        dataDestinationKey = "data_destination" + num
+        dataNameKey = "data_name" + num
+        url = chart["url_list"][urlKey]
+        dataDestinationList = chart["data_destination_list"][dataDestinationKey]
+        dataDestination = []
+        for dest in dataDestinationList:
+            dataDestination.append(dest["dest"])
+        dataName = chart["data_names"][dataNameKey]
+        # print(url)
+        # print(dataDestination)
+        # print(dataName)
+        dataFilePath = "../resources/chart_" + chartNum +"_data_" + num + ".json"
+        downloadData(url, dataDestination, dateToStart, confPath, dataFilePath, True)
+
+# def downlaodSingleDisplayLiveValue(value)
+
+def downloadData(url, dataDestination, dateToStart, confPath, filePath, is_chart = True, update = False) :
     flag_continue = True
     newData = []
     # valueTab = []
@@ -51,7 +71,6 @@ def main(url, dataDestination, dateToStart, confPath, filePath, is_chart = True,
     else :
         oldData = []
         info = {}
-        is_chart = "True"
         json_file = open(confPath)
         json_data = json.load(json_file)
 
@@ -103,11 +122,32 @@ def main(url, dataDestination, dateToStart, confPath, filePath, is_chart = True,
 
 
 if __name__ == "__main__" :
+
     url = "https://datahub.ki.agh.edu.pl/api/endpoints/70/data/"
     dataDestination = ["heater", "tempSet"]
-    dateToStart = "2022-04-19T08:27:34+02:00"
-    confPath = "../../Informations/template.json"
-    main(url, dataDestination, dateToStart, confPath, "../resources/data.json", True, True)
+    dateToStart = "2022-04-22T08:27:34+02:00"
+
+    # odtąd nowy kod
+    confPath = "../../Informations/example1.json"
+    confJsonFile = open(confPath)
+    confData = json.load(confJsonFile)
+    screenAmount = confData["general_info"]["number_of_screens"]
+    for num in range(screenAmount):
+        screenNumber = num + 1
+        screenName = "screen" + str(screenNumber)
+        screenInfo = confData["screen_info"][screenName]
+        chartNum = 1
+        for chartName in screenInfo["charts"]:
+            chart = screenInfo["charts"][chartName]
+            # linijka do odkomentowania
+            # downloadSingleChart(chart, str(chartNum))
+            chartNum += 1
+        # for singleValue in screenInfo["displayed_live_values"]
+
+    # dotąd ===============================================================================================
+
+
+    downloadData(url, dataDestination, dateToStart, confPath, "../resources/data.json", True, True)
 
 
 

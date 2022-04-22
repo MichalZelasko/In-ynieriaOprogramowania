@@ -27,8 +27,8 @@
                         "url1" : "https://datahub.ki.agh.edu.pl/api/endpoints/70/data/",
                         "url2" : "https://datahub.ki.agh.edu.pl/api/endpoints/70/data/"
                     },
-                    "data_destination_list" : [
-                        [
+                    "data_destination_list" : {
+                        "data_destination1": [
                             {
                                 "dest": "heater"
                             },
@@ -36,7 +36,7 @@
                                 "dest": "tempSet"
                             }
                         ],
-                        [
+                        "data_destination2" : [
                             {
                                 "dest": "heater"
                             },
@@ -44,23 +44,16 @@
                                 "dest": "tempRead"
                             }
                         ]
-                    ],
+                    },
                     "color_list" : {
                         "color1" : "zielony | czerwony | niebieski | etc.",
                         "color2" : "zielony | czerwony | niebieski | etc.",
                         "..." : "lista kolorow odpowiadajacym danym z kolejnych adresow url"
                     },
-                    "data_names" : [
-                        {
-                            "data_name": "nazwa zmiennej"
+                    "data_names" : {
+                            "data_name1": "tempSet",
+                            "data_name2": "tempRead"
                         },
-                        {
-                            "data_name": "nazwa zmiennej"
-                        },
-                        {
-                            "...": "lista nazw zmiennych"
-                        }
-                    ],
                     "name" : "nazwa wykresu",
                     "type" : "scatter | histogram | etc.",
                     "date" : {
@@ -84,7 +77,7 @@
                                 "dest": "location"
                             },
                             {
-                                "dest": "locName"
+                                "dest": "location"
                             }
                         ],
                     "name" : "nazwa wykresu jednocześnie zmiennej",
