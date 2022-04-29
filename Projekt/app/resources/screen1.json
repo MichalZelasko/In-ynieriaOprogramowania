@@ -1,1 +1,39 @@
-{"layout": "vertcial | horizontal | separate_pages", "tile_size": "w procentach ca\u0142ego ekranu", "chart_on_screen_number": "liczba wykres\u00f3w na ekranie"}
+{
+    "layout": "vertcial",
+    "tile_size": "w procentach ca\u0139\u201aego ekranu",
+    "chart_on_screen_number": 2,
+    "charts": {
+        "chart1": {
+            "is_chart": true,
+            "vertical": {
+                "size": "rozmiar w kafelkach",
+                "position": "polozenie tez w kafelkach"
+            },
+            "horizontal": {
+                "size": "rozmiar w kafelkach",
+                "position": "polozenie tez w kafelkach"
+            },
+            "data_list": {
+                "data1": {
+                    "color": "zielony",
+                    "file_name": "../resources/chart_1_data_1.json",
+                    "data_name": "tempSet"
+                },
+                "data2": {
+                    "color": "czerwony",
+                    "file_name": "../resources/chart_1_data_2.json",
+                    "data_name": "tempRead"
+                }
+            }
+        },
+        "chart2": {
+            "is_chart": false,
+            "data_list": {
+                "data": {
+                    "file_name": "../resources/chart_2_data.json",
+                    "data_name": "nazwa zmiennej"
+                }
+            }
+        }
+    }
+}

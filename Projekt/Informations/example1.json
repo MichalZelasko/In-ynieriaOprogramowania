@@ -46,9 +46,8 @@
                         ]
                     },
                     "color_list" : {
-                        "color1" : "zielony | czerwony | niebieski | etc.",
-                        "color2" : "zielony | czerwony | niebieski | etc.",
-                        "..." : "lista kolorow odpowiadajacym danym z kolejnych adresow url"
+                        "color1" : "zielony",
+                        "color2" : "czerwony"
                     },
                     "data_names" : {
                             "data_name1": "tempSet",
@@ -74,13 +73,10 @@
                     "url" : "https://datahub.ki.agh.edu.pl/api/endpoints/70/data/",
                     "data_destination" : [
                             {
-                                "dest": "location"
-                            },
-                            {
-                                "dest": "location"
+                                "dest": "id"
                             }
                         ],
-                    "name" : "nazwa wykresu jednocześnie zmiennej",
+                    "name" : "nazwa zmiennej",
                     "scale" : "zakres wartości na wykresie",
                     "unit" : "jednostka podstawowa na wykresie",
                     "unit_conversion" : "enabled | disabled",

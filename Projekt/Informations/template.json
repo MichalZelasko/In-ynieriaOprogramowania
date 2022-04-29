@@ -68,17 +68,11 @@
                         "color2" : "zielony | czerwony | niebieski | etc.",
                         "..." : "lista kolorow odpowiadajacym danym z kolejnych adresow url"
                     },
-                    "data_names" : [
-                        {
-                            "data_name": "nazwa zmiennej"
-                        },
-                        {
-                            "data_name": "nazwa zmiennej"
-                        },
-                        {
-                            "...": "lista nazw zmiennych"
-                        }
-                    ],
+                    "data_names" : {
+                        "data_name1": "nazwa zmiennej"
+                        "data_name2": "nazwa zmiennej"
+                        "...": "lista nazw zmiennych"
+                    }
                     "name" : "nazwa wykresu",
                     "type" : "scatter | histogram | etc.",
                     "date" : {
