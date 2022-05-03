@@ -20,26 +20,40 @@ export class TabsConfigurationComponent implements OnInit {
     this.getGeneralInfo();
   }
 
-  // tabs = [
-  //   new Tab('Ekran 1', FIRST_SCREEN_PATH),
-  //   new Tab('Ekran 2', SECOND_SCREEN_PATH),
-  //   new Tab('Ekran 3', THIRD_SCREEN_PATH),
-  // ]
-
   createScreens(numberOfScreens: number){
-    // for(var i = 1; i <= numberOfScreens; i++){
-    //   console.log('Ekran ' + i + ' HALO ' + i + 'screen')
-    //   this.tabs.push(new Tab('Ekran ' + i, i + 'screen'))
-    // }
-    // this.tabs.push(new Tab('Ekran 1', FIRST_SCREEN_PATH))
+    for(var i = 1; i <= numberOfScreens && i <= 4; i++){
+      const path = this.makePath(i);
+      this.tabs.push(new Tab('Ekran ' + i, path + '-screen'))
+    }
   }
 
   getGeneralInfo() {
-    this.appService.getGeneralInfo().subscribe(
-      res => {
-        this.generalInfo = res;
-        console.log(this.generalInfo);
-      });
+    // JAK OGARNIEMY API TO BD TO JAKOS TAK WYGLADALO
+    
+    // this.appService.getGeneralInfo().subscribe(
+    //   res => {
+    //     this.generalInfo = res;
+    //   });
+    // this.numberOfScreens = this.generalInfo.screens
+    // this.createScreens(this.numberOfScreens)
+
+    //NA RAZIE ZMOCKOWANE DANE, SPRAWDZENIE CZY DZIALA 
+    this.createScreens(4)
+  }
+
+  makePath(number: number){
+    switch (number) {
+      case 1:
+        return "first";
+      case 2:
+        return "second";
+      case 3:
+        return "third";
+      case 4:
+        return "fourth";
+      default:
+        return "err";
+    }
   }
 
 }

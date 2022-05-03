@@ -10,16 +10,16 @@ export class AppService {
   
     constructor(private http: HttpClient) {}
 
-    getGeneralInfo(): Observable<string[]> {
-        return this.http.get<string[]>(GENERAL_INFO_API_PATH);
+    getGeneralInfo(): Observable<any> {
+        return this.http.get<any>(GENERAL_INFO_API_PATH);
     }
 
-    getScreenInfo(screenID: number, ): Observable<string[]> {
-        return this.http.get<string[]>(SCREEN_INFO_API_PATH + screenID);
+    getScreenInfo(screenID: number, ): Observable<any> {
+        return this.http.get<any>(SCREEN_INFO_API_PATH + screenID);
     }
 
-    getData(chartID: number, dataID: number): Observable<string[]> {
-        return this.http.get<string[]>(DATA_API_PATH + chartID + '/data/' + dataID);
+    getData(chartID: number, dataID: number): Observable<any> {
+        return this.http.get<any>(DATA_API_PATH + chartID + '/data/' + dataID);
     }
   
 }
