@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { productSales, productSalesMulti, testjson } from '../data/products';
+import { productSales, productSalesMulti, testjson } from '../../data/products';
 
 declare var require: any;
 
 @Component({
-  selector: 'app-grouped-bar-charts',
-  templateUrl: './grouped-bar-charts.component.html',
-  styleUrls: ['./grouped-bar-charts.component.css']
+  selector: 'app-first-screen',
+  templateUrl: './first-screen.component.html',
+  styleUrls: ['./first-screen.component.css']
 })
-export class GroupedBarChartsComponent implements OnInit {
+export class FirstScreenComponent implements OnInit {
 
   productS: any[];
   productSM: any[];
@@ -43,7 +43,7 @@ export class GroupedBarChartsComponent implements OnInit {
   }
 
   getData(): void{
-    var json = require('../../../../../../resources/data.json');
+    var json = require('../../../../../../../resources/data.json');
 
     this.actualData = json.data;
   }

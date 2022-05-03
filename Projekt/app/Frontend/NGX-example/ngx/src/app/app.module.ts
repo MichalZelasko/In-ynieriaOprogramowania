@@ -1,25 +1,28 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { BarChartsComponent } from './bar-charts/bar-charts.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
 import { TabsConfigurationComponent } from './tabs-configuration/tabs-configuration.component';
-import { LineChartsComponent } from './line-charts/line-charts.component'
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { GroupedBarChartsComponent } from './grouped-bar-charts/grouped-bar-charts.component'
+import { FirstScreenComponent } from './screens/first-screen/first-screen.component';
+import { SecondScreenComponent } from './screens/second-screen/second-screen.component';
+import { ThirdScreenComponent } from './screens/third-screen/third-screen.component';
+import { FourthScreenComponent } from './screens/fourth-screen/fourth-screen.component'
 
 @NgModule({
   declarations: [
     AppComponent,
-    BarChartsComponent,
-    LineChartsComponent,
+    FirstScreenComponent,
     TabsConfigurationComponent,
-    GroupedBarChartsComponent
+    SecondScreenComponent,
+    ThirdScreenComponent,
+    FourthScreenComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,8 @@ import { GroupedBarChartsComponent } from './grouped-bar-charts/grouped-bar-char
     NgxChartsModule,
     MatTabsModule,
     MatButtonModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

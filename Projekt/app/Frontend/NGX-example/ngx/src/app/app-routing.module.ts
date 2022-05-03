@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BarChartsComponent } from './bar-charts/bar-charts.component';
-import { GroupedBarChartsComponent } from './grouped-bar-charts/grouped-bar-charts.component';
-import { LineChartsComponent } from './line-charts/line-charts.component';
-import { FIRST_SCREEN_PATH, SECOND_SCREEN_PATH, THIRD_SCREEN_PATH } from './tabs-configuration/paths';
+import { FirstScreenComponent } from './screens/first-screen/first-screen.component';
+import { FourthScreenComponent } from './screens/fourth-screen/fourth-screen.component';
+import { SecondScreenComponent } from './screens/second-screen/second-screen.component';
+import { ThirdScreenComponent } from './screens/third-screen/third-screen.component';
+import { FIRST_SCREEN_PATH, FOURTH_SCREEN_PATH, SECOND_SCREEN_PATH, THIRD_SCREEN_PATH } from './tabs-configuration/paths';
 import { TabsConfigurationComponent } from './tabs-configuration/tabs-configuration.component';
 
 const routes: Routes = [
@@ -18,16 +19,20 @@ const routes: Routes = [
         },
         {
             path: FIRST_SCREEN_PATH,
-            component: BarChartsComponent
+            component: FirstScreenComponent
         },
         {
           path: SECOND_SCREEN_PATH,
-          component: LineChartsComponent
+          component: SecondScreenComponent
         },
         {
           path: THIRD_SCREEN_PATH,
-          component: GroupedBarChartsComponent
-      },
+          component: ThirdScreenComponent
+        },
+        {
+          path: FOURTH_SCREEN_PATH,
+          component: FourthScreenComponent
+        },
     ]
   }
 ]
