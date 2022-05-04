@@ -1,6 +1,7 @@
 import requests
 import json
 from datetime import *
+import threading
 
 
 def getDataFromRes(res, dataDestination) :
@@ -46,8 +47,13 @@ def getOldFile(filePath) :
     return oldData, lastDate
 
 
-def downloadSingleChart(chart, chartNum, dateToStart) :
-    filePaths = []
+def runThreads(threads) :
+    for thread in threads : thread.start()
+    for thread in threads : thread.join()
+
+
+def downloadSingleChart(dataFilePathsList, chart, chartNum, dateToStart) :
+    filePaths, threads = [], []
 
     for i in range(len(chart["url_list"])) :
         num = str(i + 1)
@@ -57,35 +63,40 @@ def downloadSingleChart(chart, chartNum, dateToStart) :
             dataDestination.append(dest["dest"])
         dataFilePath = "../resources/chart_" + chartNum +"_data_" + num + ".json"
         filePaths.append(dataFilePath)
-        downloadData(url, dataDestination, dateToStart, dataFilePath, True)
+        threads.append(threading.Thread(target = downloadData, args = (url, dataDestination, dateToStart, dataFilePath, True)))
+    
+    runThreads(threads)
+    dataFilePathsList.append(filePaths)
 
-    return filePaths
 
-
-def downlaodSingleDisplayLiveValue(value, chartNum, dateToStart) :
+def downlaodSingleDisplayLiveValue(value, dataFilePath, dateToStart) :
     url = value["url"]
     dataDestinationList = value["data_destination"]
     dataDestination = []
 
     for dest in dataDestinationList :
         dataDestination.append(dest["dest"])
-    dataFilePath = "../resources/chart_" + chartNum + "_data" + ".json"
+    
     downloadData(url, dataDestination, dateToStart, dataFilePath, False)
     
-    return dataFilePath
 
-
-def getScreenInfo(screen, screenName, dateToStart) :
-    info =  {
-            "layout" : screen["layout"], 
-            "tile_size" : screen["tile_size"], 
-            "chart_on_screen_number" : screen["chart_on_screen_number"]
-            }
+def getCharts(screen, dateToStart) :
     chartsInfo, chartNum = {}, 1
-    
+    dataFilePathsList, threads = [], []
     for chartName in screen["charts"]:
         chart = screen["charts"][chartName]
-        dataFilePaths, dataList = downloadSingleChart(chart, str(chartNum), dateToStart), {}
+        dataList = {}
+        threads.append(threading.Thread(target = downloadSingleChart, args = (dataFilePathsList, chart, str(chartNum), dateToStart)))
+        chartNum += 1
+
+    runThreads(threads)
+
+    i, chartNum = 0, 1
+    for chartName in screen["charts"]:
+        chart = screen["charts"][chartName]
+        dataList = {}
+        dataFilePaths = dataFilePathsList[i]
+        i += 1
         for dataNum in range(len(chart["url_list"])) :
             strNum = str(dataNum + 1)
             dataName = "data" + strNum
@@ -104,10 +115,22 @@ def getScreenInfo(screen, screenName, dateToStart) :
                     }
         chartsInfo["chart" + str(chartNum)] = thisChart
         chartNum += 1
-    
+
+    return chartsInfo, chartNum
+
+
+def getSingleValue(screen, dateToStart, chartsInfo, chartNum) :
+    threads, singleValues, dataFilePaths = [], [], []
     for singleValueName in screen["displayed_live_values"] :
-        singleValue = screen["displayed_live_values"][singleValueName]
-        dataFilePath = downlaodSingleDisplayLiveValue(singleValue, str(chartNum), dateToStart)
+        singleValues.append(screen["displayed_live_values"][singleValueName])
+        dataFilePaths.append("../resources/chart_" + str(chartNum) + "_data" + ".json")
+        threads.append(threading.Thread(target = downlaodSingleDisplayLiveValue, args = (singleValues[-1], dataFilePaths[-1], dateToStart)))
+
+    runThreads(threads)
+
+    i = 0
+    for singleValueName in screen["displayed_live_values"] :
+        dataFilePath, singleValue = dataFilePaths[i], singleValues[i]
         thisChart = {
                         "is_chart" : False
                         # "vertical" : singleValue["vertical"]
@@ -123,7 +146,20 @@ def getScreenInfo(screen, screenName, dateToStart) :
         thisChart["data_list"] = dataList
         chartsInfo["chart" + str(chartNum)] = thisChart
         chartNum += 1
+        i += 1
 
+    return chartsInfo, chartNum
+
+
+def getScreenInfo(screen, screenName, dateToStart) :
+    info =  {
+            "layout" : screen["layout"], 
+            "tile_size" : screen["tile_size"], 
+            "chart_on_screen_number" : screen["chart_on_screen_number"]
+            }
+    chartsInfo, chartNum = getCharts(screen, dateToStart)
+    chartsInfo, chartNum = getSingleValue(screen, dateToStart, chartsInfo, chartNum) 
+    
     info["charts"] = chartsInfo
     fileName = "../resources/" + screenName + ".json"
     with open(fileName, "w") as write_file :
