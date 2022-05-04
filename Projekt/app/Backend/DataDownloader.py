@@ -1,7 +1,6 @@
 import requests
 import json
-# import Projekt.Informations
-# import os
+from datetime import *
 
 
 def getDataFromRes(res, dataDestination) :
@@ -47,7 +46,7 @@ def getOldFile(filePath) :
     return oldData, lastDate
 
 
-def downloadSingleChart(chart, chartNum, confPath, dateToStart) :
+def downloadSingleChart(chart, chartNum, dateToStart) :
     filePaths = []
 
     for i in range(len(chart["url_list"])) :
@@ -58,12 +57,12 @@ def downloadSingleChart(chart, chartNum, confPath, dateToStart) :
             dataDestination.append(dest["dest"])
         dataFilePath = "../resources/chart_" + chartNum +"_data_" + num + ".json"
         filePaths.append(dataFilePath)
-        downloadData(url, dataDestination, dateToStart, confPath, dataFilePath, True)
+        downloadData(url, dataDestination, dateToStart, dataFilePath, True)
 
     return filePaths
 
 
-def downlaodSingleDisplayLiveValue(value, chartNum, confPath, dateToStart) :
+def downlaodSingleDisplayLiveValue(value, chartNum, dateToStart) :
     url = value["url"]
     dataDestinationList = value["data_destination"]
     dataDestination = []
@@ -71,12 +70,12 @@ def downlaodSingleDisplayLiveValue(value, chartNum, confPath, dateToStart) :
     for dest in dataDestinationList :
         dataDestination.append(dest["dest"])
     dataFilePath = "../resources/chart_" + chartNum + "_data" + ".json"
-    downloadData(url, dataDestination, dateToStart, confPath, dataFilePath, False)
+    downloadData(url, dataDestination, dateToStart, dataFilePath, False)
     
     return dataFilePath
 
 
-def getScreenInfo(screen, screenName) :
+def getScreenInfo(screen, screenName, dateToStart) :
     info =  {
             "layout" : screen["layout"], 
             "tile_size" : screen["tile_size"], 
@@ -86,10 +85,9 @@ def getScreenInfo(screen, screenName) :
     
     for chartName in screen["charts"]:
         chart = screen["charts"][chartName]
-        dataFilePaths, dataList = downloadSingleChart(chart, str(chartNum), confPath, dateToStart), {}
+        dataFilePaths, dataList = downloadSingleChart(chart, str(chartNum), dateToStart), {}
         for dataNum in range(len(chart["url_list"])) :
             strNum = str(dataNum + 1)
-            print(strNum)
             dataName = "data" + strNum
             dataInfo = {
                             "color" : chart["color_list"]["color" + strNum],
@@ -109,8 +107,7 @@ def getScreenInfo(screen, screenName) :
     
     for singleValueName in screen["displayed_live_values"] :
         singleValue = screen["displayed_live_values"][singleValueName]
-        print(singleValue)
-        dataFilePath = downlaodSingleDisplayLiveValue(singleValue, str(chartNum), confPath, dateToStart)
+        dataFilePath = downlaodSingleDisplayLiveValue(singleValue, str(chartNum), dateToStart)
         thisChart = {
                         "is_chart" : False
                         # "vertical" : singleValue["vertical"]
@@ -133,7 +130,7 @@ def getScreenInfo(screen, screenName) :
         json.dump(info, write_file, indent=4)
 
 
-def downloadData(url, dataDestination, dateToStart, filePath, update = False) : # stare parametry, confPath i is_chart
+def downloadData(url, dataDestination, dateToStart, filePath, isChart, update = False) : # stare parametry, confPath i is_chart
     newData = []
     if update :
         oldData, dateToStart = getOldFile(filePath)
@@ -146,12 +143,18 @@ def downloadData(url, dataDestination, dateToStart, filePath, update = False) : 
         response.raise_for_status()
         j = json.loads(response.content)
         url = getNext(j)
-
-        for res in j["results"] :
+        if isChart:
+            for res in j["results"] :
+                value = getDataFromRes(res, dataDestination)
+                timeStamp = getTimeStamp(res)
+                if timeStamp > dateToStart or not update and timeStamp >= dateToStart:
+                    newData.append({"name" : timeStamp, "value" : value})
+        else:
+            res = j["results"][0]
             value = getDataFromRes(res, dataDestination)
             timeStamp = getTimeStamp(res)
-            if timeStamp > dateToStart or not update and timeStamp >= dateToStart:
-                newData.append({"name" : timeStamp, "value" : value})
+            newData.append({"name": timeStamp, "value": value})
+            url = None
 
     data = newData + oldData
     dateValue = {"data" : data}
@@ -164,8 +167,11 @@ def downloadData(url, dataDestination, dateToStart, filePath, update = False) : 
 if __name__ == "__main__" :
 
     url = "https://datahub.ki.agh.edu.pl/api/endpoints/70/data/"
-    dataDestination = ["heater", "tempSet"]
-    dateToStart = "2022-04-29T08:27:34+02:00"
+    # dateToStart = "2022-05-04T08:27:34+02:00"
+    dateToSub = timedelta(hours = 4)
+    now = datetime.now()
+    dateToStart = (now - dateToSub).strftime("%Y-%m-%dT%H:%M:%S")
+    print(dateToStart)
 
     # =============================================odtąd nowy kod============================================
 
@@ -177,7 +183,7 @@ if __name__ == "__main__" :
         screenNumber = num + 1
         screenName = "screen" + str(screenNumber)
         screen = confData["screen_info"][screenName]
-        getScreenInfo(screen, screenName)
+        getScreenInfo(screen, screenName, dateToStart)
 
 
         # chartNum = 1
