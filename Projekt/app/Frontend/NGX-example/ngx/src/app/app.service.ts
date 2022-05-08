@@ -14,7 +14,7 @@ export class AppService {
         return this.http.get<any>(GENERAL_INFO_API_PATH);
     }
 
-    getScreenInfo(screenID: number, ): Observable<any> {
+    getScreenInfo(screenID: number ): Observable<any> {
         return this.http.get<any>(SCREEN_INFO_API_PATH + screenID);
     }
 

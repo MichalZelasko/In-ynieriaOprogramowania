@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from 'src/app/app.service';
 import { productSales, productSalesMulti, testjson } from '../../data/products';
 
 declare var require: any;
@@ -34,7 +35,7 @@ export class SecondScreenComponent implements OnInit {
   tooltipDisabled: boolean = false;
   roundEdges: boolean = false;
 
-  constructor() { 
+  constructor(private appService: AppService) { 
     this.productS = productSales;
     this.productSM = productSalesMulti;
     this.testjs = testjson;
@@ -49,7 +50,15 @@ export class SecondScreenComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getSecondScreenInfo();
     this.getData();
+  }
+
+  // BRAK DANYCH!
+  getSecondScreenInfo(){
+    this.appService.getScreenInfo(2).subscribe(res => {
+      console.log(res);
+    })
   }
 
 }

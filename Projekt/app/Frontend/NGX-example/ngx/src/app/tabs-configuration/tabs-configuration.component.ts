@@ -28,17 +28,14 @@ export class TabsConfigurationComponent implements OnInit {
   }
 
   getGeneralInfo() {
-    // JAK OGARNIEMY API TO BD TO JAKOS TAK WYGLADALO
-    
-    // this.appService.getGeneralInfo().subscribe(
-    //   res => {
-    //     this.generalInfo = res;
-    //   });
-    // this.numberOfScreens = this.generalInfo.screens
-    // this.createScreens(this.numberOfScreens)
-
-    //NA RAZIE ZMOCKOWANE DANE, SPRAWDZENIE CZY DZIALA 
-    this.createScreens(4)
+    this.appService.getGeneralInfo().subscribe(
+      res => {
+        this.generalInfo = res;
+        console.log("Dane ogólne (w tym ilość ekranów)");
+        console.log(this.generalInfo)
+        this.numberOfScreens = this.generalInfo.number_of_screens;
+        this.createScreens(this.numberOfScreens)
+      });
   }
 
   makePath(number: number){

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from 'src/app/app.service';
 import { productSales, productSalesMulti, testjson } from '../../data/products';
 
 declare var require: any;
@@ -34,7 +35,7 @@ export class ThirdScreenComponent implements OnInit {
   tooltipDisabled: boolean = false;
   roundEdges: boolean = false;
 
-  constructor() { 
+  constructor(private appService: AppService) { 
     this.productS = productSales;
     this.productSM = productSalesMulti;
     this.testjs = testjson;
@@ -49,7 +50,15 @@ export class ThirdScreenComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getThirdScreenInfo();
     this.getData();
+  }
+
+  // BRAK DANYCH!
+  getThirdScreenInfo(){
+    this.appService.getScreenInfo(3).subscribe(res => {
+      console.log(res);
+    })
   }
 
 }
