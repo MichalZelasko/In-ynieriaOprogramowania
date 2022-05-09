@@ -14,7 +14,8 @@ import { FirstScreenComponent } from './screens/first-screen/first-screen.compon
 import { SecondScreenComponent } from './screens/second-screen/second-screen.component';
 import { ThirdScreenComponent } from './screens/third-screen/third-screen.component';
 import { FourthScreenComponent } from './screens/fourth-screen/fourth-screen.component';
-import { BarChartsComponent } from './bar-charts/bar-charts.component'
+import { BarChartsComponent } from './bar-charts/bar-charts.component';
+import { LineChartsComponent } from './line-charts/line-charts.component'
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { BarChartsComponent } from './bar-charts/bar-charts.component'
     SecondScreenComponent,
     ThirdScreenComponent,
     FourthScreenComponent,
-    BarChartsComponent
+    BarChartsComponent,
+    LineChartsComponent
   ],
   imports: [
     BrowserModule,

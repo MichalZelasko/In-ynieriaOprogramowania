@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { TreeMapModule } from '@swimlane/ngx-charts';
 import { greens } from "../esthetics/colorSchemes";
 
 declare var require: any;
 
 @Component({
-  selector: 'app-bar-charts',
-  templateUrl: './bar-charts.component.html',
-  styleUrls: ['./bar-charts.component.css']
+  selector: 'app-line-charts',
+  templateUrl: './line-charts.component.html',
+  styleUrls: ['./line-charts.component.css']
 })
-export class BarChartsComponent implements OnInit {
+
+export class LineChartsComponent implements OnInit {
   actualData: any[];
 
   view: [number, number] = [900,570];
@@ -24,8 +24,6 @@ export class BarChartsComponent implements OnInit {
   xAxisLabel: string = "Date";
   yAxisLabel: string = "Tepmerature";
   showGridLines: boolean = true;
-  showDataLabel: boolean = true;
-  barPadding: number = 3;
   tooltipDisabled: boolean = false;
 
   constructor(){
@@ -54,8 +52,6 @@ export class BarChartsComponent implements OnInit {
             xAxisLabel: string = "",
             yAxisLabel: string = "",
             showGridLines: boolean = false,
-            showDataLabel: boolean = true,
-            barPadding: number = 3,
             tooltipDisabled: boolean = false) {
 
     this.view = view;
@@ -70,9 +66,6 @@ export class BarChartsComponent implements OnInit {
     this.xAxisLabel = xAxisLabel;
     this.yAxisLabel = yAxisLabel;
     this.showGridLines = showGridLines;
-    this.showDataLabel = showDataLabel;
-    this.barPadding = barPadding;
     this.tooltipDisabled = tooltipDisabled;
   }
-
 }

@@ -6,6 +6,7 @@ import { appendComponentToBody } from '../addComponent';
 import { FirstScreenComponent } from '../screens/first-screen/first-screen.component';
 import { SecondScreenComponent } from '../screens/second-screen/second-screen.component';
 import { BarChartsComponent } from '../bar-charts/bar-charts.component';
+import { LineChartsComponent } from '../line-charts/line-charts.component'; 
 
 @Component({
   selector: 'app-tabs-configuration',
@@ -26,8 +27,8 @@ export class TabsConfigurationComponent implements OnInit {
     //Example of component creation:
     //Create component
     var barc = new BarChartsComponent();
-    //Set desired values (change that to a function that sets all of them)
-    barc.legend = false;
+    //Set desired values
+    barc.setValues(undefined, undefined, undefined, undefined, undefined, undefined, false, undefined, undefined, undefined, undefined, undefined, false, undefined, undefined);
     //Add component to HTML
     var newdomElem = appendComponentToBody(this, BarChartsComponent, barc);
   }
