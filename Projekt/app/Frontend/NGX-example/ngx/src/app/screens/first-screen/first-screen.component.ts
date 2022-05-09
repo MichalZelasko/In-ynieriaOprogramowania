@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from 'src/app/app.service';
 import { productSales, productSalesMulti, testjson } from '../../data/products';
+import { appendComponentToBody } from '../../addComponent';
+import { SecondScreenComponent } from '../../screens/second-screen/second-screen.component';
 
 declare var require: any;
 
