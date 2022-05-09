@@ -73,6 +73,21 @@
                         "data_name2": "nazwa zmiennej",
                         "...": "lista nazw zmiennych"
                     },
+                    "period_of_time_to_download_data" : {
+                        "data_time1": {
+                            "weeks" : "ile tyodni w tył ściągamy dane",
+                            "days" : "ile dni",
+                            "hours" : "ile godzin",
+                            "minutes": "ile minut"
+                        },
+                        "data_time2": {
+                            "weeks" : "ile tyodni w tył ściągamy dane",
+                            "days" : "ile dni",
+                            "hours" : "ile godzin",
+                            "minutes": "ile minut"
+                        },
+                        "..." : "lista kolejnych dat"
+                    },
                     "name" : "nazwa wykresu",
                     "type" : "scatter | histogram | etc.",
                     "date" : {
@@ -194,6 +209,21 @@
                             "data_name2": "nazwa2",
                             "...": "reszta nazw"
                         },
+                    "period_of_time_to_download_data" : {
+                        "data_time1": {
+                            "weeks" : "ile tyodni w tył ściągamy dane",
+                            "days" : "ile dni",
+                            "hours" : "ile godzin",
+                            "minutes": "ile minut"
+                        },
+                        "data_time2": {
+                            "weeks" : "ile tyodni w tył ściągamy dane",
+                            "days" : "ile dni",
+                            "hours" : "ile godzin",
+                            "minutes": "ile minut"
+                        },
+                        "..." : "lista kolejnych dat"
+                    },
                     "name" : "nazwa wykresu",
                     "type" : "scatter | histogram | etc.",
                     "date" : {
@@ -267,6 +297,21 @@
                             "data_name2": "nazwa 2",
                             "...": "reszta nazw"
                         },
+                    "period_of_time_to_download_data" : {
+                        "data_time1": {
+                            "weeks" : "ile tyodni w tył ściągamy dane",
+                            "days" : "ile dni",
+                            "hours" : "ile godzin",
+                            "minutes": "ile minut"
+                        },
+                        "data_time2": {
+                            "weeks" : "ile tyodni w tył ściągamy dane",
+                            "days" : "ile dni",
+                            "hours" : "ile godzin",
+                            "minutes": "ile minut"
+                        },
+                        "..." : "lista kolejnych dat"
+                    },
                     "name" : "nazwa wykresu",
                     "type" : "scatter | histogram | etc.",
                     "date" : {

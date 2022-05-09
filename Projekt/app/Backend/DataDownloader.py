@@ -51,13 +51,26 @@ def runThreads(threads) :
     for thread in threads : thread.start()
     for thread in threads : thread.join()
 
+def getStartDate(times):
+    weeks = times["weeks"]
+    days = times["days"]
+    hours = times["hours"]
+    minutes = times["minutes"]
+    # print(weeks, days, hours, minutes)
+    dateToSub = timedelta(weeks= weeks, days= days, hours=hours, minutes=minutes)
+    now = datetime.now()
+    dateToStart = (now - dateToSub).strftime("%Y-%m-%dT%H:%M:%S")
+    print(dateToStart)
+    return dateToStart
 
-def downloadSingleChart(dataFilePathsList, chart, chartNum, dateToStart) :
+def downloadSingleChart(dataFilePathsList, chart, chartNum) :
     filePaths, threads = [], []
 
     for i in range(len(chart["url_list"])) :
         num = str(i + 1)
-        urlKey, dataDestinationKey = "url" + num, "data_destination" + num
+        urlKey, dataDestinationKey, dataTimeKey = "url" + num, "data_destination" + num, "data_time" + num
+        dataTime = chart["period_of_time_to_download_data"][dataTimeKey]
+        dateToStart = getStartDate(dataTime)
         url, dataDestinationList, dataDestination  = chart["url_list"][urlKey], chart["data_destination_list"][dataDestinationKey], []
         for dest in dataDestinationList:
             dataDestination.append(dest["dest"])
@@ -80,13 +93,13 @@ def downlaodSingleDisplayLiveValue(value, dataFilePath, dateToStart) :
     downloadData(url, dataDestination, dateToStart, dataFilePath, False)
     
 
-def getCharts(screen, dateToStart) :
+def getCharts(screen) :
     chartsInfo, chartNum = {}, 1
     dataFilePathsList, threads = [], []
     for chartName in screen["charts"]:
         chart = screen["charts"][chartName]
         dataList = {}
-        threads.append(threading.Thread(target = downloadSingleChart, args = (dataFilePathsList, chart, str(chartNum), dateToStart)))
+        threads.append(threading.Thread(target = downloadSingleChart, args = (dataFilePathsList, chart, str(chartNum))))
         chartNum += 1
 
     runThreads(threads)
@@ -157,7 +170,7 @@ def getScreenInfo(screen, screenName, dateToStart) :
             "tile_size" : screen["tile_size"], 
             "chart_on_screen_number" : screen["chart_on_screen_number"]
             }
-    chartsInfo, chartNum = getCharts(screen, dateToStart)
+    chartsInfo, chartNum = getCharts(screen)
     chartsInfo, chartNum = getSingleValue(screen, dateToStart, chartsInfo, chartNum) 
     
     info["charts"] = chartsInfo
@@ -207,7 +220,7 @@ if __name__ == "__main__" :
     dateToSub = timedelta(hours = 4)
     now = datetime.now()
     dateToStart = (now - dateToSub).strftime("%Y-%m-%dT%H:%M:%S")
-    print(dateToStart)
+    # print(dateToStart)
 
     # =============================================odtąd nowy kod============================================
 
