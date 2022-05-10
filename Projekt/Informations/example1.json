@@ -77,9 +77,9 @@
                         "low" : "zakres wartosci na wykresie",
                         "high" : ""
                     },
-                    "unit" : "jednostka podstawowa na wykresie",
-                    "unit_conversion" : "enabled | disabled",
-                    "enabled_units" : "None | lista dozwolonych jednostek"
+                    "unit" : "C",
+                    "unit_conversion" : "enabled",
+                    "enabled_units" : "C | F | K"
                 }
             },
             "displayed_live_values" : {
@@ -92,9 +92,9 @@
                         ],
                     "name" : "nazwa zmiennej",
                     "scale" : "zakres wartości na wykresie",
-                    "unit" : "jednostka podstawowa na wykresie",
-                    "unit_conversion" : "enabled | disabled",
-                    "enabled_units" : "None | lista dozwolonych jednostek"
+                    "unit" : "C",
+                    "unit_conversion" : "enabled",
+                    "enabled_units" : "C | F | K"
                 }
             }
         }
