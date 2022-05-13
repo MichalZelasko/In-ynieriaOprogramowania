@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import HTMLResponse, JSONResponse
 from utils import get_json_object_from_file
+from dataConverter import convertFileData
 
 RESOURCES_PATH = "../resources/"
 
@@ -31,10 +32,20 @@ def get_screen_info(screen_id: int):
     return JSONResponse(content=screen_info, status_code=200)
 
 @app.get("/api/chart/{chart_id}/data/{data_id}", response_class=JSONResponse)
-def get_data(chart_id: int, data_id: int):
+def get_data(chart_id: int, data_id: int) :
     file_name = "chart_" + str(chart_id) + "_data_" + str(data_id) + ".json"
     try:
         js = get_json_object_from_file(RESOURCES_PATH + file_name)
     except FileNotFoundError as err:
         raise HTTPException(status_code=404, detail=err.strerror)
     return JSONResponse(content=js, status_code=200)
+
+@app.get("/api/chart/convert/{screen_id}/{chart_id}/to/{destinationUnit}", response_class=JSONResponse)
+def convert_data(chart_id: int, screen_id: int, destinationUnit: str) :
+    try:
+        convertFileData(chart_id, screen_id, destinationUnit)
+    except FileNotFoundError as err:
+        raise HTTPException(status_code=404, detail=err.strerror)
+    except Exception:
+        raise HTTPException(status_code=404, detail="Incompatible units")
+    return JSONResponse(content={"response": "OK"}, status_code=200)

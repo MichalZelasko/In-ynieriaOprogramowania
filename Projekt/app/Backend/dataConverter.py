@@ -1,4 +1,4 @@
-from argparse import ArgumentError
+from utils import get_json_object_from_file, create_json_file
 
 def getPrefix(unit) :
     if unit[0:2] == "da" : return "da"
@@ -15,7 +15,7 @@ def prefixConvert(value, sourceUnit, destinationUnit) :
     return value * prefixDict[sourceUnit] / prefixDict[destinationUnit]
 
 def convertTemperature(value, sourceUnit, destinationUnit, validUnits) :
-    if destinationUnit not in validUnits : raise Exception(f'Inconsistent units: {sourceUnit} and {destinationUnit}')
+    if destinationUnit not in validUnits : raise Exception(f"Inconsistent units: {sourceUnit} and {destinationUnit}")
     
     if sourceUnit == "C" : value += 273.15
     elif sourceUnit == "F" : value = 5.0 * (value - 32.0) / 9.0 + 273.15
@@ -26,7 +26,7 @@ def convertTemperature(value, sourceUnit, destinationUnit, validUnits) :
     return value
 
 def convertPressure(value, sourceUnit, destinationUnit, validUnits) :
-    if destinationUnit not in validUnits : raise Exception(f'Inconsistent units: {sourceUnit} and {destinationUnit}')
+    if destinationUnit not in validUnits : raise Exception(f"Inconsistent units: {sourceUnit} and {destinationUnit}")
     
     if sourceUnit == "atm" : value *= 101325.0
     elif sourceUnit == "bar" : value *= 100000.0
@@ -54,11 +54,30 @@ def convert(value, sourceUnit, destinationUnit) :
     if sourceUnit in temperature : return convertTemperature(value, sourceUnit, destinationUnit, temperature)
     elif sourceUnit in pressure : return convertPressure(value, sourceUnit, destinationUnit, pressure)
     else : 
-        if removePrefix(sourceUnit) != removePrefix(destinationUnit) : raise Exception(f'Inconsistent units: {sourceUnit} and {destinationUnit}')
+        if removePrefix(sourceUnit) != removePrefix(destinationUnit) : raise Exception(f"Inconsistent units: {sourceUnit} and {destinationUnit}")
         return prefixConvert(value, getPrefix(sourceUnit), getPrefix(destinationUnit))
 
-if __name__ == "__main__" :
+def convertFileData(chartNumber, screenNumber, destinationUnit) :
+    screenFilePath, i = f"../resources/screen{screenNumber}.json", 1
+    screen = get_json_object_from_file(screenFilePath)
+    sourceUnit = screen["charts"][f"chart{chartNumber}"]["unit"]
+    if not destinationUnit in screen["charts"][f"chart{chartNumber}"]["enabled_units"] :
+        raise Exception(f"Inconsistent units: {sourceUnit} and {destinationUnit}")
+    while i > 0 :
+        filePath = f"../resources/chart_{str(chartNumber)}_data_{str(i)}.json"
+        try :
+            json_source = get_json_object_from_file(filePath)
+            data = json_source["data"]
+            for dataPoint in data : dataPoint["value"] = convert(dataPoint["value"], sourceUnit, destinationUnit)
+            converted_json = {"data" : data}
+            i += 1
+            create_json_file(filePath, converted_json)
+        except :
+            i = 0
+    screen["charts"][f"chart{chartNumber}"]["unit"] = destinationUnit
+    create_json_file(screenFilePath, screen)
 
+def convertTest() :
     print("Temperature test")
     value, sourceUnit, destinationUnit = 10, "C", "F"
     print(value, sourceUnit, "=", convert(value, sourceUnit, destinationUnit), destinationUnit)
@@ -88,3 +107,12 @@ if __name__ == "__main__" :
     print(value, sourceUnit, "=", convert(value, sourceUnit, destinationUnit), destinationUnit)
     value, sourceUnit, destinationUnit = 10, "dag", "t"
     print(value, sourceUnit, "=", convert(value, sourceUnit, destinationUnit), destinationUnit)
+
+if __name__ == "__main__" :
+    #   convertTest()
+    convertFileData(1, 1, "C")
+    ############################################Test uruchamiania##############################################
+
+    #   Nie uruchamiać !!!
+    #   convertFileData(1, "C", "F")
+    

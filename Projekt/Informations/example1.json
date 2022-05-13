@@ -79,7 +79,7 @@
                     },
                     "unit" : "C",
                     "unit_conversion" : "enabled",
-                    "enabled_units" : "C | F | K"
+                    "enabled_units" : ["C", "F", "K"]
                 }
             },
             "displayed_live_values" : {
@@ -94,7 +94,7 @@
                     "scale" : "zakres wartości na wykresie",
                     "unit" : "C",
                     "unit_conversion" : "enabled",
-                    "enabled_units" : "C | F | K"
+                    "enabled_units" : ["C", "F", "K"]
                 }
             }
         }
