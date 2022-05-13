@@ -47,6 +47,7 @@ def checkTones(unit) :
     else : return unit
 
 def convert(value, sourceUnit, destinationUnit) :
+    if sourceUnit == "skip" or destinationUnit == "skip" : return value
     sourceUnit = checkTones(sourceUnit)
     destinationUnit = checkTones(destinationUnit)
     temperature = ["K", "F", "C"]
@@ -85,6 +86,7 @@ def convertTest() :
     print(value, sourceUnit, "=", convert(value, sourceUnit, destinationUnit), destinationUnit)
     value, sourceUnit, destinationUnit = 10, "K", "C"
     print(value, sourceUnit, "=", convert(value, sourceUnit, destinationUnit), destinationUnit)
+    value, sourceUnit, destinationUnit = 10, "C", "F"
     
     print("\n\nPressure test")
     value, sourceUnit, destinationUnit = 10, "hPa", "atm"
@@ -109,8 +111,9 @@ def convertTest() :
     print(value, sourceUnit, "=", convert(value, sourceUnit, destinationUnit), destinationUnit)
 
 if __name__ == "__main__" :
-    #   convertTest()
-    convertFileData(1, 1, "C")
+    convertTest()
+    #   convertFileData(1, 1, "F")
+    #   convertFileData(1, 1, "C")
     ############################################Test uruchamiania##############################################
 
     #   Nie uruchamiać !!!

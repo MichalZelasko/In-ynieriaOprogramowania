@@ -2,6 +2,8 @@ import requests
 import json
 from datetime import *
 import threading
+from dataConverter import convert
+from utils import get_json_object_from_file
 
 
 def getDataFromRes(res, dataDestination) :
@@ -63,8 +65,13 @@ def getStartDate(times):
     print(dateToStart)
     return dateToStart
 
-def downloadSingleChart(dataFilePathsList, chart, chartNum) :
+def downloadSingleChart(dataFilePathsList, chart, chartNum, unit) :
     filePaths, threads = [], []
+
+    try :
+        originalUnit = chart["original_unit"]
+    except KeyError :
+        originalUnit = "skip"
 
     for i in range(len(chart["url_list"])) :
         num = str(i + 1)
@@ -76,7 +83,7 @@ def downloadSingleChart(dataFilePathsList, chart, chartNum) :
             dataDestination.append(dest["dest"])
         dataFilePath = "../resources/chart_" + chartNum +"_data_" + num + ".json"
         filePaths.append(dataFilePath)
-        threads.append(threading.Thread(target = downloadData, args = (url, dataDestination, dateToStart, dataFilePath, True)))
+        threads.append(threading.Thread(target = downloadData, args = (url, dataDestination, dateToStart, dataFilePath, True, originalUnit, unit)))
     
     runThreads(threads)
     dataFilePathsList.append(filePaths)
@@ -93,17 +100,27 @@ def downlaodSingleDisplayLiveValue(value, dataFilePath) :
     downloadData(url, dataDestination, None, dataFilePath, False)
     
 
-def getCharts(screen) :
+def getCharts(screen, fileName) :
+    try :
+        screenInfoOld = get_json_object_from_file(fileName)
+    except FileNotFoundError :
+        screenInfoOld = None
     chartsInfo, chartNum = {}, 1
-    dataFilePathsList, threads = [], []
+    dataFilePathsList, threads, currentUnits = [], [], []
+
     for chartName in screen["charts"]:
+        if screenInfoOld != None :
+            unit = screenInfoOld["charts"][chartName]["unit"]
+        else :
+            unit = None
         chart = screen["charts"][chartName]
+        currentUnits.append(unit)
         dataList = {}
-        threads.append(threading.Thread(target = downloadSingleChart, args = (dataFilePathsList, chart, str(chartNum))))
+        threads.append(threading.Thread(target = downloadSingleChart, args = (dataFilePathsList, chart, str(chartNum), unit)))
         chartNum += 1
 
     runThreads(threads)
-
+    print(currentUnits)
     i, chartNum = 0, 1
     for chartName in screen["charts"]:
         chart = screen["charts"][chartName]
@@ -124,7 +141,8 @@ def getCharts(screen) :
                     "is_chart" : True, 
                     "vertical" : chart["vertical"], 
                     "horizontal" : chart["horizontal"],
-                    "unit": chart["unit"],
+                    "unit": currentUnits[i - 1],
+                    "original_unit" : chart["unit"],
                     "unit_conversion": chart["unit_conversion"],
                     "enabled_units": chart["enabled_units"],
                     "data_list" : dataList
@@ -169,21 +187,22 @@ def getSingleValue(screen, chartsInfo, chartNum) :
 
 
 def getScreenInfo(screen, screenName) :
+    fileName = "../resources/" + screenName + ".json"
     info =  {
             "layout" : screen["layout"], 
             "tile_size" : screen["tile_size"], 
             "chart_on_screen_number" : screen["chart_on_screen_number"]
             }
-    chartsInfo, chartNum = getCharts(screen)
+    chartsInfo, chartNum = getCharts(screen, fileName)
     chartsInfo, chartNum = getSingleValue(screen, chartsInfo, chartNum)
     
     info["charts"] = chartsInfo
-    fileName = "../resources/" + screenName + ".json"
+    
     with open(fileName, "w") as write_file :
         json.dump(info, write_file, indent=4)
 
 
-def downloadData(url, dataDestination, dateToStart, filePath, isChart, update = False) : # stare parametry, confPath i is_chart
+def downloadData(url, dataDestination, dateToStart, filePath, isChart, update = False, originalUnit = "skip", unit = "skip") : # stare parametry, confPath i is_chart
     newData = []
     if update :
         oldData, dateToStart = getOldFile(filePath)
@@ -191,7 +210,7 @@ def downloadData(url, dataDestination, dateToStart, filePath, isChart, update = 
         oldData = []
 
     timeStamp = dateToStart
-    while (not isChart or timeStamp >= dateToStart )and url != None:
+    while (not isChart or timeStamp >= dateToStart) and url != None:
         response = requests.get(url, timeout=30)
         response.raise_for_status()
         j = json.loads(response.content)
@@ -201,7 +220,7 @@ def downloadData(url, dataDestination, dateToStart, filePath, isChart, update = 
                 value = getDataFromRes(res, dataDestination)
                 timeStamp = getTimeStamp(res)
                 if timeStamp > dateToStart or not update and timeStamp >= dateToStart:
-                    newData.append({"name" : timeStamp, "value" : value})
+                    newData.append({"name" : timeStamp, "value" : convert(value, originalUnit, unit)})
         else:
             res = j["results"][0]
             value = getDataFromRes(res, dataDestination)
