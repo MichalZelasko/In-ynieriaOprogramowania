@@ -13,6 +13,12 @@ export class TabsConfigurationComponent implements OnInit {
   numberOfScreens: any;
   generalInfo: any;
   tabs: Tab[] = [];
+  screensData: any[] = [];
+  numberOfCharts: any;
+  screenInfo: any;
+  charts: any;
+  chart_data: any;
+  datas: any;
 
   constructor(private appService: AppService) { }
 
@@ -20,22 +26,24 @@ export class TabsConfigurationComponent implements OnInit {
     this.getGeneralInfo();
   }
 
-  createScreens(numberOfScreens: number){
-    for(var i = 1; i <= numberOfScreens && i <= 4; i++){
-      const path = this.makePath(i);
-      this.tabs.push(new Tab('Ekran ' + i, path + '-screen'))
-    }
-  }
-
   getGeneralInfo() {
     this.appService.getGeneralInfo().subscribe(
       res => {
         this.generalInfo = res;
-        console.log("Dane ogólne (w tym ilość ekranów)");
-        console.log(this.generalInfo)
         this.numberOfScreens = this.generalInfo.number_of_screens;
         this.createScreens(this.numberOfScreens)
       });
+  }
+
+  createScreens(numberOfScreens: number){
+    for(var i = 1; i <= numberOfScreens && i <= 4; i++){
+      const path = this.makePath(i);
+      this.tabs.push(new Tab('Ekran ' + i, path + '-screen'));
+    }
+  }
+
+  refresh(){
+    window.location.reload();
   }
 
   makePath(number: number){
@@ -52,7 +60,6 @@ export class TabsConfigurationComponent implements OnInit {
         return "err";
     }
   }
-
 }
 
 

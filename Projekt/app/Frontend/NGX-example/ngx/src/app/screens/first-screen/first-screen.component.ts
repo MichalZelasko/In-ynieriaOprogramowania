@@ -11,9 +11,7 @@ declare var require: any;
 })
 export class FirstScreenComponent implements OnInit {
 
-  productS: any[];
-  productSM: any[];
-  testjs: any[];
+  chartsData: any[];
   actualData: any[];
   numberOfCharts: any;
   screenInfo: any;
@@ -21,31 +19,20 @@ export class FirstScreenComponent implements OnInit {
   chart_data: any;
   datas: any;
 
+
   view: [number, number] = [900,570];
   colorScheme = { domain: ['#596d5f', '#5d7765', '#60816b', '#638c70', '#679676', '#6aa17c', '#6cab82', '#6fb688', '#72c18e'] };
-  gradient: boolean = false;
   xAxis: boolean = true;
   yAxis: boolean = true;
-  legendTitle: string = "Products";
-  legendTitleMulti: string = "Months";
-  legendPosition: string = "below";
-  legend: boolean = true;
   showXAxisLabel: boolean = true;
   showYAxisLabel: boolean = true;
   xAxisLabel: string = "Date";
   yAxisLabel: string = "Tepmerature";
-  showGridLines: boolean = true;
-  showDataLabel: boolean = true;
-  barPadding: number = 3;
-  tooltipDisabled: boolean = false;
-  roundEdges: boolean = false;
+  showDataLabel: boolean = false;
 
   constructor(private appService: AppService) { 
-    this.productS = productSales;
-    this.productSM = productSalesMulti;
-    this.testjs = testjson;
     this.actualData = [];
-    
+    this.chartsData = [];
   }
 
   getData(): void{
@@ -55,13 +42,11 @@ export class FirstScreenComponent implements OnInit {
 
   ngOnInit(): void {
     this.getFirstScreenInfo();
-    this.getData();
+    // this.getData();
   }
 
   getFirstScreenInfo(){
     this.appService.getScreenInfo(1).subscribe(res => {
-      console.log("Dane ekranu pierwszego:" )
-      console.log(res);
       this.screenInfo = res;
       this.numberOfCharts = this.screenInfo.chart_on_screen_number
       this.getChartsData(this.numberOfCharts)
@@ -81,8 +66,10 @@ export class FirstScreenComponent implements OnInit {
   getChartData(numberOfDatas: number, chartNumber: number){
     for(let i = 1; i <= numberOfDatas; i++){
       this.appService.getData(chartNumber, i).subscribe(res => {
-        console.log("Dane dla wykresu numer: " + chartNumber + "dane numer: " + i)
-        console.log(res);
+        console.log("WYKRES NUMER: " + chartNumber + " DANA NUMER: " + i);
+        //DODANIE WYKRESU DO EKRANU
+        this.chartsData.push(res.data)
+        console.log(" DANE: " + res.data);
       });
     }
   }
