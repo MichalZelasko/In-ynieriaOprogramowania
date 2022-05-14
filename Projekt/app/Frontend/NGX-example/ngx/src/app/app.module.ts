@@ -15,6 +15,8 @@ import { SecondScreenComponent } from './screens/second-screen/second-screen.com
 import { ThirdScreenComponent } from './screens/third-screen/third-screen.component';
 import { FourthScreenComponent } from './screens/fourth-screen/fourth-screen.component';
 import {MatIconModule} from '@angular/material/icon';
+import { BarChartsComponent } from './bar-charts/bar-charts.component';
+import { LineChartsComponent } from './line-charts/line-charts.component'
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import {MatIconModule} from '@angular/material/icon';
     TabsConfigurationComponent,
     SecondScreenComponent,
     ThirdScreenComponent,
-    FourthScreenComponent
+    FourthScreenComponent,
+    BarChartsComponent,
+    LineChartsComponent
   ],
   imports: [
     BrowserModule,

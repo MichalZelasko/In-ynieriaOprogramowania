@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { ApplicationRef, Component, ComponentFactoryResolver, Injector, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
 import { FIRST_SCREEN_PATH, SECOND_SCREEN_PATH, THIRD_SCREEN_PATH } from './paths';
 import { Tab } from './tabs';
+import { appendComponentToBody } from '../addComponent';
+import { FirstScreenComponent } from '../screens/first-screen/first-screen.component';
+import { SecondScreenComponent } from '../screens/second-screen/second-screen.component';
+import { BarChartsComponent } from '../bar-charts/bar-charts.component';
+import { LineChartsComponent } from '../line-charts/line-charts.component'; 
 
 @Component({
   selector: 'app-tabs-configuration',
@@ -20,10 +25,18 @@ export class TabsConfigurationComponent implements OnInit {
   chart_data: any;
   datas: any;
 
-  constructor(private appService: AppService) { }
+  constructor(private appService: AppService,  private componentFactoryResolver: ComponentFactoryResolver, private appRef: ApplicationRef, private injector: Injector) { }
 
   ngOnInit(): void {
     this.getGeneralInfo();
+
+    //Example of component creation:
+    //Create component
+    var barc = new BarChartsComponent();
+    //Set desired values
+    barc.setValues(undefined, undefined, undefined, undefined, undefined, undefined, false, undefined, undefined, undefined, undefined, undefined, false, undefined, undefined);
+    //Add component to HTML
+    var newdomElem = appendComponentToBody(this, BarChartsComponent, barc);
   }
 
   getGeneralInfo() {
