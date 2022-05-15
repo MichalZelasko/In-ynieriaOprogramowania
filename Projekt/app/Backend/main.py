@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.responses import HTMLResponse, JSONResponse
 from utils import get_json_object_from_file
 from dataConverter import convertFileData
+from DataDownloader import refresh_data
 
 RESOURCES_PATH = "../resources/"
 
@@ -48,4 +49,9 @@ def convert_data(chart_id: int, screen_id: int, destinationUnit: str) :
         raise HTTPException(status_code=404, detail=err.strerror)
     except Exception:
         raise HTTPException(status_code=404, detail="Incompatible units")
+    return JSONResponse(content={"response": "OK"}, status_code=200)
+
+@app.get("/api/refresh")
+def refresh():
+    refresh_data()
     return JSONResponse(content={"response": "OK"}, status_code=200)
