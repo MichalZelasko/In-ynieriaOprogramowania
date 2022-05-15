@@ -32,15 +32,7 @@ export class BarChartsComponent implements OnInit {
     this.actualData = [];
   }
 
-  getData(): void{
-    var json = require('../../../../../../resources/data.json');
-
-    this.actualData = json.data;
-  }
-
-  ngOnInit(): void {
-    this.getData();
-  }
+  ngOnInit(): void { }
 
   setValues(view: [number, number] = [900,570], 
             colorscheme: any = greens,
@@ -56,7 +48,8 @@ export class BarChartsComponent implements OnInit {
             showGridLines: boolean = false,
             showDataLabel: boolean = true,
             barPadding: number = 3,
-            tooltipDisabled: boolean = false) {
+            tooltipDisabled: boolean = false,
+            actualData: any) {
 
     this.view = view;
     this.colorScheme = colorscheme;
@@ -73,6 +66,7 @@ export class BarChartsComponent implements OnInit {
     this.showDataLabel = showDataLabel;
     this.barPadding = barPadding;
     this.tooltipDisabled = tooltipDisabled;
+    this.actualData = actualData;
   }
 
 }

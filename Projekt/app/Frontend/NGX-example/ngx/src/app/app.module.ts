@@ -16,7 +16,8 @@ import { ThirdScreenComponent } from './screens/third-screen/third-screen.compon
 import { FourthScreenComponent } from './screens/fourth-screen/fourth-screen.component';
 import {MatIconModule} from '@angular/material/icon';
 import { BarChartsComponent } from './bar-charts/bar-charts.component';
-import { LineChartsComponent } from './line-charts/line-charts.component'
+import { LineChartsComponent } from './line-charts/line-charts.component';
+import { SingleValueComponent } from './single-value/single-value.component'
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { LineChartsComponent } from './line-charts/line-charts.component'
     ThirdScreenComponent,
     FourthScreenComponent,
     BarChartsComponent,
-    LineChartsComponent
+    LineChartsComponent,
+    SingleValueComponent
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { ApplicationRef, Component, ComponentFactoryResolver, ElementRef, Injector, OnInit, ViewChild } from '@angular/core';
 import { AppService } from 'src/app/app.service';
 import { productSales, productSalesMulti, testjson } from '../../data/products';
 import { appendComponentToBody } from '../../addComponent';
 import { SecondScreenComponent } from '../../screens/second-screen/second-screen.component';
+import { BarChartsComponent } from 'src/app/bar-charts/bar-charts.component';
+import { elementAt } from 'rxjs';
+import { SingleValueComponent } from 'src/app/single-value/single-value.component';
 
 declare var require: any;
 
@@ -32,7 +35,7 @@ export class FirstScreenComponent implements OnInit {
   yAxisLabel: string = "Tepmerature";
   showDataLabel: boolean = false;
 
-  constructor(private appService: AppService) { 
+  constructor(private appService: AppService, private componentFactoryResolver: ComponentFactoryResolver, private appRef: ApplicationRef, private injector: Injector) { 
     this.actualData = [];
     this.chartsData = [];
   }
@@ -50,6 +53,7 @@ export class FirstScreenComponent implements OnInit {
   getFirstScreenInfo(){
     this.appService.getScreenInfo(1).subscribe(res => {
       this.screenInfo = res;
+      console.log(this.screenInfo)
       this.numberOfCharts = this.screenInfo.chart_on_screen_number
       this.getChartsData(this.numberOfCharts)
     })
@@ -61,19 +65,46 @@ export class FirstScreenComponent implements OnInit {
     this.chart_data = Object.values(this.charts)[i];
     this.datas = this.chart_data.data_list;
     var numberOfDatas = Object.keys(this.datas).length;
+    //TODO pobrac polozenie
     this.getChartData(numberOfDatas, i + 1);
     }
   }
 
   getChartData(numberOfDatas: number, chartNumber: number){
-    for(let i = 1; i <= numberOfDatas; i++){
-      this.appService.getData(chartNumber, i).subscribe(res => {
-        console.log("WYKRES NUMER: " + chartNumber + " DANA NUMER: " + i);
-        //DODANIE WYKRESU DO EKRANU
-        this.chartsData.push(res.data)
-        console.log(" DANE: " + res.data);
+    if(numberOfDatas == 1){
+      this.appService.getData(chartNumber, 1).subscribe(res => {
+
+        var barc = new BarChartsComponent();
+        // var barc = new SingleValueComponent();
+        //Set desired values
+        barc.setValues(undefined, undefined, undefined, undefined, undefined, undefined, false, undefined, undefined, undefined, undefined, undefined, false, undefined, undefined, res.data);
+        // barc.setValues("TESTTTTTTTTTT");
+        //Add component to HTML
+        var newdomElem = appendComponentToBody(this, SingleValueComponent, barc);
+
+        newdomElem.style.position = 'relative';
+        newdomElem.style.top = '40%';
+        newdomElem.style.left = '50%';
       });
+    }
+    else{
+      let result: LooseObject = {}; 
+      for(let i = 1; i <= numberOfDatas; i++){
+        console.log("WYKRES NUMER: " + chartNumber + " DANA NUMER: " + i);
+        this.appService.getData(chartNumber, i).subscribe(res => {
+          result[i] = res.data;
+        });
+      }
+      var barc = new BarChartsComponent();
+        //Set desired values
+        barc.setValues(undefined, undefined, undefined, undefined, undefined, undefined, false, undefined, undefined, undefined, undefined, undefined, false, undefined, undefined, result);
+        //Add component to HTML
+        var newdomElem = appendComponentToBody(this, BarChartsComponent, barc);
     }
   }
 
+}
+
+interface LooseObject {
+  [key: string]: any
 }

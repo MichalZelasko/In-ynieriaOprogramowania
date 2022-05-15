@@ -32,20 +32,19 @@ export class TabsConfigurationComponent implements OnInit {
 
     //Example of component creation:
     //Create component
-    var barc = new BarChartsComponent();
-    //Set desired values
-    barc.setValues(undefined, undefined, undefined, undefined, undefined, undefined, false, undefined, undefined, undefined, undefined, undefined, false, undefined, undefined);
-    //Add component to HTML
-    var newdomElem = appendComponentToBody(this, BarChartsComponent, barc);
+    // var barc = new BarChartsComponent();
+    // //Set desired values
+    // barc.setValues(undefined, undefined, undefined, undefined, undefined, undefined, false, undefined, undefined, undefined, undefined, undefined, false, undefined, undefined);
+    // //Add component to HTML
+    // var newdomElem = appendComponentToBody(this, BarChartsComponent, barc);
   
-
-    //Example of component creation:
-    //Create component
-    var barc = new BarChartsComponent();
-    //Set desired values
-    barc.setValues(undefined, undefined, undefined, undefined, undefined, undefined, false, undefined, undefined, undefined, undefined, undefined, false, undefined, undefined);
-    //Add component to HTML
-    var newdomElem = appendComponentToBody(this, BarChartsComponent, barc);
+    // //Example of component creation:
+    // //Create component
+    // var barc = new BarChartsComponent();
+    // //Set desired values
+    // barc.setValues(undefined, undefined, undefined, undefined, undefined, undefined, false, undefined, undefined, undefined, undefined, undefined, false, undefined, undefined);
+    // //Add component to HTML
+    // var newdomElem = appendComponentToBody(this, BarChartsComponent, barc);
   }
 
   getGeneralInfo() {

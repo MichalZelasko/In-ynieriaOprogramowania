@@ -27,5 +27,5 @@ export function appendComponentToBody(ths: any, component: any, componentInstanc
     //     this.appRef.detachView(componentRef.hostView);
     //     componentRef.destroy();
     // }, 3000);
-    return componentRef;
+    return domElem;
   }
