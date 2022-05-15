@@ -235,6 +235,10 @@ def downloadData(url, dataDestination, dateToStart, filePath, isChart, update = 
         json.dump(dateValue, write_file, indent = 4)
 
 
+def refresh_data():
+    # downloadData()
+    pass
+
 
 if __name__ == "__main__" :
 

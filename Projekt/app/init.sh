@@ -54,8 +54,3 @@ fi
 
 #todo check for required angular dependencies, add here
 
-# start server
-
-#/Backend/uvicorn main:app -- reload
-cd Backend && uvicorn main:app --reload
-
