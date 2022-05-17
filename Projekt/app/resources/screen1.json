@@ -13,6 +13,14 @@
                 "size": "rozmiar w kafelkach",
                 "position": "polozenie tez w kafelkach"
             },
+            "unit": "C",
+            "original_unit": "C",
+            "unit_conversion": "enabled",
+            "enabled_units": [
+                "C",
+                "F",
+                "K"
+            ],
             "data_list": {
                 "data1": {
                     "color": "zielony",
@@ -28,6 +36,13 @@
         },
         "chart2": {
             "is_chart": false,
+            "unit": "C",
+            "unit_conversion": "enabled",
+            "enabled_units": [
+                "C",
+                "F",
+                "K"
+            ],
             "data_list": {
                 "data": {
                     "file_name": "../resources/chart_2_data.json",
