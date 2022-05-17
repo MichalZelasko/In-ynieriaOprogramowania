@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TreeMapModule } from '@swimlane/ngx-charts';
-import { productSales, productSalesMulti, testjson } from '../data/products';
+import { greens } from "../esthetics/colorSchemes";
 
 declare var require: any;
 
@@ -10,19 +10,13 @@ declare var require: any;
   styleUrls: ['./bar-charts.component.css']
 })
 export class BarChartsComponent implements OnInit {
-
-  productS: any[];
-  productSM: any[];
-  testjs: any[];
   actualData: any[];
 
   view: [number, number] = [900,570];
-  colorScheme = { domain: ['#596d5f', '#5d7765', '#60816b', '#638c70', '#679676', '#6aa17c', '#6cab82', '#6fb688', '#72c18e'] };
-  gradient: boolean = false;
+  colorScheme = greens;
   xAxis: boolean = true;
   yAxis: boolean = true;
   legendTitle: string = "Products";
-  legendTitleMulti: string = "Months";
   legendPosition: string = "below";
   legend: boolean = true;
   showXAxisLabel: boolean = true;
@@ -33,27 +27,46 @@ export class BarChartsComponent implements OnInit {
   showDataLabel: boolean = true;
   barPadding: number = 3;
   tooltipDisabled: boolean = false;
-  roundEdges: boolean = false;
 
-  constructor() { 
-    this.productS = productSales;
-    this.productSM = productSalesMulti;
-    this.testjs = testjson;
+  constructor(){
     this.actualData = [];
-    
-    //Object.assign(this.productS, productSales);
-    //Object.assign(this.productSM, productSalesMulti);
-    //Object.assign(this.testjs, testjson);
   }
 
-  getData(): void{
-    var json = require('../../../../../../resources/data.json');
+  ngOnInit(): void { }
 
-    this.actualData = json.data;
-  }
+  setValues(view: [number, number] = [900,570], 
+            colorscheme: any = greens,
+            xAxis: boolean = true, 
+            yAxis: boolean = true, 
+            legendTitle: string = "Legend",
+            legendPosition: string = "below",
+            legend: boolean = true,
+            showXAxisLabel: boolean = false,
+            showYAxisLabel: boolean = false,
+            xAxisLabel: string = "",
+            yAxisLabel: string = "",
+            showGridLines: boolean = false,
+            showDataLabel: boolean = true,
+            barPadding: number = 3,
+            tooltipDisabled: boolean = false,
+            actualData: any) {
 
-  ngOnInit(): void {
-    this.getData();
+    this.view = view;
+    this.colorScheme = colorscheme;
+    this.xAxis = xAxis;
+    this.yAxis = yAxis;
+    this.legendTitle = legendTitle;
+    this.legendPosition = legendPosition;
+    this.legend = legend;
+    this.showXAxisLabel = showXAxisLabel;
+    this.showYAxisLabel = showYAxisLabel;
+    this.xAxisLabel = xAxisLabel;
+    this.yAxisLabel = yAxisLabel;
+    this.showGridLines = showGridLines;
+    this.showDataLabel = showDataLabel;
+    this.barPadding = barPadding;
+    this.tooltipDisabled = tooltipDisabled;
+    this.actualData = actualData;
   }
 
 }
