@@ -2,9 +2,9 @@ import { ApplicationRef, Component, ComponentFactory, ComponentFactoryResolver, 
 
 
 //Before using in a component - add to its constructor: private componentFactoryResolver: ComponentFactoryResolver, private appRef: ApplicationRef, private injector: Injector
-//Usage: create and instance of a desired component (with any desired values), then use appendComponentToBody(this, <ComponentClass>, <componentInstance>)
+//Usage: create and instance of a desired component (with any desired values), then use appendComponentToBody(this, <ComponentClass>, <componentInstance>, <parentHTMLElement>)
 
-export function appendComponentToBody(ths: any, component: any, componentInstance: any) {
+export function appendComponentToBody(ths: any, component: any, componentInstance: any, htmlElem: HTMLElement) {
     // 1. Create a component reference from the component 
     const componentRef = ths.componentFactoryResolver
       .resolveComponentFactory(component)
@@ -20,7 +20,8 @@ export function appendComponentToBody(ths: any, component: any, componentInstanc
       .rootNodes[0] as HTMLElement;
     
     // 4. Append DOM element to the body
-    document.body.appendChild(domElem);
+    //ths.document.body.appendChild(domElem);
+    htmlElem.parentNode!.appendChild(domElem);
     
     // 5. Wait some time and remove it from the component tree and from the DOM
     // setTimeout(() => {

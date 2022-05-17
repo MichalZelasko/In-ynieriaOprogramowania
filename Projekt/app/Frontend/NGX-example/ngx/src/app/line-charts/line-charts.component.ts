@@ -1,4 +1,6 @@
+import { BoundElementProperty } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { Chart, registerables } from 'chart.js';
 import { greens } from "../esthetics/colorSchemes";
 
 declare var require: any;
@@ -10,62 +12,108 @@ declare var require: any;
 })
 
 export class LineChartsComponent implements OnInit {
-  actualData: any[];
 
-  view: [number, number] = [900,570];
-  colorScheme = greens;
-  xAxis: boolean = true;
-  yAxis: boolean = true;
-  legendTitle: string = "Products";
-  legendPosition: string = "below";
-  legend: boolean = true;
-  showXAxisLabel: boolean = true;
-  showYAxisLabel: boolean = true;
-  xAxisLabel: string = "Date";
-  yAxisLabel: string = "Tepmerature";
-  showGridLines: boolean = true;
-  tooltipDisabled: boolean = false;
+  idHTML: string = " ";
+  width: string;
+  height: string;
 
-  constructor(){
-    this.actualData = [];
-  }
 
-  getData(): void{
-    var json = require('../../../../../../resources/data.json');
+  data: any;
 
-    this.actualData = json.data;
+  constructor() { 
+    Chart.register(...registerables);
+    this.idHTML = "test";
+    this.width = "0%";
+    this.height = "0%";
+    this.data = null;
   }
 
   ngOnInit(): void {
-    this.getData();
+    setTimeout(() =>{
+      this.createChart();
+    }, 200);
   }
 
-  setValues(view: [number, number] = [900,570], 
-            colorscheme: any = greens,
-            xAxis: boolean = true, 
-            yAxis: boolean = true, 
-            legendTitle: string = "Legend",
-            legendPosition: string = "below",
-            legend: boolean = true,
-            showXAxisLabel: boolean = false,
-            showYAxisLabel: boolean = false,
-            xAxisLabel: string = "",
-            yAxisLabel: string = "",
-            showGridLines: boolean = false,
-            tooltipDisabled: boolean = false) {
+  setValues(id: string, width: string, height: string, data: any){
+    this.idHTML = id;
+    this.height = height;
+    this.width = width;
+    this.data = data;
+  }
 
-    this.view = view;
-    this.colorScheme = colorscheme;
-    this.xAxis = xAxis;
-    this.yAxis = yAxis;
-    this.legendTitle = legendTitle;
-    this.legendPosition = legendPosition;
-    this.legend = legend;
-    this.showXAxisLabel = showXAxisLabel;
-    this.showYAxisLabel = showYAxisLabel;
-    this.xAxisLabel = xAxisLabel;
-    this.yAxisLabel = yAxisLabel;
-    this.showGridLines = showGridLines;
-    this.tooltipDisabled = tooltipDisabled;
+  createChart(){
+    var canvas = <HTMLCanvasElement> document.getElementById("test");
+    canvas.setAttribute('id', this.idHTML + this.idHTML);
+    var container = <HTMLElement> document.getElementById("di");
+    container.setAttribute('id', "di"+ this.idHTML + this.idHTML);
+    container.setAttribute('style', "width: " + this.width + "; height: " + this.height + ";");
+    canvas.setAttribute('width', this.width);
+    canvas.setAttribute('height', this.height);
+
+    var ctx = <CanvasRenderingContext2D> canvas.getContext("2d");
+    const myChart = new Chart(ctx, {
+      type: 'line',
+      data: this.data,
+      options: {
+        scales: {
+          y: {
+            grid: {
+              drawBorder: false, // <-- this removes y-axis line
+              lineWidth: 0.5,
+            },
+            ticks: {
+              autoSkip: true,
+              maxTicksLimit: 100,
+            },
+            title: {
+              display: true,
+              font: {
+                size: 20
+              },
+              text: 'Temperature'
+            },
+            display: true // Hide Y axis labels
+          },
+          x: {
+            grid: {
+              drawBorder: false, // <-- this removes y-axis line
+              lineWidth: 0.5,
+            },
+            ticks: {
+              autoSkip: true,
+              maxTicksLimit: 5,
+              maxRotation: 0,
+              minRotation: 0,
+              align: 'start'
+            },
+            title: {
+              display: true,
+              font: {
+                size: 20
+              },
+              text: 'Date'
+            },
+            display: true // Hide X axis labels
+          }
+          } ,
+          elements: {
+            point:{
+                radius: 0
+            }
+          },
+          plugins: {
+            legend: {
+              labels: {
+                // This more specific font property overrides the global property
+                font: {
+                    size: 14
+                }
+              },
+              display: true
+            }
+          }
+      }
+  });
+
   }
 }

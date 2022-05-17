@@ -7,6 +7,16 @@ import { BarChartsComponent } from 'src/app/bar-charts/bar-charts.component';
 import { elementAt } from 'rxjs';
 import { SingleValueComponent } from 'src/app/single-value/single-value.component';
 import { ScatterChartsComponent } from 'src/app/scatter-charts/scatter-charts.component';
+import { LinearScale, LineController } from 'chart.js';
+import { LineChartsComponent } from 'src/app/line-charts/line-charts.component';
+
+
+function renameProperties(obj) {
+  obj['x'] = obj['name'];
+  obj['y'] = obj['value'];
+  delete obj['name'];
+  delete obj['value'];
+}
 
 @Component({
   selector: 'app-first-screen',
@@ -67,6 +77,7 @@ export class FirstScreenComponent implements OnInit {
     }
     var numberOfDatas = Object.keys(this.datas).length;
     //TODO pobrac polozenie
+    //i nazwę wykresu i cokolwiek tam jeszcze do pobrania
     this.getChartData(numberOfDatas, i + 1, isChart);
     }
   }
@@ -75,22 +86,25 @@ export class FirstScreenComponent implements OnInit {
     if(!flag){
       this.appService.getData(chartNumber, 1).subscribe(res => {
 
-        var barc = new SingleValueComponent();
-        barc.setValues("Wartość: " + res.data[0].value, "20px");
-        var newdomElem = appendComponentToBody(this, SingleValueComponent, barc);
+        var screenHTML = document.getElementById("screen");
 
-        newdomElem.style.top = '0%';
-        newdomElem.style.left = '0%';
-        newdomElem.style.maxHeight = '1px';
-        newdomElem.style.maxWidth = '1px';
+        var barc = new SingleValueComponent();
+        barc.setValues("Wartość: " + res.data[0].value, "20px", "400px", "50px");
+        var newdomElem = appendComponentToBody(this, SingleValueComponent, barc, screenHTML!);
+
+        newdomElem.style.position = 'relative';
+        newdomElem.style.top = '15%';
+        newdomElem.style.left = '5%';
       });
     } else {
       if(numberOfDatas == 1){
         this.appService.getData(chartNumber, 1).subscribe(res => {
   
+          var screenHTML = document.getElementById("screen");
+
           var barc = new BarChartsComponent();
           barc.setValues(undefined, undefined, undefined, undefined, undefined, undefined, false, undefined, undefined, undefined, undefined, undefined, false, undefined, undefined, res.data);
-          var newdomElem = appendComponentToBody(this, BarChartsComponent, barc);
+          var newdomElem = appendComponentToBody(this, BarChartsComponent, barc, screenHTML!);
   
           newdomElem.style.position = 'relative';
           newdomElem.style.top = '0%';
@@ -99,21 +113,42 @@ export class FirstScreenComponent implements OnInit {
           newdomElem.style.width = '100%';
         });
       }
+
       else{
-        let result: LooseObject = {}; 
+        let colors = ['#638c70', '#c7aa5a']
+        let results: LooseObject = {}; 
+        let result: any = {datasets: []}; 
         for(let i = 1; i <= numberOfDatas; i++){
           console.log("WYKRES NUMER: " + chartNumber + " DANA NUMER: " + i);
           this.appService.getData(chartNumber, i).subscribe(res => {
-            result[i] = res.data;
+            for(let element of Object.keys(res.data)){
+              renameProperties(res.data[element]);
+            }
+            results[i] = {label: "Data Label " + i, data: res.data, borderColor: colors[i-1], backgroundColor: colors[i-1]};//res.data;
+            result['datasets'][i-1] = results[i];
           });
         }
+
+        var screenHTML = document.getElementById("screen");
+
+        // not important for now
         var barc = new ScatterChartsComponent();
-        barc.setValues(chartNumber.toString(), "1000px", "500px");
-        var newdomElem = appendComponentToBody(this, ScatterChartsComponent, barc);
+        barc.setValues(chartNumber.toString(), "700px", "400px");//, result);
+        var newdomElem = appendComponentToBody(this, ScatterChartsComponent, barc, screenHTML!);
 
         newdomElem.style.position = 'relative';
-        newdomElem.style.top = '0%';
-        newdomElem.style.left = '0%';
+        newdomElem.style.top = '5%';
+        newdomElem.style.left = '5%';
+        newdomElem.style.display = 'inline-block';
+
+        var barc2 = new LineChartsComponent();
+        barc2.setValues(chartNumber.toString(), "900px", "500px", result);
+        var newdomElem2 = appendComponentToBody(this, LineChartsComponent, barc2, screenHTML!);
+
+        newdomElem2.style.position = 'relative';
+        newdomElem2.style.top = '10%';
+        newdomElem2.style.left = '150px';
+        newdomElem2.style.display = 'inline-block';
 
       }
     }
