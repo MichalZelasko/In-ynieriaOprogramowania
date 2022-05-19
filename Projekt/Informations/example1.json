@@ -10,6 +10,7 @@
     },
     "screen_info" : {
         "screen1" : {
+            "name" : "nazwa ekranu",
             "layout" : "vertcial",
             "tile_size" : "w procentach całego ekranu",
             "chart_on_screen_number" : 2,
@@ -46,8 +47,7 @@
                         ]
                     },
                     "color_list" : {
-                        "color1" : "zielony",
-                        "color2" : "czerwony"
+                        "color1" : "color_set_name"
                     },
                     "data_names" : {
                             "data_name1": "tempSet",
