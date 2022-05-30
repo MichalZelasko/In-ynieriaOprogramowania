@@ -1,9 +1,11 @@
 {
+    "name": "nazwa ekranu",
     "layout": "vertcial",
     "tile_size": "w procentach ca\u0139\u201aego ekranu",
     "chart_on_screen_number": 2,
     "charts": {
         "chart1": {
+            "name": "nazwa wykresu",
             "is_chart": true,
             "vertical": {
                 "size": "rozmiar w kafelkach",
@@ -22,13 +24,12 @@
                 "K"
             ],
             "data_list": {
+                "color": "color_set_name",
                 "data1": {
-                    "color": "zielony",
                     "file_name": "../resources/chart_1_data_1.json",
                     "data_name": "tempSet"
                 },
                 "data2": {
-                    "color": "czerwony",
                     "file_name": "../resources/chart_1_data_2.json",
                     "data_name": "tempRead"
                 }

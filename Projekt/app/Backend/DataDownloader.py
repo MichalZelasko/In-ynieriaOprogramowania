@@ -124,20 +124,21 @@ def getCharts(screen, fileName) :
     i, chartNum = 0, 1
     for chartName in screen["charts"]:
         chart = screen["charts"][chartName]
-        dataList = {}
+        dataList = {"color" : chart["color_list"]["color1"]}
         dataFilePaths = dataFilePathsList[i]
         i += 1
         for dataNum in range(len(chart["url_list"])) :
             strNum = str(dataNum + 1)
             dataName = "data" + strNum
+            print(chart["color_list"], chart["data_names"])
             dataInfo = {
-                            "color" : chart["color_list"]["color" + strNum],
                             "file_name" : dataFilePaths[dataNum],
                             "data_name" : chart["data_names"]["data_name" + strNum]
                        }
             dataList[dataName] = dataInfo
         
         thisChart = {
+                    "name" : chart["name"],
                     "is_chart" : True, 
                     "vertical" : chart["vertical"], 
                     "horizontal" : chart["horizontal"],
@@ -189,6 +190,7 @@ def getSingleValue(screen, chartsInfo, chartNum) :
 def getScreenInfo(screen, screenName) :
     fileName = "../resources/" + screenName + ".json"
     info =  {
+            "name" : screen["name"],
             "layout" : screen["layout"], 
             "tile_size" : screen["tile_size"], 
             "chart_on_screen_number" : screen["chart_on_screen_number"]
