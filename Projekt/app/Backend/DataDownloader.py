@@ -21,15 +21,15 @@ class MyDate :
         self.year, self.month, self.day = year, month, day
         self.hour, self.minute, self.seconds = hour, minute, seconds
 
-    def diff(self, other, unit) :
+    def diff(self, other, unit, number = 1) :
         if unit == "hour" :
-            return self.year < self.year or self.month < other.month or self.day < other.day or self.hour < other.hour - 1 or (self.hour < other.hour and self.minute < other.minute)
+            return self.year < self.year or self.month < other.month or self.day < other.day or self.hour < other.hour - number or (self.hour < other.hour - number + 1 and self.minute < other.minute)
         if unit == "day" :
-            return self.year < self.year or self.month < other.month or self.day < other.day - 1 or (self.day < other.day and self.hour < other.hour)
+            return self.year < self.year or self.month < other.month or self.day < other.day - number or (self.day < other.day - number + 1 and self.hour < other.hour)
         if unit == "month" :
-            return self.year < self.year or self.month < other.month - 1 or (self.month < other.month and self.day < other.day)
+            return self.year < self.year or self.month < other.month - number or (self.month < other.month and self.day - number + 1 < other.day)
         if unit == "year" :
-            return self.year < other.year - 1 or (self.year < other.year and self.month < other.month)
+            return self.year < other.year - number or (self.year < other.year - number + 1 and self.month < other.month)
         return True
 
     def __str__(self) :
