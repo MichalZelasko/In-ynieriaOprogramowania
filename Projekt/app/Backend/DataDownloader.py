@@ -5,6 +5,36 @@ import threading
 from dataConverter import convert
 from utils import get_json_object_from_file
 
+class MyDate :
+
+    def __init__(self, dateTime) :
+        if type(dateTime) == str :
+            year, month, day = int(dateTime[0:4]), int(dateTime[5:7]), int(dateTime[8:10])
+            hour, minute, seconds = int(dateTime[11:13]), int(dateTime[14:16]), int(dateTime[17:19])
+            self.set(year, month, day, hour, minute, seconds)
+        else :
+            year, month, day = dateTime.year, dateTime.month, dateTime.day
+            hour, minute, seconds = dateTime.hour, dateTime.minute, dateTime.second
+            self.set(year, month, day, hour, minute, seconds)
+
+    def set(self, year, month, day, hour, minute, seconds) :
+        self.year, self.month, self.day = year, month, day
+        self.hour, self.minute, self.seconds = hour, minute, seconds
+
+    def diff(self, other, unit) :
+        if unit == "hour" :
+            return self.year < self.year or self.month < other.month or self.day < other.day or self.hour < other.hour - 1 or (self.hour < other.hour and self.minute < other.minute)
+        if unit == "day" :
+            return self.year < self.year or self.month < other.month or self.day < other.day - 1 or (self.day < other.day and self.hour < other.hour)
+        if unit == "month" :
+            return self.year < self.year or self.month < other.month - 1 or (self.month < other.month and self.day < other.day)
+        if unit == "year" :
+            return self.year < other.year - 1 or (self.year < other.year and self.month < other.month)
+        return True
+
+    def __str__(self) :
+        return f"{self.year}-{self.month}-{self.day} {self.hour}:{self.minute}:{self.seconds}"
+
 
 def getDataFromRes(res, dataDestination) :
     dataName = "data"
@@ -31,7 +61,26 @@ def getInfo(res) :
 
 def getOldData(res) :
     data = "data"
-    return res[data]
+    previous, now = MyDate(datetime.now()), MyDate(datetime.now())
+    sparse_data = []
+    for record in res[data] :
+        mydate = MyDate(record["name"])
+        if mydate.diff(now, "year") :
+            if mydate.diff(previous, "month") :
+                sparse_data.append(record)
+                previous = mydate
+        elif mydate.diff(now, "month") :
+            if mydate.diff(previous, "day") :
+                sparse_data.append(record)
+                previous = mydate
+        elif mydate.diff(now, "day") :
+            if mydate.diff(previous, "hour") :
+                sparse_data.append(record)
+                previous = mydate
+        else :
+            sparse_data.append(record)
+            previous = mydate
+    return sparse_data
 
 
 def getLastDate(res) :
