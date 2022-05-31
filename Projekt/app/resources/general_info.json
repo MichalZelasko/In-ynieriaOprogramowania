@@ -1,1 +1,9 @@
-{"chart_number": "liczba wykres\u00f3w", "number_of_screens": "3", "zooming": "True | False", "scale_changeable": "True | False", "automatic_refresh": "True | False", "refresh_time": "czas po kt\u00f3rym nast\u0119puje automatyczne od\u015bwie\u017cenie", "user_refresh": "True | False"}
+{
+    "chart_number": "liczba wykres\u00f3w",
+    "number_of_screens": "3",
+    "zooming": "True | False",
+    "scale_changeable": "True | False",
+    "automatic_refresh": "True | False",
+    "refresh_time": "czas po kt\u00f3rym nast\u0119puje automatyczne od\u015bwie\u017cenie",
+    "user_refresh": "True | False"
+}
