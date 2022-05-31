@@ -88,6 +88,17 @@
                         },
                         "..." : "lista kolejnych dat"
                     },
+                    "min_max_values":{
+                        "data1": {
+                            "min" : "wartość minimalna",
+                            "max" : "wartość maksymalna"
+                        },
+                        "data2": {
+                            "min" : "wartość minimalna",
+                            "max" : "wartość maksymalna"
+                        },
+                        "..." : "lista kolejnych wartości"
+                    },
                     "name" : "nazwa wykresu",
                     "type" : "scatter | histogram | etc.",
                     "date" : {
@@ -224,6 +235,17 @@
                         },
                         "..." : "lista kolejnych dat"
                     },
+                    "min_max_values":{
+                        "data1": {
+                            "min" : "wartość minimalna",
+                            "max" : "wartość maksymalna"
+                        },
+                        "data2": {
+                            "min" : "wartość minimalna",
+                            "max" : "wartość maksymalna"
+                        },
+                        "..." : "lista kolejnych wartości"
+                    },
                     "name" : "nazwa wykresu",
                     "type" : "scatter | histogram | etc.",
                     "date" : {
@@ -311,6 +333,17 @@
                             "minutes": "ile minut"
                         },
                         "..." : "lista kolejnych dat"
+                    },
+                    "min_max_values":{
+                        "data1": {
+                            "min" : "wartość minimalna",
+                            "max" : "wartość maksymalna"
+                        },
+                        "data2": {
+                            "min" : "wartość minimalna",
+                            "max" : "wartość maksymalna"
+                        },
+                        "..." : "lista kolejnych wartości"
                     },
                     "name" : "nazwa wykresu",
                     "type" : "scatter | histogram | etc.",

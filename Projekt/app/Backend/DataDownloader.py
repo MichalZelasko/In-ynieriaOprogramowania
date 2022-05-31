@@ -124,15 +124,16 @@ def downloadSingleChart(dataFilePathsList, chart, chartNum, unit, update = False
 
     for i in range(len(chart["url_list"])) :
         num = str(i + 1)
-        urlKey, dataDestinationKey, dataTimeKey = "url" + num, "data_destination" + num, "data_time" + num
+        urlKey, dataDestinationKey, dataTimeKey, dataMinMaxKey = "url" + num, "data_destination" + num, "data_time" + num, "data" + num
         dataTime = chart["period_of_time_to_download_data"][dataTimeKey]
         dateToStart = getStartDate(dataTime)
         url, dataDestinationList, dataDestination  = chart["url_list"][urlKey], chart["data_destination_list"][dataDestinationKey], []
+        minValue, maxValue = chart["min_max_values"][dataMinMaxKey]["min"], chart["min_max_values"][dataMinMaxKey]["max"]
         for dest in dataDestinationList:
             dataDestination.append(dest["dest"])
         dataFilePath = "../resources/chart_" + chartNum +"_data_" + num + ".json"
         filePaths.append(dataFilePath)
-        threads.append(threading.Thread(target = downloadData, args = (url, dataDestination, dateToStart, dataFilePath, True,  update, originalUnit, unit)))
+        threads.append(threading.Thread(target = downloadData, args = (url, dataDestination, dateToStart, dataFilePath, True,  update, originalUnit, unit, minValue, maxValue)))
     
     runThreads(threads)
     dataFilePathsList.append(filePaths)
@@ -188,6 +189,7 @@ def getCharts(screen, fileName, update = False) :
         
         thisChart = {
                         "name" : chart["name"],
+                        "type" : chart["type"],
                         "is_chart" : True, 
                         "vertical" : chart["vertical"], 
                         "horizontal" : chart["horizontal"],
@@ -253,7 +255,7 @@ def getScreenInfo(screen, screenName, update = False) :
         json.dump(info, write_file, indent=4)
 
 
-def downloadData(url, dataDestination, dateToStart, filePath, isChart, update = False, originalUnit = "skip", unit = "skip") : # stare parametry, confPath i is_chart
+def downloadData(url, dataDestination, dateToStart, filePath, isChart, update = False, originalUnit = "skip", unit = "skip", minValue = None, maxValue = None) : # stare parametry, confPath i is_chart
     newData = []
     if update :
         oldData, dateToStart = getOldFile(filePath)
@@ -270,8 +272,9 @@ def downloadData(url, dataDestination, dateToStart, filePath, isChart, update = 
             for res in j["results"] :
                 value = getDataFromRes(res, dataDestination)
                 timeStamp = getTimeStamp(res)
-                if timeStamp > dateToStart or not update and timeStamp >= dateToStart:
-                    newData.append({"name" : timeStamp, "value" : convert(value, originalUnit, unit)})
+                convertedValue = convert(value, originalUnit, unit)
+                if (timeStamp > dateToStart or not update and timeStamp >= dateToStart) and minValue <= convertedValue <= maxValue:
+                    newData.append({"name" : timeStamp, "value" : convertedValue})
         else:
             res = j["results"][0]
             value = getDataFromRes(res, dataDestination)
@@ -279,7 +282,10 @@ def downloadData(url, dataDestination, dateToStart, filePath, isChart, update = 
             newData.append({"name": timeStamp, "value": value})
             url = None
 
-    data = newData + oldData
+    if isChart:
+        data = newData + oldData
+    else:
+        data = newData
     dateValue = {"data" : data}
 
     with open(filePath, "w") as write_file :

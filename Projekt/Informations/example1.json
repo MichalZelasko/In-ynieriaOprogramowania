@@ -67,8 +67,18 @@
                             "minutes": 15
                         }
                     },
+                    "min_max_values":{
+                        "data1": {
+                            "min" : 0,
+                            "max" : 25
+                        },
+                        "data2": {
+                            "min" : 0,
+                            "max" : 50
+                        }
+                    },
                     "name" : "nazwa wykresu",
-                    "type" : "scatter | histogram | etc.",
+                    "type" : "histogram",
                     "date" : {
                         "date_start" : "od kiedy dane wyswietlac",
                         "date_end" : "do kiedy dane wyswietlac, default: teraz"

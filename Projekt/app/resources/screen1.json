@@ -6,6 +6,7 @@
     "charts": {
         "chart1": {
             "name": "nazwa wykresu",
+            "type": "histogram",
             "is_chart": true,
             "vertical": {
                 "size": "rozmiar w kafelkach",
