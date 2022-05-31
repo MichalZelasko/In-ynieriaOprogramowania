@@ -35,6 +35,19 @@ class MyDate :
     def __str__(self) :
         return f"{self.year}-{self.month}-{self.day} {self.hour}:{self.minute}:{self.seconds}"
 
+    def comp(self, other) :
+        if self.year > other.year : return True
+        if self.year < other.year : return False
+        if self.month > other.month : return True
+        if self.month < other.month : return False
+        if self.day > other.day : return True
+        if self.day < other.day : return False
+        if self.hour > other.hour : return True
+        if self.hour < other.hour : return False
+        if self.seconds > other.seconds : return True
+        if self.seconds < other.seconds : return False
+        return False
+
 
 def getDataFromRes(res, dataDestination) :
     dataName = "data"
@@ -59,12 +72,10 @@ def getInfo(res) :
     return res[info]
 
 
-def getOldData(res) :
-    data = "data"
-    previous, now = MyDate(datetime.now()), MyDate(datetime.now())
-    sparse_data = []
-    for record in res[data] :
+def addSparse(sparse_data, res, now, previous, dateToStart) :
+    for record in res :
         mydate = MyDate(record["name"])
+        if dateToStart.comp(mydate) : break
         if mydate.diff(now, "year") :
             if mydate.diff(previous, "month") :
                 sparse_data.append(record)
@@ -83,17 +94,24 @@ def getOldData(res) :
     return sparse_data
 
 
+def getOldData(res, dateToStart) :
+    data = "data"
+    previous, now = MyDate(datetime.now()), MyDate(datetime.now())
+    sparse_data, dateToStart = [], MyDate(dateToStart)
+    return addSparse(sparse_data, res[data], now, previous, dateToStart)
+
+
 def getLastDate(res) :
     index = 0
     name = "name"
     return res[index][name]
 
 
-def getOldFile(filePath) :
+def getOldFile(filePath, dateToStart) :
     json_file =  open(filePath)
     json_data = json.load(json_file)
     # info = getInfo(json_data)
-    oldData = getOldData(json_data)
+    oldData = getOldData(json_data, dateToStart)
     lastDate = getLastDate(oldData)
     return oldData, lastDate
 
@@ -111,7 +129,6 @@ def getStartDate(times):
     dateToSub = timedelta(weeks= weeks, days= days, hours=hours, minutes=minutes)
     now = datetime.now()
     dateToStart = (now - dateToSub).strftime("%Y-%m-%dT%H:%M:%S")
-    print(dateToStart)
     return dateToStart
 
 def downloadSingleChart(dataFilePathsList, chart, chartNum, unit, update = False) :
@@ -258,7 +275,7 @@ def getScreenInfo(screen, screenName, update = False) :
 def downloadData(url, dataDestination, dateToStart, filePath, isChart, update = False, originalUnit = "skip", unit = "skip", minValue = None, maxValue = None) : # stare parametry, confPath i is_chart
     newData = []
     if update :
-        oldData, dateToStart = getOldFile(filePath)
+        oldData, dateToStart = getOldFile(filePath, dateToStart)
     else :
         oldData = []
 
@@ -275,6 +292,9 @@ def downloadData(url, dataDestination, dateToStart, filePath, isChart, update = 
                 convertedValue = convert(value, originalUnit, unit)
                 if (timeStamp > dateToStart or not update and timeStamp >= dateToStart) and minValue <= convertedValue <= maxValue:
                     newData.append({"name" : timeStamp, "value" : convertedValue})
+            previous, now = MyDate(datetime.now()), MyDate(datetime.now())
+            sparse_data, dateStart = [], MyDate(dateToStart)
+            newData = addSparse(sparse_data, newData, now, previous, dateStart)
         else:
             res = j["results"][0]
             value = getDataFromRes(res, dataDestination)
@@ -327,6 +347,6 @@ if __name__ == "__main__" :
         screenNumber = num + 1
         screenName = "screen" + str(screenNumber)
         screen = confData["screen_info"][screenName]
-        getScreenInfo(screen, screenName)
+        getScreenInfo(screen, screenName, True)
 
 
