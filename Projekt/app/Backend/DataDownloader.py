@@ -289,6 +289,8 @@ def start(path, update = False) :
     confPath = path
     confJsonFile = open(confPath)
     confData = json.load(confJsonFile)
+    with open("../../Informations/example1.json", "w") as write_file :
+        json.dump(confData, write_file, indent=4)
     screenAmount = confData["general_info"]["number_of_screens"]
     for num in range(screenAmount):
         screenNumber = num + 1
