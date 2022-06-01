@@ -86,15 +86,18 @@ export class FirstScreenComponent implements OnInit {
     if(!flag){
       this.appService.getData(chartNumber, 1).subscribe(res => {
 
-        var screenHTML = document.getElementById("screen");
+        // var screenHTML = document.getElementById("screen");
 
-        var barc = new SingleValueComponent();
-        barc.setValues("Wartość: " + res.data[0].value, "20px", "400px", "50px");
-        var newdomElem = appendComponentToBody(this, SingleValueComponent, barc, screenHTML!);
+        // var barc = new SingleValueComponent();
+        // barc.setValues("Wartość: " + res.data[0].value, "20px", "400px", "50px");
+        // var newdomElem = appendComponentToBody(this, SingleValueComponent, barc, screenHTML!);
 
-        newdomElem.style.position = 'relative';
-        newdomElem.style.top = '15%';
-        newdomElem.style.left = '5%';
+        // newdomElem.style.position = 'relative';
+        // newdomElem.style.top = '15%';
+        // newdomElem.style.left = '5%';
+        // newdomElem.style.backgroundColor = "#ebebeb";
+        // newdomElem.style.padding = "1%";
+        // newdomElem.style.borderRadius = "4%";
       });
     } else {
       if(numberOfDatas == 1){
@@ -111,6 +114,9 @@ export class FirstScreenComponent implements OnInit {
           newdomElem.style.left = '0%';
           newdomElem.style.height = '100%';
           newdomElem.style.width = '100%';
+          newdomElem.style.backgroundColor = "#ebebeb";
+          newdomElem.style.padding = "1%";
+          newdomElem.style.borderRadius = "7%";
         });
       }
 
@@ -137,18 +143,24 @@ export class FirstScreenComponent implements OnInit {
         var newdomElem = appendComponentToBody(this, ScatterChartsComponent, barc, screenHTML!);
 
         newdomElem.style.position = 'relative';
-        newdomElem.style.top = '5%';
-        newdomElem.style.left = '5%';
+        newdomElem.style.top = '-10%';
+        newdomElem.style.left = '3%';
         newdomElem.style.display = 'inline-block';
+        newdomElem.style.backgroundColor = "#ebebeb";
+        newdomElem.style.padding = "1%";
+        newdomElem.style.borderRadius = "7%";
 
         var barc2 = new LineChartsComponent();
         barc2.setValues(chartNumber.toString(), "900px", "500px", result);
         var newdomElem2 = appendComponentToBody(this, LineChartsComponent, barc2, screenHTML!);
 
         newdomElem2.style.position = 'relative';
-        newdomElem2.style.top = '10%';
+        newdomElem2.style.top = '0%';
         newdomElem2.style.left = '150px';
         newdomElem2.style.display = 'inline-block';
+        newdomElem2.style.backgroundColor = "#ebebeb";
+        newdomElem2.style.padding = "1%";
+        newdomElem2.style.borderRadius = "7%";
 
       }
     }
