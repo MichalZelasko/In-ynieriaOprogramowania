@@ -102,6 +102,7 @@ def getOldData(res, dateToStart) :
 
 
 def getLastDate(res) :
+    if(len(res) == 0) : return None
     index = 0
     name = "name"
     return res[index][name]
@@ -113,6 +114,7 @@ def getOldFile(filePath, dateToStart) :
     # info = getInfo(json_data)
     oldData = getOldData(json_data, dateToStart)
     lastDate = getLastDate(oldData)
+    if lastDate == None : lastDate = dateToStart
     return oldData, lastDate
 
 
@@ -210,6 +212,8 @@ def getCharts(screen, fileName, update = False) :
                         "is_chart" : True, 
                         "vertical" : chart["vertical"], 
                         "horizontal" : chart["horizontal"],
+                        "x_name" : chart["x_name"],
+                        "y_name" : chart["y_name"],
                         "unit": currentUnits[i - 1],
                         "original_unit" : chart["unit"],
                         "unit_conversion": chart["unit_conversion"],
