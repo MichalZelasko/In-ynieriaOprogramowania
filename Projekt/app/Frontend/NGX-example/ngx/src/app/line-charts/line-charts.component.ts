@@ -17,12 +17,12 @@ export class LineChartsComponent implements OnInit {
   idHTML: string = " ";
   width: string;
   height: string;
-  selectedUnit: any;
   chartNumber: any;
   screenNumber: any;
   title: string;
   x_name: string;
   y_name: string;
+  actualUnit: any;
 
   unitsList: string[] = [];
   data: any;
@@ -47,7 +47,7 @@ export class LineChartsComponent implements OnInit {
     }, 200);
   }
 
-  setValues(id: string, width: string, height: string, title: string, x_name: string, y_name: string, data: any, unitsList: any, chartNumber: number, screenNumber: number){
+  setValues(id: string, width: string, height: string, title: string, x_name: string, y_name: string, data: any, unitsList: any, chartNumber: number, screenNumber: number, actualUnit: any){
     this.idHTML = id;
     this.height = height;
     this.width = width;
@@ -58,6 +58,7 @@ export class LineChartsComponent implements OnInit {
     this.title = title;
     this.x_name = x_name;
     this.y_name = y_name;
+    this.actualUnit = actualUnit;
   }
 
   createChart(){
@@ -69,7 +70,8 @@ export class LineChartsComponent implements OnInit {
     canvas.setAttribute('width', this.width);
     canvas.setAttribute('height', this.height);
     var form = <HTMLElement> document.getElementById("form");
-    form.style.marginLeft = "30px";
+    form.style.position = "relative";
+    form.style.top = "30px";
 
     var ctx = <CanvasRenderingContext2D> canvas.getContext("2d");
     const myChart = new Chart(ctx, {

@@ -35,6 +35,7 @@ export class FirstScreenComponent implements OnInit {
   chart_data: any;
   datas: any;
   reload: boolean = true;
+  actualUnit: any;
 
 
   view: [number, number] = [900,570];
@@ -75,7 +76,7 @@ export class FirstScreenComponent implements OnInit {
     let isChart: boolean = true;
     this.charts = this.screenInfo.charts;
     this.chart_data = Object.values(this.charts)[i];
-    console.log(this.chart_data);
+    this.actualUnit = this.chart_data.unit;
     this.datas = this.chart_data.data_list;
     this.unitsList = this.chart_data.enabled_units;
     if(!this.chart_data.is_chart){
@@ -112,7 +113,7 @@ export class FirstScreenComponent implements OnInit {
             let screenHTML = document.getElementById("screen");
   
             var barc = new BarChartsComponent(this.appService);
-            barc.setValues(undefined, undefined, undefined, undefined, undefined, undefined, false, undefined, undefined, undefined, undefined, undefined, false, undefined, undefined, res.data, this.unitsList, chartNumber, 1);
+            barc.setValues(undefined, undefined, undefined, undefined, undefined, undefined, false, undefined, undefined, undefined, undefined, undefined, false, undefined, undefined, res.data, this.unitsList, chartNumber, 1, this.actualUnit);
             var newdomElem = appendComponentToBody(this, BarChartsComponent, barc, screenHTML!);
     
             newdomElem.style.position = 'relative';
@@ -150,7 +151,7 @@ export class FirstScreenComponent implements OnInit {
           let screenHTML = document.getElementById("screen");
 
           let barc = new LineChartsComponent(this.appService);
-          barc.setValues(chartNumber.toString(), "900px", "500px", this.chart_data.name, this.chart_data.x_name, this.chart_data.y_name + " [" + this.chart_data.unit + "]", result, this.unitsList, chartNumber, 1);
+          barc.setValues(chartNumber.toString(), "900px", "500px", this.chart_data.name, this.chart_data.x_name, this.chart_data.y_name + " [" + this.chart_data.unit + "]", result, this.unitsList, chartNumber, 1, this.actualUnit);
           let newdomElem = appendComponentToBody(this, LineChartsComponent, barc, screenHTML!);
 
           newdomElem.style.position = 'absolute';
@@ -180,8 +181,8 @@ export class FirstScreenComponent implements OnInit {
 
           let screenHTML = document.getElementById("screen");
 
-          let barc = new ScatterChartsComponent();
-          barc.setValues(chartNumber.toString(), "700px", "500px", this.chart_data.name, this.chart_data.x_name, this.chart_data.y_name, result);
+          let barc = new ScatterChartsComponent(this.appService);
+          barc.setValues(chartNumber.toString(), "700px", "500px", this.chart_data.name, this.chart_data.x_name, this.chart_data.y_name, result, this.unitsList, chartNumber, 1, this.actualUnit);
           let newdomElem = appendComponentToBody(this, ScatterChartsComponent, barc, screenHTML!);
   
           newdomElem.style.position = 'absolute';

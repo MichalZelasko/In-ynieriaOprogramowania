@@ -5,7 +5,7 @@
 <div id="form">
 <mat-form-field appearance="fill">
     <mat-label>Jednostka</mat-label>
-    <mat-select (selectionChange)="setUnit($event.value)">
+    <mat-select [(value)]="actualUnit" (selectionChange)="setUnit($event.value)">
       <mat-option *ngFor="let unit of unitsList" [value]="unit">{{ unit }} </mat-option>
     </mat-select>
   </mat-form-field>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { colorSets } from '@swimlane/ngx-charts';
 import { Chart, registerables} from 'chart.js';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-scatter-charts',
@@ -16,8 +17,12 @@ export class ScatterChartsComponent implements OnInit {
   x_name: string;
   y_name: string;
   data: any;
+  chartNumber: any;
+  screenNumber: any;
+  actualUnit: any;
+  unitsList: any;
 
-  constructor() { 
+  constructor(private appService: AppService) { 
     Chart.register(...registerables);
     this.idHTML = "test";
     this.width = "0%";
@@ -53,7 +58,7 @@ export class ScatterChartsComponent implements OnInit {
     }, 200);
   }
 
-  setValues(id: string, width: string, height: string, title: string, x_name: string, y_name: string, data: any){
+  setValues(id: string, width: string, height: string, title: string, x_name: string, y_name: string, data: any, unitsList: any, chartNumber: number, screenNumber: number, actualUnit: any){
     this.idHTML = id;
     this.height = height;
     this.width = width;
@@ -61,6 +66,10 @@ export class ScatterChartsComponent implements OnInit {
     this.data = data;
     this.x_name = x_name;
     this.y_name = y_name;
+    this.unitsList = unitsList;
+    this.chartNumber = chartNumber;
+    this.screenNumber = screenNumber;
+    this.actualUnit = actualUnit;
   }
 
   createChart(){
@@ -133,5 +142,10 @@ export class ScatterChartsComponent implements OnInit {
       }
   });
   
+  }
+  setUnit(unit: string){
+    this.appService.chartConvert(unit, this.screenNumber, this.chartNumber).subscribe(res => {
+      window.location.reload();
+    });
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs';
+import { AppService } from '../app.service';
 import { FileUploadComponent } from '../file-upload/file-upload.component';
 import { FIRST_SCREEN_PATH } from '../tabs-configuration/paths';
 
@@ -14,7 +15,7 @@ export class StartAppComponent implements OnInit {
 
   flag: boolean = true;
 
-  constructor(public dialog: MatDialog, private router: Router) { }
+  constructor(public dialog: MatDialog, private router: Router, private appService: AppService) { }
 
   ngOnInit(): void {
     this.uploadFile();
@@ -27,15 +28,19 @@ export class StartAppComponent implements OnInit {
     dialogRef.afterClosed().pipe(
       tap()
     ).subscribe((res) => {
-      //validacja pliku
       if(res === "cancel"){
         this.flag = false;
       }
       else{
-        this.router.navigateByUrl('app');
+        if(res.split('.').pop() !== 'txt' ){
+          alert("Wczytaj poprawny plik (błędne rozszerzenie)");
+          this.flag = false;
+        }
+        else{
+          // this.appService.uploadFile(res).subscribe(() => this.router.navigateByUrl('app'))
+          this.router.navigateByUrl('app');
+        }        
       }
-      //get to back
-      
      })
     
   }

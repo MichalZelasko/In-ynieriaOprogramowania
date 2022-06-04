@@ -28,8 +28,10 @@ export class TabsConfigurationComponent implements OnInit {
   constructor(private appService: AppService,  private componentFactoryResolver: ComponentFactoryResolver, private appRef: ApplicationRef, private injector: Injector, public dialog: MatDialog, private router: Router) { }
 
   ngOnInit(): void {
-    console.log("elo")
     this.getGeneralInfo();
+    setInterval(() => {
+      this.refresh();
+    }, 900000); 
   }
 
   getGeneralInfo() {
@@ -50,9 +52,10 @@ export class TabsConfigurationComponent implements OnInit {
   }
 
   refresh(){
-    // window.location.reload();
-    this.appService.refresh().subscribe();
+    this.appService.refresh().subscribe(() => window.location.reload());
   }
+
+
 
   makePath(number: number){
     switch (number) {

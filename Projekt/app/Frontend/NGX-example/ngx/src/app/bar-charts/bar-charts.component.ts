@@ -30,8 +30,9 @@ export class BarChartsComponent implements OnInit {
   tooltipDisabled: boolean = false;
   chartNumber: any;
   screenNumber: any;
+  actualUnit: any;
 
-  unitsList: string[] = [];
+  unitsList: any;
 
   constructor(private appSerivce: AppService){
     this.actualData = [];
@@ -57,7 +58,8 @@ export class BarChartsComponent implements OnInit {
             actualData: any, 
             unitsList: any, 
             chartNumber: number, 
-            screenNumber: number) {
+            screenNumber: number,
+            actualUnit: any) {
 
     this.view = view;
     this.colorScheme = colorscheme;
@@ -78,6 +80,7 @@ export class BarChartsComponent implements OnInit {
     this.unitsList = unitsList;
     this.chartNumber = chartNumber;
     this.screenNumber = screenNumber;
+    this.actualUnit = actualUnit;
   }
 
   setUnit(unit: string){
