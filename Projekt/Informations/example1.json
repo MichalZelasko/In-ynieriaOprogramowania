@@ -87,6 +87,8 @@
                         "low" : "zakres wartosci na wykresie",
                         "high" : ""
                     },
+                    "x_name" : "date",
+                    "y_name" : "temperature",
                     "unit" : "C",
                     "unit_conversion" : "enabled",
                     "enabled_units" : ["C", "F", "K"]

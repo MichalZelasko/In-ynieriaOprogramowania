@@ -20,6 +20,9 @@ export class LineChartsComponent implements OnInit {
   selectedUnit: any;
   chartNumber: any;
   screenNumber: any;
+  title: string;
+  x_name: string;
+  y_name: string;
 
   unitsList: string[] = [];
   data: any;
@@ -31,15 +34,20 @@ export class LineChartsComponent implements OnInit {
     this.height = "0%";
     this.data = null;
 
+    this.title = "";
+    this.x_name = "";
+    this.y_name = "";
   }
 
   ngOnInit(): void {
     setTimeout(() =>{
       this.createChart();
+      console.log("Line: ");
+      console.log(this.data);
     }, 200);
   }
 
-  setValues(id: string, width: string, height: string, data: any, unitsList: any, chartNumber: number, screenNumber: number){
+  setValues(id: string, width: string, height: string, title: string, x_name: string, y_name: string, data: any, unitsList: any, chartNumber: number, screenNumber: number){
     this.idHTML = id;
     this.height = height;
     this.width = width;
@@ -47,6 +55,9 @@ export class LineChartsComponent implements OnInit {
     this.unitsList = unitsList;
     this.chartNumber = chartNumber;
     this.screenNumber = screenNumber;
+    this.title = title;
+    this.x_name = x_name;
+    this.y_name = y_name;
   }
 
   createChart(){
@@ -80,7 +91,7 @@ export class LineChartsComponent implements OnInit {
               font: {
                 size: 20
               },
-              text: 'Temperature'
+              text: this.y_name
             },
             display: true // Hide Y axis labels
           },
@@ -101,7 +112,7 @@ export class LineChartsComponent implements OnInit {
               font: {
                 size: 20
               },
-              text: 'Date'
+              text: this.x_name,
             },
             display: true // Hide X axis labels
           }
@@ -120,6 +131,13 @@ export class LineChartsComponent implements OnInit {
                 }
               },
               display: true
+            },
+            title: {
+              display: true,
+              text: this.title,
+              font: {
+                size: 16
+              }
             }
           }
       }
