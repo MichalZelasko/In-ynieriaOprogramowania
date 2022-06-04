@@ -17,6 +17,8 @@ export class LineChartsComponent implements OnInit {
   width: string;
   height: string;
   title: string;
+  x_name: string;
+  y_name: string;
 
 
   data: any;
@@ -28,6 +30,8 @@ export class LineChartsComponent implements OnInit {
     this.height = "0%";
     this.data = null;
     this.title = "";
+    this.x_name = "";
+    this.y_name = "";
   }
 
   ngOnInit(): void {
@@ -38,12 +42,14 @@ export class LineChartsComponent implements OnInit {
     }, 200);
   }
 
-  setValues(id: string, width: string, height: string, title: string, data: any){
+  setValues(id: string, width: string, height: string, title: string, x_name: string, y_name: string, data: any){
     this.idHTML = id;
     this.height = height;
     this.width = width;
     this.data = data;
     this.title = title;
+    this.x_name = x_name;
+    this.y_name = y_name;
   }
 
   createChart(){
@@ -75,7 +81,7 @@ export class LineChartsComponent implements OnInit {
               font: {
                 size: 20
               },
-              text: 'Temperature'
+              text: this.y_name
             },
             display: true // Hide Y axis labels
           },
@@ -96,7 +102,7 @@ export class LineChartsComponent implements OnInit {
               font: {
                 size: 20
               },
-              text: 'Date'
+              text: this.x_name,
             },
             display: true // Hide X axis labels
           }

@@ -145,7 +145,7 @@ export class FirstScreenComponent implements OnInit {
           let screenHTML = document.getElementById("screen");
 
           let barc = new LineChartsComponent();
-          barc.setValues(chartNumber.toString(), "900px", "500px", this.chart_data.name, result);
+          barc.setValues(chartNumber.toString(), "900px", "500px", this.chart_data.name, this.chart_data.x_name, this.chart_data.y_name, result);
           let newdomElem = appendComponentToBody(this, LineChartsComponent, barc, screenHTML!);
 
           newdomElem.style.position = 'absolute';
@@ -176,7 +176,7 @@ export class FirstScreenComponent implements OnInit {
           let screenHTML = document.getElementById("screen");
 
           let barc = new ScatterChartsComponent();
-          barc.setValues(chartNumber.toString(), "700px", "500px", this.chart_data.name, result);
+          barc.setValues(chartNumber.toString(), "700px", "500px", this.chart_data.name, this.chart_data.x_name, this.chart_data.y_name, result);
           let newdomElem = appendComponentToBody(this, ScatterChartsComponent, barc, screenHTML!);
   
           newdomElem.style.position = 'absolute';

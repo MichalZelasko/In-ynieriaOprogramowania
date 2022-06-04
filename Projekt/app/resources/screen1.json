@@ -6,7 +6,7 @@
     "charts": {
         "chart1": {
             "name": "nazwa wykresu",
-            "type": "histogram",
+            "type": "linechart",
             "is_chart": true,
             "vertical": {
                 "size": "rozmiar w kafelkach",
@@ -27,7 +27,7 @@
                 "K"
             ],
             "data_list": {
-                "color": "color_set_name",
+                "color": "papaj",
                 "data1": {
                     "file_name": "../resources/chart_1_data_1.json",
                     "data_name": "tempSet"

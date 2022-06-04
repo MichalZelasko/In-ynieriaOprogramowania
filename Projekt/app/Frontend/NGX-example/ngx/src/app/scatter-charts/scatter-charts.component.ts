@@ -13,6 +13,8 @@ export class ScatterChartsComponent implements OnInit {
   width: string;
   height: string;
   title: string;
+  x_name: string;
+  y_name: string;
   data: any;
 
   constructor() { 
@@ -21,6 +23,8 @@ export class ScatterChartsComponent implements OnInit {
     this.width = "0%";
     this.height = "0%";
     this.title = " ";
+    this.x_name = "";
+    this.y_name = "";
     this.data = null;
   }
 
@@ -49,12 +53,14 @@ export class ScatterChartsComponent implements OnInit {
     }, 200);
   }
 
-  setValues(id: string, width: string, height: string, title: string, data: any){
+  setValues(id: string, width: string, height: string, title: string, x_name: string, y_name: string, data: any){
     this.idHTML = id;
     this.height = height;
     this.width = width;
     this.title = title;
     this.data = data;
+    this.x_name = x_name;
+    this.y_name = y_name;
   }
 
   createChart(){
@@ -86,6 +92,26 @@ export class ScatterChartsComponent implements OnInit {
         ]
       },
       options: {
+        scales: {
+          y: {
+            title: {
+              display: true,
+              font: {
+                size: 20
+              },
+              text: this.y_name
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              font: {
+                size: 20
+              },
+              text: this.x_name
+            }
+          }
+        },
         plugins: {
           legend: {
             labels: {
