@@ -6,7 +6,7 @@
     "charts": {
         "chart1": {
             "name": "nazwa wykresu",
-            "type": "linechart",
+            "type": "histogram",
             "is_chart": true,
             "vertical": {
                 "size": "rozmiar w kafelkach",
@@ -16,6 +16,8 @@
                 "size": "rozmiar w kafelkach",
                 "position": "polozenie tez w kafelkach"
             },
+            "x_name": "date",
+            "y_name": "temperature",
             "unit": "C",
             "original_unit": "C",
             "unit_conversion": "enabled",
@@ -25,7 +27,7 @@
                 "K"
             ],
             "data_list": {
-                "color": "royalFrog",
+                "color": "color_set_name",
                 "data1": {
                     "file_name": "../resources/chart_1_data_1.json",
                     "data_name": "tempSet"
