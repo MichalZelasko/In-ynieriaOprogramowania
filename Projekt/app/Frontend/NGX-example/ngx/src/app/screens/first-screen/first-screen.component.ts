@@ -145,7 +145,7 @@ export class FirstScreenComponent implements OnInit {
           let screenHTML = document.getElementById("screen");
 
           let barc = new LineChartsComponent();
-          barc.setValues(chartNumber.toString(), "900px", "500px", this.chart_data.name, this.chart_data.x_name, this.chart_data.y_name, result);
+          barc.setValues(chartNumber.toString(), "900px", "500px", this.chart_data.name, this.chart_data.x_name, this.chart_data.y_name + " [" + this.chart_data.unit + "]", result);
           let newdomElem = appendComponentToBody(this, LineChartsComponent, barc, screenHTML!);
 
           newdomElem.style.position = 'absolute';
@@ -157,7 +157,7 @@ export class FirstScreenComponent implements OnInit {
           newdomElem.style.borderRadius = "7%";
         }
 
-        if(this.chart_data.type == "scatter"){ //scatter
+        if(this.chart_data.type == "scatter"){ 
           let colors = schemes[this.chart_data.data_list.color].domain;
           let results: LooseObject = {}; 
           let result: any = {datasets: []}; 
