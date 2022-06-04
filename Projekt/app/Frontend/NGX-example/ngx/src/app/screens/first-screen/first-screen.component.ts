@@ -9,6 +9,7 @@ import { SingleValueComponent } from 'src/app/single-value/single-value.componen
 import { ScatterChartsComponent } from 'src/app/scatter-charts/scatter-charts.component';
 import { LinearScale, LineController } from 'chart.js';
 import { LineChartsComponent } from 'src/app/line-charts/line-charts.component';
+import * as schemes from 'src/app/esthetics/colorSchemes';
 
 
 function renameProperties(obj) {
@@ -77,7 +78,6 @@ export class FirstScreenComponent implements OnInit {
     }
     var numberOfDatas = Object.keys(this.datas).length;
     //TODO pobrac polozenie
-    //i nazwę wykresu i cokolwiek tam jeszcze do pobrania
     this.getChartData(numberOfDatas, i + 1, isChart);
     }
   }
@@ -86,82 +86,107 @@ export class FirstScreenComponent implements OnInit {
     if(!flag){
       this.appService.getData(chartNumber, 1).subscribe(res => {
 
-        // var screenHTML = document.getElementById("screen");
+        let screenHTML = document.getElementById("screen");
 
-        // var barc = new SingleValueComponent();
-        // barc.setValues("Wartość: " + res.data[0].value, "20px", "400px", "50px");
-        // var newdomElem = appendComponentToBody(this, SingleValueComponent, barc, screenHTML!);
+        let barc = new SingleValueComponent();
+        barc.setValues("Wartość: " + res.data[0].value, "20px", "300px", "15px");
+        let newdomElem = appendComponentToBody(this, SingleValueComponent, barc, screenHTML!);
 
-        // newdomElem.style.position = 'relative';
-        // newdomElem.style.top = '15%';
-        // newdomElem.style.left = '5%';
-        // newdomElem.style.backgroundColor = "#ebebeb";
-        // newdomElem.style.padding = "1%";
-        // newdomElem.style.borderRadius = "4%";
+        newdomElem.style.position = 'absolute';
+        newdomElem.style.top = '700px';
+        newdomElem.style.left = '70px';
+        newdomElem.style.backgroundColor = "#ebebeb";
+        newdomElem.style.padding = "1%";
+        newdomElem.style.borderRadius = "4%";
       });
     } else {
       if(numberOfDatas == 1){
-        this.appService.getData(chartNumber, 1).subscribe(res => {
+        if(this.chart_data.type == "barchart"){
+          this.appService.getData(chartNumber, 1).subscribe(res => {
+          
+            let screenHTML = document.getElementById("screen");
   
-          var screenHTML = document.getElementById("screen");
-
-          var barc = new BarChartsComponent();
-          barc.setValues(undefined, undefined, undefined, undefined, undefined, undefined, false, undefined, undefined, undefined, undefined, undefined, false, undefined, undefined, res.data);
-          var newdomElem = appendComponentToBody(this, BarChartsComponent, barc, screenHTML!);
-  
-          newdomElem.style.position = 'relative';
-          newdomElem.style.top = '0%';
-          newdomElem.style.left = '0%';
-          newdomElem.style.height = '100%';
-          newdomElem.style.width = '100%';
-          newdomElem.style.backgroundColor = "#ebebeb";
-          newdomElem.style.padding = "1%";
-          newdomElem.style.borderRadius = "7%";
-        });
+            let barc = new BarChartsComponent();
+            barc.setValues(undefined, this.chart_data.data_list.color, undefined, undefined, undefined, undefined, false, undefined, undefined, undefined, undefined, undefined, false, undefined, undefined, res.data);
+            let newdomElem = appendComponentToBody(this, BarChartsComponent, barc, screenHTML!);
+    
+            newdomElem.style.position = 'relative';
+            newdomElem.style.top = '600px';
+            newdomElem.style.left = '600px';
+            newdomElem.style.height = '50px';
+            newdomElem.style.width = '200px';
+            newdomElem.style.display = 'inline-block';
+            newdomElem.style.backgroundColor = "#ebebeb";
+            newdomElem.style.padding = "1%";
+            newdomElem.style.borderRadius = "7%";
+          });
+        }
       }
 
       else{
-        let colors = ['#638c70', '#c7aa5a']
-        let results: LooseObject = {}; 
-        let result: any = {datasets: []}; 
-        for(let i = 1; i <= numberOfDatas; i++){
-          console.log("WYKRES NUMER: " + chartNumber + " DANA NUMER: " + i);
-          this.appService.getData(chartNumber, i).subscribe(res => {
-            for(let element of Object.keys(res.data)){
-              renameProperties(res.data[element]);
-            }
-            results[i] = {label: "Data Label " + i, data: res.data, borderColor: colors[i-1], backgroundColor: colors[i-1]};//res.data;
-            result['datasets'][i-1] = results[i];
-          });
+        if(this.chart_data.type == "linechart"){
+          let colors = schemes[this.chart_data.data_list.color].domain;
+          console.log(this.chart_data.data_list.color);
+          let results: LooseObject = {}; 
+          let result: any = {datasets: []}; 
+          for(let i = 1; i < numberOfDatas; i++){
+            console.log("WYKRES NUMER: " + chartNumber + " DANA NUMER: " + i);
+            let name = this.chart_data.data_list["data" + i].data_name;
+            this.appService.getData(chartNumber, i).subscribe(res => {
+              console.log(res);
+              for(let element of Object.keys(res.data)){
+                renameProperties(res.data[element]);
+              }
+              results[i] = {label: name, data: res.data, borderColor: colors[i-1], backgroundColor: colors[i-1]};
+              result['datasets'][i-1] = results[i];
+            });
+          }
+
+          let screenHTML = document.getElementById("screen");
+
+          let barc = new LineChartsComponent();
+          barc.setValues(chartNumber.toString(), "900px", "500px", this.chart_data.name, result);
+          let newdomElem = appendComponentToBody(this, LineChartsComponent, barc, screenHTML!);
+
+          newdomElem.style.position = 'absolute';
+          newdomElem.style.top = '100px';
+          newdomElem.style.left = '850px';
+          newdomElem.style.display = 'inline-block';
+          newdomElem.style.backgroundColor = "#ebebeb";
+          newdomElem.style.padding = "1%";
+          newdomElem.style.borderRadius = "7%";
         }
 
-        var screenHTML = document.getElementById("screen");
+        if(this.chart_data.type == "scatter"){ //scatter
+          let colors = schemes[this.chart_data.data_list.color].domain;
+          let results: LooseObject = {}; 
+          let result: any = {datasets: []}; 
+          for(let i = 1; i < numberOfDatas; i++){
+            console.log("WYKRES NUMER: " + chartNumber + " DANA NUMER: " + i);
+            let name = this.chart_data.data_list["data" + i].data_name;
+            this.appService.getData(chartNumber, i).subscribe(res => {
+              for(let element of Object.keys(res.data)){
+                renameProperties(res.data[element]);
+              }
+              results[i] = {label: name, data: res.data, borderColor: colors[i-1], backgroundColor: colors[i-1]};
+              result['datasets'][i-1] = results[i];
+            });
+          }
 
-        // not important for now
-        var barc = new ScatterChartsComponent();
-        barc.setValues(chartNumber.toString(), "700px", "400px");//, result);
-        var newdomElem = appendComponentToBody(this, ScatterChartsComponent, barc, screenHTML!);
+          let screenHTML = document.getElementById("screen");
 
-        newdomElem.style.position = 'relative';
-        newdomElem.style.top = '-10%';
-        newdomElem.style.left = '3%';
-        newdomElem.style.display = 'inline-block';
-        newdomElem.style.backgroundColor = "#ebebeb";
-        newdomElem.style.padding = "1%";
-        newdomElem.style.borderRadius = "7%";
-
-        var barc2 = new LineChartsComponent();
-        barc2.setValues(chartNumber.toString(), "900px", "500px", result);
-        var newdomElem2 = appendComponentToBody(this, LineChartsComponent, barc2, screenHTML!);
-
-        newdomElem2.style.position = 'relative';
-        newdomElem2.style.top = '0%';
-        newdomElem2.style.left = '150px';
-        newdomElem2.style.display = 'inline-block';
-        newdomElem2.style.backgroundColor = "#ebebeb";
-        newdomElem2.style.padding = "1%";
-        newdomElem2.style.borderRadius = "7%";
-
+          let barc = new ScatterChartsComponent();
+          barc.setValues(chartNumber.toString(), "700px", "500px", this.chart_data.name, result);
+          let newdomElem = appendComponentToBody(this, ScatterChartsComponent, barc, screenHTML!);
+  
+          newdomElem.style.position = 'absolute';
+          newdomElem.style.top = '10%';
+          newdomElem.style.left = '70px';
+          newdomElem.style.display = 'inline-block';
+          newdomElem.style.backgroundColor = "#ebebeb";
+          newdomElem.style.padding = "1%";
+          newdomElem.style.borderRadius = "7%";
+        }
       }
     }
   }

@@ -12,25 +12,49 @@ export class ScatterChartsComponent implements OnInit {
   idHTML: string = " ";
   width: string;
   height: string;
-  //data: any;
+  title: string;
+  data: any;
 
   constructor() { 
     Chart.register(...registerables);
     this.idHTML = "test";
     this.width = "0%";
     this.height = "0%";
-    // this.data = {datasets: null};
+    this.title = " ";
+    this.data = null;
   }
 
   ngOnInit(): void {
-    this.createChart();
+    setTimeout(() =>{
+      this.createChart();
+      let dat = {
+        datasets: [
+          {
+            label: 'Dataset 1',
+            data: [{ x: -8, y: 3 }, { x: 2, y: 8 }, { x: 3, y: 9 }, { x: 6, y: 10 }, { x: 7, y: 2 }, { x: 10, y: 5 }],
+            borderColor: '#638c70',
+            backgroundColor: '#638c70'
+          },
+          {
+            label: 'Dataset 2',
+            data: [{ x: -3, y: 3 }, { x: 5, y: 8 }, { x: 9, y: 9 }, { x: 11, y: 9 }, { x: 13, y: -2 }],
+            borderColor: 'rgb(255, 99, 132)',
+            backgroundColor: 'rgb(255, 99, 132)'
+          }
+        ]
+      }
+      console.log("Scatter: ");
+      console.log(dat);
+      console.log(this.data);
+    }, 200);
   }
 
-  setValues(id: string, width: string, height: string){ //, data: any){
+  setValues(id: string, width: string, height: string, title: string, data: any){
     this.idHTML = id;
     this.height = height;
     this.width = width;
-    //this.data = data;
+    this.title = title;
+    this.data = data;
   }
 
   createChart(){
@@ -45,26 +69,41 @@ export class ScatterChartsComponent implements OnInit {
     var ctx = <CanvasRenderingContext2D> canvas.getContext("2d");
     const myChart = new Chart(ctx, {
       type: 'scatter',
-      data: {
+      data: /* this.data, */{
         datasets: [
           {
             label: 'Dataset 1',
             data: [{ x: -8, y: 3 }, { x: 2, y: 8 }, { x: 3, y: 9 }, { x: 6, y: 10 }, { x: 7, y: 2 }, { x: 10, y: 5 }],
+            borderColor: '#638c70',
             backgroundColor: '#638c70'
           },
           {
             label: 'Dataset 2',
             data: [{ x: -3, y: 3 }, { x: 5, y: 8 }, { x: 9, y: 9 }, { x: 11, y: 9 }, { x: 13, y: -2 }],
+            borderColor: 'rgb(255, 99, 132)',
             backgroundColor: 'rgb(255, 99, 132)'
           }
         ]
       },
       options: {
-          scales: {
-              y: {
-                  beginAtZero: true
+        plugins: {
+          legend: {
+            labels: {
+              // This more specific font property overrides the global property
+              font: {
+                  size: 14
               }
+            },
+            display: true
+          },
+          title: {
+            display: true,
+            text: this.title,
+            font: {
+              size: 16
+            }
           }
+        }
       }
   });
   

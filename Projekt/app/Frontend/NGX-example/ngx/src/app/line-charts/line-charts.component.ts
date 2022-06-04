@@ -16,6 +16,7 @@ export class LineChartsComponent implements OnInit {
   idHTML: string = " ";
   width: string;
   height: string;
+  title: string;
 
 
   data: any;
@@ -26,19 +27,23 @@ export class LineChartsComponent implements OnInit {
     this.width = "0%";
     this.height = "0%";
     this.data = null;
+    this.title = "";
   }
 
   ngOnInit(): void {
     setTimeout(() =>{
       this.createChart();
+      console.log("Line: ");
+      console.log(this.data);
     }, 200);
   }
 
-  setValues(id: string, width: string, height: string, data: any){
+  setValues(id: string, width: string, height: string, title: string, data: any){
     this.idHTML = id;
     this.height = height;
     this.width = width;
     this.data = data;
+    this.title = title;
   }
 
   createChart(){
@@ -110,6 +115,13 @@ export class LineChartsComponent implements OnInit {
                 }
               },
               display: true
+            },
+            title: {
+              display: true,
+              text: this.title,
+              font: {
+                size: 16
+              }
             }
           }
       }
