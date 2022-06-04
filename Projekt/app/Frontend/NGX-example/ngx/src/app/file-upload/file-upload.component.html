@@ -1,0 +1,26 @@
+<h3>Wczytaj plik konfiguracyjny</h3>
+<div mat-dialog-actions>
+<button mat-raised-button color="primary" (click)="fileInput.click()">
+    <mat-icon>file_upload</mat-icon>
+    Wybierz plik konfiguracyjny
+    <form enctype="multipart/form-data">
+        <fieldset style="display: none;">
+          <div class="form-group">
+            <div>
+              <input #fileInput type="file"
+                     (change)="upload($event)"
+                     name="files"
+                     multiple
+                     class="form-control"
+              />
+            </div>
+          </div>
+        </fieldset>
+      </form>
+</button>
+
+<button mat-raised-button color="warn" (click)="closeDialog()">
+    <mat-icon>cancel</mat-icon>
+    Anuluj
+</button>
+</div>

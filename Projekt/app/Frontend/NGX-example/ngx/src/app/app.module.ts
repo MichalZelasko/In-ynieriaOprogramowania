@@ -19,6 +19,10 @@ import { BarChartsComponent } from './bar-charts/bar-charts.component';
 import { LineChartsComponent } from './line-charts/line-charts.component';
 import { SingleValueComponent } from './single-value/single-value.component';
 import { ScatterChartsComponent } from './scatter-charts/scatter-charts.component'
+import {MatSelectModule} from '@angular/material/select';
+import {MatDialogModule} from '@angular/material/dialog';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { StartAppComponent } from './start-app/start-app.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +35,9 @@ import { ScatterChartsComponent } from './scatter-charts/scatter-charts.componen
     BarChartsComponent,
     LineChartsComponent,
     SingleValueComponent,
-    ScatterChartsComponent
+    ScatterChartsComponent,
+    FileUploadComponent,
+    StartAppComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +48,9 @@ import { ScatterChartsComponent } from './scatter-charts/scatter-charts.componen
     MatButtonModule,
     FlexLayoutModule,
     HttpClientModule,
-    MatIconModule
+    MatIconModule,
+    MatSelectModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

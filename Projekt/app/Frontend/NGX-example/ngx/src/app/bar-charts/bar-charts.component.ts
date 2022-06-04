@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TreeMapModule } from '@swimlane/ngx-charts';
+import { AppService } from '../app.service';
 import { greens } from "../esthetics/colorSchemes";
 
 declare var require: any;
@@ -27,8 +28,12 @@ export class BarChartsComponent implements OnInit {
   showDataLabel: boolean = true;
   barPadding: number = 3;
   tooltipDisabled: boolean = false;
+  chartNumber: any;
+  screenNumber: any;
 
-  constructor(){
+  unitsList: string[] = [];
+
+  constructor(private appSerivce: AppService){
     this.actualData = [];
   }
 
@@ -49,7 +54,10 @@ export class BarChartsComponent implements OnInit {
             showDataLabel: boolean = true,
             barPadding: number = 3,
             tooltipDisabled: boolean = false,
-            actualData: any) {
+            actualData: any, 
+            unitsList: any, 
+            chartNumber: number, 
+            screenNumber: number) {
 
     this.view = view;
     this.colorScheme = colorscheme;
@@ -67,6 +75,14 @@ export class BarChartsComponent implements OnInit {
     this.barPadding = barPadding;
     this.tooltipDisabled = tooltipDisabled;
     this.actualData = actualData;
+    this.unitsList = unitsList;
+    this.chartNumber = chartNumber;
+    this.screenNumber = screenNumber;
   }
 
+  setUnit(unit: string){
+    this.appSerivce.chartConvert(unit, this.screenNumber, this.chartNumber).subscribe(res => {
+      console.log(res)
+    });
+  }
 }

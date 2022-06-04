@@ -1,6 +1,7 @@
 import { BoundElementProperty } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
+import { AppService } from '../app.service';
 import { greens } from "../esthetics/colorSchemes";
 
 declare var require: any;
@@ -16,16 +17,20 @@ export class LineChartsComponent implements OnInit {
   idHTML: string = " ";
   width: string;
   height: string;
+  selectedUnit: any;
+  chartNumber: any;
+  screenNumber: any;
 
-
+  unitsList: string[] = [];
   data: any;
 
-  constructor() { 
+  constructor(private appSerivce: AppService) { 
     Chart.register(...registerables);
     this.idHTML = "test";
     this.width = "0%";
     this.height = "0%";
     this.data = null;
+
   }
 
   ngOnInit(): void {
@@ -34,11 +39,14 @@ export class LineChartsComponent implements OnInit {
     }, 200);
   }
 
-  setValues(id: string, width: string, height: string, data: any){
+  setValues(id: string, width: string, height: string, data: any, unitsList: any, chartNumber: number, screenNumber: number){
     this.idHTML = id;
     this.height = height;
     this.width = width;
     this.data = data;
+    this.unitsList = unitsList;
+    this.chartNumber = chartNumber;
+    this.screenNumber = screenNumber;
   }
 
   createChart(){
@@ -49,6 +57,8 @@ export class LineChartsComponent implements OnInit {
     container.setAttribute('style', "width: " + this.width + "; height: " + this.height + ";");
     canvas.setAttribute('width', this.width);
     canvas.setAttribute('height', this.height);
+    var form = <HTMLElement> document.getElementById("form");
+    form.style.marginLeft = "30px";
 
     var ctx = <CanvasRenderingContext2D> canvas.getContext("2d");
     const myChart = new Chart(ctx, {
@@ -114,6 +124,10 @@ export class LineChartsComponent implements OnInit {
           }
       }
   });
-
+  }
+  setUnit(unit: string){
+    this.appSerivce.chartConvert(unit, this.screenNumber, this.chartNumber).subscribe(res => {
+      window.location.reload();
+    });
   }
 }

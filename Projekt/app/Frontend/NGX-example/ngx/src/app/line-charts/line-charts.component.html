@@ -1,3 +1,13 @@
 <div id="di">
-    <canvas id="test" ></canvas>
+  <canvas id="test" ></canvas>
+
+  
+<div id="form">
+<mat-form-field appearance="fill">
+    <mat-label>Jednostka</mat-label>
+    <mat-select (selectionChange)="setUnit($event.value)">
+      <mat-option *ngFor="let unit of unitsList" [value]="unit">{{ unit }} </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
 </div>

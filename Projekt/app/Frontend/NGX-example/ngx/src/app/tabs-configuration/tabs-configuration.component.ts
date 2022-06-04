@@ -1,12 +1,11 @@
 import { ApplicationRef, Component, ComponentFactoryResolver, Injector, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { tap } from 'rxjs';
 import { AppService } from '../app.service';
-import { FIRST_SCREEN_PATH, SECOND_SCREEN_PATH, THIRD_SCREEN_PATH } from './paths';
+import { FileUploadComponent } from '../file-upload/file-upload.component';
+import { FIRST_SCREEN_PATH } from './paths';
 import { Tab } from './tabs';
-import { appendComponentToBody } from '../addComponent';
-import { FirstScreenComponent } from '../screens/first-screen/first-screen.component';
-import { SecondScreenComponent } from '../screens/second-screen/second-screen.component';
-import { BarChartsComponent } from '../bar-charts/bar-charts.component';
-import { LineChartsComponent } from '../line-charts/line-charts.component'; 
 
 @Component({
   selector: 'app-tabs-configuration',
@@ -24,10 +23,12 @@ export class TabsConfigurationComponent implements OnInit {
   charts: any;
   chart_data: any;
   datas: any;
+  reload: boolean = true;
 
-  constructor(private appService: AppService,  private componentFactoryResolver: ComponentFactoryResolver, private appRef: ApplicationRef, private injector: Injector) { }
+  constructor(private appService: AppService,  private componentFactoryResolver: ComponentFactoryResolver, private appRef: ApplicationRef, private injector: Injector, public dialog: MatDialog, private router: Router) { }
 
   ngOnInit(): void {
+    console.log("elo")
     this.getGeneralInfo();
   }
 
@@ -45,10 +46,12 @@ export class TabsConfigurationComponent implements OnInit {
       const path = this.makePath(i);
       this.tabs.push(new Tab('Ekran ' + i, path + '-screen'));
     }
+    this.router.navigateByUrl('app/' + FIRST_SCREEN_PATH);
   }
 
   refresh(){
-    window.location.reload();
+    // window.location.reload();
+    this.appService.refresh().subscribe();
   }
 
   makePath(number: number){

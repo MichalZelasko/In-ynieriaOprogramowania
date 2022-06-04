@@ -27,6 +27,7 @@ export class FirstScreenComponent implements OnInit {
 
   chartsData: any[];
   actualData: any[];
+  unitsList: any[];
   numberOfCharts: any;
   screenInfo: any;
   charts: any;
@@ -48,6 +49,7 @@ export class FirstScreenComponent implements OnInit {
   constructor(private appService: AppService, private componentFactoryResolver: ComponentFactoryResolver, private appRef: ApplicationRef, private injector: Injector) { 
     this.actualData = [];
     this.chartsData = [];
+    this.unitsList = [];
   }
 
 
@@ -57,6 +59,7 @@ export class FirstScreenComponent implements OnInit {
       this.reload = false;
     }
   }
+
 
   getFirstScreenInfo(){
     this.appService.getScreenInfo(1).subscribe(res => {
@@ -71,7 +74,9 @@ export class FirstScreenComponent implements OnInit {
     let isChart: boolean = true;
     this.charts = this.screenInfo.charts;
     this.chart_data = Object.values(this.charts)[i];
+    console.log(this.chart_data);
     this.datas = this.chart_data.data_list;
+    this.unitsList = this.chart_data.enabled_units;
     if(!this.chart_data.is_chart){
       isChart = false;
     }
@@ -105,8 +110,8 @@ export class FirstScreenComponent implements OnInit {
   
           var screenHTML = document.getElementById("screen");
 
-          var barc = new BarChartsComponent();
-          barc.setValues(undefined, undefined, undefined, undefined, undefined, undefined, false, undefined, undefined, undefined, undefined, undefined, false, undefined, undefined, res.data);
+          var barc = new BarChartsComponent(this.appService);
+          barc.setValues(undefined, undefined, undefined, undefined, undefined, undefined, false, undefined, undefined, undefined, undefined, undefined, false, undefined, undefined, res.data, this.unitsList, chartNumber, 1);
           var newdomElem = appendComponentToBody(this, BarChartsComponent, barc, screenHTML!);
   
           newdomElem.style.position = 'relative';
@@ -150,8 +155,8 @@ export class FirstScreenComponent implements OnInit {
         newdomElem.style.padding = "1%";
         newdomElem.style.borderRadius = "7%";
 
-        var barc2 = new LineChartsComponent();
-        barc2.setValues(chartNumber.toString(), "900px", "500px", result);
+        var barc2 = new LineChartsComponent(this.appService);
+        barc2.setValues(chartNumber.toString(), "900px", "500px", result, this.unitsList, chartNumber, 1);
         var newdomElem2 = appendComponentToBody(this, LineChartsComponent, barc2, screenHTML!);
 
         newdomElem2.style.position = 'relative';
@@ -159,7 +164,7 @@ export class FirstScreenComponent implements OnInit {
         newdomElem2.style.left = '150px';
         newdomElem2.style.display = 'inline-block';
         newdomElem2.style.backgroundColor = "#ebebeb";
-        newdomElem2.style.padding = "1%";
+        newdomElem2.style.padding = "3%";
         newdomElem2.style.borderRadius = "7%";
 
       }
