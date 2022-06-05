@@ -48,7 +48,7 @@ def get_screen_info(screen_id: int):
         raise HTTPException(status_code=404, detail=err.strerror)
     return JSONResponse(content=screen_info, status_code=200)
 
-@app.get("/api/chart/{chart_id}/data/{data_id}", response_class=JSONResponse)
+@app.get("/api/screen/{screen_id}/chart/{chart_id}/data/{data_id}", response_class=JSONResponse)
 def get_data(screen_id: int, chart_id: int, data_id: int) :
     file_name = "screen_" + str(screen_id) + "_chart_" + str(chart_id) + "_data_" + str(data_id) + ".json"
     try:
