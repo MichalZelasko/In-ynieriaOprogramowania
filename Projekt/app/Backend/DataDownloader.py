@@ -133,7 +133,7 @@ def getStartDate(times):
     dateToStart = (now - dateToSub).strftime("%Y-%m-%dT%H:%M:%S")
     return dateToStart
 
-def downloadSingleChart(dataFilePathsList, chart, chartNum, unit, update = False) :
+def downloadSingleChart(dataFilePathsList, chart, chartNum, unit, screenName, update = False) :
     filePaths, threads = [], []
 
     try :
@@ -150,7 +150,7 @@ def downloadSingleChart(dataFilePathsList, chart, chartNum, unit, update = False
         minValue, maxValue = chart["min_max_values"][dataMinMaxKey]["min"], chart["min_max_values"][dataMinMaxKey]["max"]
         for dest in dataDestinationList:
             dataDestination.append(dest["dest"])
-        dataFilePath = "../resources/chart_" + chartNum +"_data_" + num + ".json"
+        dataFilePath = "../resources/" + screenName + "_chart_" + chartNum +"_data_" + num + ".json"
         filePaths.append(dataFilePath)
         threads.append(threading.Thread(target = downloadData, args = (url, dataDestination, dateToStart, dataFilePath, True,  update, originalUnit, unit, minValue, maxValue)))
     
@@ -169,7 +169,7 @@ def downlaodSingleDisplayLiveValue(value, dataFilePath) :
     downloadData(url, dataDestination, None, dataFilePath, False)
     
 
-def getCharts(screen, fileName, update = False) :
+def getCharts(screen, fileName, screenName, update = False) :
     try :
         screenInfoOld = get_json_object_from_file(fileName)
     except FileNotFoundError :
@@ -185,7 +185,7 @@ def getCharts(screen, fileName, update = False) :
         chart = screen["charts"][chartName]
         currentUnits.append(unit)
         dataList = {}
-        threads.append(threading.Thread(target = downloadSingleChart, args = (dataFilePathsList, chart, str(chartNum), unit, update)))
+        threads.append(threading.Thread(target = downloadSingleChart, args = (dataFilePathsList, chart, str(chartNum), unit, screenName, update)))
         chartNum += 1
 
     runThreads(threads)
@@ -196,10 +196,13 @@ def getCharts(screen, fileName, update = False) :
         dataList = {"color" : chart["color_list"]["color1"]}
         dataFilePaths = dataFilePathsList[i]
         i += 1
+        print(chart["url_list"], chartNum)
         for dataNum in range(len(chart["url_list"])) :
             strNum = str(dataNum + 1)
             dataName = "data" + strNum
             print(chart["color_list"], chart["data_names"])
+            print(dataFilePaths)
+            print(dataNum)
             dataInfo = {
                             "file_name" : dataFilePaths[dataNum],
                             "data_name" : chart["data_names"]["data_name" + strNum]
@@ -226,11 +229,11 @@ def getCharts(screen, fileName, update = False) :
     return chartsInfo, chartNum
 
 
-def getSingleValue(screen, chartsInfo, chartNum) :
+def getSingleValue(screen, chartsInfo, chartNum, screenName) :
     threads, singleValues, dataFilePaths = [], [], []
     for singleValueName in screen["displayed_live_values"] :
         singleValues.append(screen["displayed_live_values"][singleValueName])
-        dataFilePaths.append("../resources/chart_" + str(chartNum) + "_data" + ".json")
+        dataFilePaths.append("../resources/" + screenName + "_chart_" + str(chartNum) + "_data" + ".json")
         threads.append(threading.Thread(target = downlaodSingleDisplayLiveValue, args = (singleValues[-1], dataFilePaths[-1])))
 
     runThreads(threads)
@@ -267,8 +270,8 @@ def getScreenInfo(screen, screenName, update = False) :
             "tile_size" : screen["tile_size"], 
             "chart_on_screen_number" : screen["chart_on_screen_number"]
             }
-    chartsInfo, chartNum = getCharts(screen, fileName, update)
-    chartsInfo, chartNum = getSingleValue(screen, chartsInfo, chartNum)
+    chartsInfo, chartNum = getCharts(screen, fileName, screenName, update)
+    chartsInfo, chartNum = getSingleValue(screen, chartsInfo, chartNum, screenName)
     
     info["charts"] = chartsInfo
     
@@ -334,7 +337,7 @@ def refresh_data() :
 
 
 if __name__ == "__main__" :
-    start("../../Informations/example1.json")
+    start("../../Informations/example2.json")
 #     refresh_data()
 
     # url = "https://datahub.ki.agh.edu.pl/api/endpoints/70/data/"
