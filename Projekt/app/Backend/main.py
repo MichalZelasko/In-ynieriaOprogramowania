@@ -100,7 +100,7 @@ async def configuration(body: Request) :
             path += body[i]
             i += 1
     try :
-        result = start(path)
+        result = start("../../Informations/" + path)
     except Exception as err :
         raise HTTPException(status_code=404, detail="Error")
     return result
