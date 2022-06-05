@@ -64,7 +64,6 @@ export class FirstScreenComponent implements OnInit {
   getFirstScreenInfo(){
     this.appService.getScreenInfo(1).subscribe(res => {
       this.screenInfo = res;
-      console.log(res)
       this.numberOfCharts = this.screenInfo.chart_on_screen_number
       this.getChartsData(this.numberOfCharts)
     })
