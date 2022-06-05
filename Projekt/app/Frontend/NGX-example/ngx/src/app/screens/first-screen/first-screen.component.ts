@@ -110,9 +110,34 @@ export class FirstScreenComponent implements OnInit {
           this.appService.getData(1, chartNumber, 1).subscribe(res => {
           
             let screenHTML = document.getElementById("screen");
+
+            let unit = "";
+            if(this.chart_data.unit != null){
+              unit = " [" + this.chart_data.unit + "]";
+            }
   
             var barc = new BarChartsComponent(this.appService);
-            barc.setValues(undefined, undefined, undefined, undefined, undefined, undefined, false, undefined, undefined, undefined, undefined, undefined, false, undefined, undefined, res.data, this.unitsList, chartNumber, 1, this.actualUnit);
+            barc.setValues(undefined, 
+                            schemes[this.chart_data.data_list.color], 
+                            undefined, 
+                            undefined, 
+                            undefined, 
+                            undefined, 
+                            false, 
+                            true, 
+                            true, 
+                            this.
+                            chart_data.x_name, 
+                            this.chart_data.y_name + unit, 
+                            undefined, 
+                            false, 
+                            undefined, 
+                            undefined, 
+                            res.data, 
+                            this.unitsList, 
+                            chartNumber, 
+                            1, 
+                            this.actualUnit);
             var newdomElem = appendComponentToBody(this, BarChartsComponent, barc, screenHTML!);
     
             newdomElem.style.position = 'relative';
@@ -149,8 +174,23 @@ export class FirstScreenComponent implements OnInit {
 
           let screenHTML = document.getElementById("screen");
 
+          let unit = "";
+          if(this.chart_data.unit != null){
+            unit = " [" + this.chart_data.unit + "]";
+          }
+
           let barc = new LineChartsComponent(this.appService);
-          barc.setValues(chartNumber.toString(), "900px", "500px", this.chart_data.name, this.chart_data.x_name, this.chart_data.y_name + " [" + this.chart_data.unit + "]", result, this.unitsList, chartNumber, 1, this.actualUnit);
+          barc.setValues(chartNumber.toString(), 
+                         "900px", 
+                         "500px", 
+                         this.chart_data.name, 
+                         this.chart_data.x_name, 
+                         this.chart_data.y_name + unit, 
+                         result, 
+                         this.unitsList, 
+                         chartNumber, 
+                         1, 
+                         this.actualUnit);
           let newdomElem = appendComponentToBody(this, LineChartsComponent, barc, screenHTML!);
 
           newdomElem.style.position = 'absolute';
@@ -180,8 +220,23 @@ export class FirstScreenComponent implements OnInit {
 
           let screenHTML = document.getElementById("screen");
 
+          let unit = "";
+          if(this.chart_data.unit != null){
+            unit = " [" + this.chart_data.unit + "]";
+          }
+
           let barc = new ScatterChartsComponent(this.appService);
-          barc.setValues(chartNumber.toString(), "700px", "500px", this.chart_data.name, this.chart_data.x_name, this.chart_data.y_name, result, this.unitsList, chartNumber, 1, this.actualUnit);
+          barc.setValues(chartNumber.toString(), 
+                         "700px", 
+                         "500px", 
+                         this.chart_data.name, 
+                         this.chart_data.x_name, 
+                         this.chart_data.y_name + unit, 
+                         result, 
+                         this.unitsList, 
+                         chartNumber, 
+                         1, 
+                         this.actualUnit);
           let newdomElem = appendComponentToBody(this, ScatterChartsComponent, barc, screenHTML!);
   
           newdomElem.style.position = 'absolute';

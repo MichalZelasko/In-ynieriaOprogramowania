@@ -263,7 +263,7 @@
                         }
                     },
                     "name": "nazwa wykresu",
-                    "type": "histogram",
+                    "type": "linechart",
                     "date": {
                         "date_start": "od kiedy dane wyswietlac",
                         "date_end": "do kiedy dane wyswietlac, default: teraz"
