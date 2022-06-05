@@ -319,7 +319,7 @@ def start(path, update = False) :
     confPath = path
     confJsonFile = open(confPath)
     confData = json.load(confJsonFile)
-    with open("../../Informations/example1.json", "w") as write_file :
+    with open("../resources/configuration.json", "w") as write_file :
         json.dump(confData, write_file, indent=4)
     screenAmount = confData["general_info"]["number_of_screens"]
     for num in range(screenAmount):
@@ -327,13 +327,15 @@ def start(path, update = False) :
         screenName = "screen" + str(screenNumber)
         screen = confData["screen_info"][screenName]
         getScreenInfo(screen, screenName, update)
+    return {"response" : "OK"}
 
-def refresh_data(path):
-    start(path, update = True)
-    pass
+def refresh_data() :
+    start("../resources/configuration.json", update = True)
 
 
 if __name__ == "__main__" :
+    start("../../Informations/example1.json")
+#     refresh_data()
 
     # url = "https://datahub.ki.agh.edu.pl/api/endpoints/70/data/"
     # # dateToStart = "2022-05-04T08:27:34+02:00"
@@ -343,14 +345,16 @@ if __name__ == "__main__" :
     # # print(dateToStart)
 
 
-    confPath = "../../Informations/example1.json"
-    confJsonFile = open(confPath)
-    confData = json.load(confJsonFile)
-    screenAmount = confData["general_info"]["number_of_screens"]
-    for num in range(screenAmount):
-        screenNumber = num + 1
-        screenName = "screen" + str(screenNumber)
-        screen = confData["screen_info"][screenName]
-        getScreenInfo(screen, screenName, True)
+    # confPath = "../../Informations/example1.json"
+    # confJsonFile = open(confPath)
+    # confData = json.load(confJsonFile)
+    # screenAmount = confData["general_info"]["number_of_screens"]
+    # for num in range(screenAmount):
+    #     screenNumber = num + 1
+    #     screenName = "screen" + str(screenNumber)
+    #     screen = confData["screen_info"][screenName]
+    #     getScreenInfo(screen, screenName, True)
+
+
 
 
