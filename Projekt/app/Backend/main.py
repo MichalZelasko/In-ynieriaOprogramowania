@@ -1,9 +1,11 @@
-from fastapi import FastAPI, HTTPException
+from urllib.request import Request
+from fastapi import FastAPI, HTTPException, Request 
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from utils import get_json_object_from_file
 from dataConverter import convertFileData
-from DataDownloader import refresh_data
+from DataDownloader import refresh_data, start
+import json
 
 RESOURCES_PATH = "../resources/"
 
@@ -65,7 +67,40 @@ def convert_data(chart_id: int, screen_id: int, destinationUnit: str) :
         raise HTTPException(status_code=404, detail="Incompatible units")
     return JSONResponse(content={"response": "OK"}, status_code=200)
 
-@app.get("/api/refresh")
-def refresh():
-    refresh_data()
+@app.get("/api/refresh", response_class=JSONResponse)
+def refresh() :
+    try :
+        refresh_data()
+    except FileNotFoundError as err:
+        raise HTTPException(status_code=404, detail=err.strerror)
+    except Exception:
+        raise HTTPException(status_code=404, detail="Refresh internal error")
     return JSONResponse(content={"response": "OK"}, status_code=200)
+
+@app.get("/api/restart", response_class=JSONResponse)
+def restart() :
+    try :
+        start("../../Informations/example1.json")
+    except FileNotFoundError as err:
+        raise HTTPException(status_code=404, detail=err.strerror)
+    except Exception:
+        raise HTTPException(status_code=404, detail="Start internal error")
+    return JSONResponse(content={"response": "OK"}, status_code=200)
+
+@app.post("/api/configuration")
+async def configuration(body: Request) :
+    body = await body.body()
+    body = body.decode("utf-8")
+    i, path = 5, ""
+    while i < len(body) :
+        if body[i] == '%' : 
+            path += "/"
+            i += 3
+        else :
+            path += body[i]
+            i += 1
+    try :
+        result = start(path)
+    except Exception as err :
+        raise HTTPException(status_code=404, detail="Error")
+    return result
