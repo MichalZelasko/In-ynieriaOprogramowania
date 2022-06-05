@@ -39,7 +39,7 @@ def get_general_info():
 
 @app.get("/api/screen/{screen_id}", response_class=JSONResponse)
 def get_screen_info(screen_id: int):
-    file_name = "screen" + str(screen_id) + ".json"
+    file_name = "screen_" + str(screen_id) + ".json"
     try:
         screen_info = get_json_object_from_file(RESOURCES_PATH + file_name)
     except FileNotFoundError as err:
@@ -47,8 +47,8 @@ def get_screen_info(screen_id: int):
     return JSONResponse(content=screen_info, status_code=200)
 
 @app.get("/api/chart/{chart_id}/data/{data_id}", response_class=JSONResponse)
-def get_data(chart_id: int, data_id: int) :
-    file_name = "chart_" + str(chart_id) + "_data_" + str(data_id) + ".json"
+def get_data(screen_id: int, chart_id: int, data_id: int) :
+    file_name = "screen_" + str(screen_id) + "_chart_" + str(chart_id) + "_data_" + str(data_id) + ".json"
     try:
         js = get_json_object_from_file(RESOURCES_PATH + file_name)
     except FileNotFoundError as err:
