@@ -5,3 +5,10 @@ ngx-charts-bar-vertical {
 .chart-legend {
     font-size: 800px;
 }
+
+.refresh{
+    position: relative;
+    top: 0;
+    right: 200px;
+    
+}

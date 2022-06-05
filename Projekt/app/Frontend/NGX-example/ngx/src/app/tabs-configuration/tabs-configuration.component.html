@@ -1,6 +1,6 @@
 <div class="container" >
 
-<div fxLayout="row" fxLayoutAlign="space-between start" >
+<div fxLayout="row" fxLayoutAlign="space-between start">
 
         <nav mat-tab-nav-bar>
             <a mat-tab-link *ngFor="let tab of tabs" [routerLink]="tab.path" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
@@ -8,8 +8,8 @@
             </a>
         </nav>
 
-        <button mat-fab color="primary" (click)="refresh()" aria-label="Odśwież dane">
-            <mat-icon>sync</mat-icon>
+        <button mat-fab color="primary" (click)="uploadFile()" aria-label="Wczytaj plik konfiguracyjny">
+            <mat-icon>file_upload</mat-icon>
         </button>
 
 </div>

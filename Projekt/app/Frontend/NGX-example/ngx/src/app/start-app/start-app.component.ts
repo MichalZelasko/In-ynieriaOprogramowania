@@ -32,13 +32,13 @@ export class StartAppComponent implements OnInit {
         this.flag = false;
       }
       else{
-        if(res.split('.').pop() !== 'txt' ){
+        if(res.split('.').pop() !== 'json' ){
           alert("Wczytaj poprawny plik (błędne rozszerzenie)");
           this.flag = false;
         }
         else{
-          // this.appService.uploadFile(res).subscribe(() => this.router.navigateByUrl('app'))
-          this.router.navigateByUrl('app');
+          this.appService.uploadFile(res).subscribe(() => this.router.navigateByUrl('app'))
+          // this.router.navigateByUrl('app');
         }        
       }
      })

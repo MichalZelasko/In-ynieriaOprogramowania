@@ -1,9 +1,7 @@
 import { ApplicationRef, Component, ComponentFactoryResolver, Injector, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { tap } from 'rxjs';
 import { AppService } from '../app.service';
-import { FileUploadComponent } from '../file-upload/file-upload.component';
 import { FIRST_SCREEN_PATH } from './paths';
 import { Tab } from './tabs';
 
@@ -30,7 +28,7 @@ export class TabsConfigurationComponent implements OnInit {
   ngOnInit(): void {
     this.getGeneralInfo();
     setInterval(() => {
-      this.refresh();
+      this.appService.refresh().subscribe(() => window.location.reload());
     }, 900000); 
   }
 
@@ -51,11 +49,9 @@ export class TabsConfigurationComponent implements OnInit {
     this.router.navigateByUrl('app/' + FIRST_SCREEN_PATH);
   }
 
-  refresh(){
-    this.appService.refresh().subscribe(() => window.location.reload());
+  uploadFile(){
+    this.router.navigateByUrl('');
   }
-
-
 
   makePath(number: number){
     switch (number) {

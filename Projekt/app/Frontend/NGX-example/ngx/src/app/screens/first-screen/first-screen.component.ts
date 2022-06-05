@@ -1,15 +1,12 @@
-import { ApplicationRef, Component, ComponentFactoryResolver, ElementRef, Injector, OnInit, ViewChild } from '@angular/core';
+import { ApplicationRef, Component, ComponentFactoryResolver, Injector, OnInit } from '@angular/core';
 import { AppService } from 'src/app/app.service';
-import { productSales, productSalesMulti, testjson } from '../../data/products';
 import { appendComponentToBody } from '../../addComponent';
-import { SecondScreenComponent } from '../../screens/second-screen/second-screen.component';
 import { BarChartsComponent } from 'src/app/bar-charts/bar-charts.component';
-import { elementAt } from 'rxjs';
 import { SingleValueComponent } from 'src/app/single-value/single-value.component';
 import { ScatterChartsComponent } from 'src/app/scatter-charts/scatter-charts.component';
-import { LinearScale, LineController } from 'chart.js';
 import { LineChartsComponent } from 'src/app/line-charts/line-charts.component';
 import * as schemes from 'src/app/esthetics/colorSchemes';
+import { Router } from '@angular/router';
 
 
 function renameProperties(obj) {
@@ -36,6 +33,7 @@ export class FirstScreenComponent implements OnInit {
   datas: any;
   reload: boolean = true;
   actualUnit: any;
+  actualRoute: any;
 
 
   view: [number, number] = [900,570];
@@ -48,7 +46,7 @@ export class FirstScreenComponent implements OnInit {
   yAxisLabel: string = "Tepmerature";
   showDataLabel: boolean = false;
 
-  constructor(private appService: AppService, private componentFactoryResolver: ComponentFactoryResolver, private appRef: ApplicationRef, private injector: Injector) { 
+  constructor(private appService: AppService, private componentFactoryResolver: ComponentFactoryResolver, private appRef: ApplicationRef, private injector: Injector, private router: Router) { 
     this.actualData = [];
     this.chartsData = [];
     this.unitsList = [];
@@ -60,12 +58,13 @@ export class FirstScreenComponent implements OnInit {
       this.getFirstScreenInfo();
       this.reload = false;
     }
+    this.actualRoute = this.router.url;
   }
-
 
   getFirstScreenInfo(){
     this.appService.getScreenInfo(1).subscribe(res => {
       this.screenInfo = res;
+      console.log(res)
       this.numberOfCharts = this.screenInfo.chart_on_screen_number
       this.getChartsData(this.numberOfCharts)
     })
@@ -89,8 +88,9 @@ export class FirstScreenComponent implements OnInit {
   }
 
   getChartData(numberOfDatas: number, chartNumber: number, flag: boolean){
+    numberOfDatas -= 1;
     if(!flag){
-      this.appService.getData(chartNumber, 1).subscribe(res => {
+      this.appService.getData(1, chartNumber, 1).subscribe(res => {
 
         let screenHTML = document.getElementById("screen");
 
@@ -108,7 +108,7 @@ export class FirstScreenComponent implements OnInit {
     } else {
       if(numberOfDatas == 1){
         if(this.chart_data.type == "barchart"){
-          this.appService.getData(chartNumber, 1).subscribe(res => {
+          this.appService.getData(1, chartNumber, 1).subscribe(res => {
           
             let screenHTML = document.getElementById("screen");
   
@@ -131,14 +131,14 @@ export class FirstScreenComponent implements OnInit {
       }
       else{
         if(this.chart_data.type == "linechart"){
-          let colors = schemes[this.chart_data.data_list.color].domain;
+          let colors = schemes[this.chart_data.data_list.color];
           console.log(this.chart_data.data_list.color);
           let results: LooseObject = {}; 
           let result: any = {datasets: []}; 
           for(let i = 1; i < numberOfDatas; i++){
             console.log("WYKRES NUMER: " + chartNumber + " DANA NUMER: " + i);
             let name = this.chart_data.data_list["data" + i].data_name;
-            this.appService.getData(chartNumber, i).subscribe(res => {
+            this.appService.getData(1, chartNumber, i).subscribe(res => {
               console.log(res);
               for(let element of Object.keys(res.data)){
                 renameProperties(res.data[element]);
@@ -164,13 +164,13 @@ export class FirstScreenComponent implements OnInit {
         }
 
         if(this.chart_data.type == "scatter"){ 
-          let colors = schemes[this.chart_data.data_list.color].domain;
+          let colors = schemes[this.chart_data.data_list.color];
           let results: LooseObject = {}; 
           let result: any = {datasets: []}; 
           for(let i = 1; i < numberOfDatas; i++){
             console.log("WYKRES NUMER: " + chartNumber + " DANA NUMER: " + i);
             let name = this.chart_data.data_list["data" + i].data_name;
-            this.appService.getData(chartNumber, i).subscribe(res => {
+            this.appService.getData(1, chartNumber, i).subscribe(res => {
               for(let element of Object.keys(res.data)){
                 renameProperties(res.data[element]);
               }
@@ -196,6 +196,10 @@ export class FirstScreenComponent implements OnInit {
       }
     }
   }
+  refresh(){
+    this.appService.refresh().subscribe(() => this.getFirstScreenInfo())
+  }
+
 }
 
 interface LooseObject {

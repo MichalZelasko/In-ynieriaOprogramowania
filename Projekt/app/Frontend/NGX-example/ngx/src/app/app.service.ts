@@ -18,8 +18,8 @@ export class AppService {
         return this.http.get<any>(SCREEN_INFO_API_PATH + screenID);
     }
 
-    getData(chartID: number, dataID: number): Observable<any> {
-        return this.http.get<any>(DATA_API_PATH + chartID + '/data/' + dataID);
+    getData(screenID: number, chartID: number, dataID: number): Observable<any> {
+        return this.http.get<any>(DATA_API_PATH + screenID + '/chart/' + chartID + '/data/' + dataID);
     }
 
     chartConvert(unit: string, screenId: number, chartId: number): Observable<any> {
@@ -31,6 +31,6 @@ export class AppService {
     }
 
     uploadFile(file: any): Observable<any>{
-        return this.http.post<any>(FILE_UPLOAD_API_PATH, file);
+        return this.http.post<any>(FILE_UPLOAD_API_PATH, {file});
     }
 }

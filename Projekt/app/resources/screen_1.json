@@ -1,0 +1,42 @@
+{
+    "name": "nazwa ekranu",
+    "layout": "vertcial",
+    "tile_size": "w procentach ca\u0139\u201aego ekranu",
+    "chart_on_screen_number": 1,
+    "charts": {
+        "chart1": {
+            "name": "nazwa wykresu",
+            "type": "scatter",
+            "is_chart": true,
+            "vertical": {
+                "size": "rozmiar w kafelkach",
+                "position": "polozenie tez w kafelkach"
+            },
+            "horizontal": {
+                "size": "rozmiar w kafelkach",
+                "position": "polozenie tez w kafelkach"
+            },
+            "x_name": "date",
+            "y_name": "temperature",
+            "unit": null,
+            "original_unit": "C",
+            "unit_conversion": "enabled",
+            "enabled_units": [
+                "C",
+                "F",
+                "K"
+            ],
+            "data_list": {
+                "color": "color_set_name",
+                "data1": {
+                    "file_name": "../resources/screen1_chart_1_data_1.json",
+                    "data_name": "tempSet"
+                },
+                "data2": {
+                    "file_name": "../resources/screen1_chart_1_data_2.json",
+                    "data_name": "tempRead"
+                }
+            }
+        }
+    }
+}
