@@ -1,7 +1,9 @@
 import { ApplicationRef, Component, ComponentFactoryResolver, Injector, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { tap } from 'rxjs';
 import { AppService } from '../app.service';
+import { FileUploadComponent } from '../file-upload/file-upload.component';
 import { FIRST_SCREEN_PATH } from './paths';
 import { Tab } from './tabs';
 
@@ -22,6 +24,7 @@ export class TabsConfigurationComponent implements OnInit {
   chart_data: any;
   datas: any;
   reload: boolean = true;
+  flag: boolean = true;
 
   constructor(private appService: AppService,  private componentFactoryResolver: ComponentFactoryResolver, private appRef: ApplicationRef, private injector: Injector, public dialog: MatDialog, private router: Router) { }
 
@@ -50,7 +53,30 @@ export class TabsConfigurationComponent implements OnInit {
   }
 
   uploadFile(){
-    this.router.navigateByUrl('');
+    const dialogRef = this.dialog.open(FileUploadComponent, {
+      width: '500px',
+    });
+    dialogRef.afterClosed().pipe(
+      tap()
+    ).subscribe((res) => {
+      if(res === "cancel"){
+        this.flag = false;
+      }
+      else{
+        if(res.split('.').pop() !== 'json' ){
+          alert("Wczytaj poprawny plik (błędne rozszerzenie)");
+          this.flag = false;
+        }
+        else{
+          // this.appService.uploadFile(res).subscribe(() => {
+          //   this.tabs = [];
+          //   this.getGeneralInfo();
+          // })
+          this.tabs = [];
+          this.getGeneralInfo();
+        }        
+      }
+     })
   }
 
   makePath(number: number){

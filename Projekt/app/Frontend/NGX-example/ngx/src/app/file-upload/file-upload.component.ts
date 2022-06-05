@@ -11,7 +11,9 @@ export class FileUploadComponent implements OnInit {
 
   file: File | undefined
 
-  constructor(private appService: AppService, public dialogRef: MatDialogRef<any>, @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(private appService: AppService, public dialogRef: MatDialogRef<any>, @Inject(MAT_DIALOG_DATA) public data: any) { 
+    dialogRef.disableClose = true;
+  }
 
   ngOnInit(): void {
   }

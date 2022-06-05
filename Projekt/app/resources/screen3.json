@@ -40,7 +40,7 @@
         },
         "chart2": {
             "name": "nazwa wykresu",
-            "type": "histogram",
+            "type": "linechart",
             "is_chart": true,
             "vertical": {
                 "size": "rozmiar w kafelkach",
