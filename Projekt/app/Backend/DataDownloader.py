@@ -133,7 +133,7 @@ def getStartDate(times):
     dateToStart = (now - dateToSub).strftime("%Y-%m-%dT%H:%M:%S")
     return dateToStart
 
-def downloadSingleChart(dataFilePathsList, chart, chartNum, unit, screenName, update = False) :
+def downloadSingleChart(k, dataFilePathsList, chart, chartNum, unit, screenName, update = False) :
     filePaths, threads = [], []
 
     try :
@@ -155,7 +155,8 @@ def downloadSingleChart(dataFilePathsList, chart, chartNum, unit, screenName, up
         threads.append(threading.Thread(target = downloadData, args = (url, dataDestination, dateToStart, dataFilePath, True,  update, originalUnit, unit, minValue, maxValue)))
     
     runThreads(threads)
-    dataFilePathsList.append(filePaths)
+    print(dataFilePathsList)
+    dataFilePathsList[k] = filePaths
 
 
 def downlaodSingleDisplayLiveValue(value, dataFilePath) :
@@ -174,9 +175,9 @@ def getCharts(screen, fileName, screenName, update = False) :
         screenInfoOld = get_json_object_from_file(fileName)
     except FileNotFoundError :
         screenInfoOld = None
-    chartsInfo, chartNum = {}, 1
-    dataFilePathsList, threads, currentUnits = [], [], []
-
+    chartsInfo, chartNum, i = {}, 1, 0
+    dataFilePathsList, threads, currentUnits = [None] * len(screen["charts"]), [], []
+    print(len(screen["charts"]))
     for chartName in screen["charts"]:
         if screenInfoOld != None :
             unit = screenInfoOld["charts"][chartName]["unit"]
@@ -185,24 +186,26 @@ def getCharts(screen, fileName, screenName, update = False) :
         chart = screen["charts"][chartName]
         currentUnits.append(unit)
         dataList = {}
-        threads.append(threading.Thread(target = downloadSingleChart, args = (dataFilePathsList, chart, str(chartNum), unit, screenName, update)))
+        threads.append(threading.Thread(target = downloadSingleChart, args = (i, dataFilePathsList, chart, str(chartNum), unit, screenName, update)))
         chartNum += 1
+        i += 1
 
     runThreads(threads)
-    print(currentUnits)
+    #print(currentUnits)
+    print(dataFilePathsList)
     i, chartNum = 0, 1
     for chartName in screen["charts"]:
         chart = screen["charts"][chartName]
         dataList = {"color" : chart["color_list"]["color1"]}
         dataFilePaths = dataFilePathsList[i]
         i += 1
-        print(chart["url_list"], chartNum)
+        #print(chart["url_list"], chartNum)
         for dataNum in range(len(chart["url_list"])) :
             strNum = str(dataNum + 1)
             dataName = "data" + strNum
-            print(chart["color_list"], chart["data_names"])
+            #print(chart["color_list"], chart["data_names"])
             print(dataFilePaths)
-            print(dataNum)
+            print(dataNum, len(chart["url_list"]))
             dataInfo = {
                             "file_name" : dataFilePaths[dataNum],
                             "data_name" : chart["data_names"]["data_name" + strNum]
@@ -337,8 +340,8 @@ def refresh_data() :
 
 
 if __name__ == "__main__" :
-    start("../../Informations/example2.json")
-#     refresh_data()
+    #start("../../Informations/example2.json")
+    refresh_data()
 
     # url = "https://datahub.ki.agh.edu.pl/api/endpoints/70/data/"
     # # dateToStart = "2022-05-04T08:27:34+02:00"

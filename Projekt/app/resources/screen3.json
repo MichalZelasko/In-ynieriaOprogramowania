@@ -40,7 +40,7 @@
         },
         "chart2": {
             "name": "nazwa wykresu",
-            "type": "linechart",
+            "type": "histogram",
             "is_chart": true,
             "vertical": {
                 "size": "rozmiar w kafelkach",
@@ -54,11 +54,9 @@
             "y_name": "temperature",
             "unit": null,
             "original_unit": "C",
-            "unit_conversion": "enabled",
+            "unit_conversion": "disabled",
             "enabled_units": [
-                "C",
-                "F",
-                "K"
+                "C"
             ],
             "data_list": {
                 "color": "color_set_name",

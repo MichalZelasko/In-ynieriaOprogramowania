@@ -2,7 +2,7 @@
     "name": "nazwa ekranu",
     "layout": "vertcial",
     "tile_size": "w procentach ca\u0139\u201aego ekranu",
-    "chart_on_screen_number": 2,
+    "chart_on_screen_number": 1,
     "charts": {
         "chart1": {
             "name": "nazwa wykresu",
@@ -35,22 +35,6 @@
                 "data2": {
                     "file_name": "../resources/screen1_chart_1_data_2.json",
                     "data_name": "tempRead"
-                }
-            }
-        },
-        "chart2": {
-            "is_chart": false,
-            "unit": "C",
-            "unit_conversion": "enabled",
-            "enabled_units": [
-                "C",
-                "F",
-                "K"
-            ],
-            "data_list": {
-                "data": {
-                    "file_name": "../resources/screen1_chart_2_data.json",
-                    "data_name": "nazwa zmiennej"
                 }
             }
         }
