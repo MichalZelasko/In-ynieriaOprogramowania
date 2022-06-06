@@ -236,7 +236,7 @@ def getSingleValue(screen, chartsInfo, chartNum, screenName) :
     threads, singleValues, dataFilePaths = [], [], []
     for singleValueName in screen["displayed_live_values"] :
         singleValues.append(screen["displayed_live_values"][singleValueName])
-        dataFilePaths.append("../resources/" + screenName + "_chart_" + str(chartNum) + "_data" + ".json")
+        dataFilePaths.append("../resources/" + screenName + "_chart_" + str(chartNum) + "_data_1" + ".json")
         threads.append(threading.Thread(target = downlaodSingleDisplayLiveValue, args = (singleValues[-1], dataFilePaths[-1])))
 
     runThreads(threads)
@@ -244,12 +244,12 @@ def getSingleValue(screen, chartsInfo, chartNum, screenName) :
     for i, singleValueName in enumerate(screen["displayed_live_values"]) :
         dataFilePath, singleValue = dataFilePaths[i], singleValues[i]
         thisChart = {
+                        "vertical" : singleValue["vertical"],
+                        "horizontal" : singleValue["horizontal"],
                         "is_chart" : False,
                         "unit": singleValue["unit"],
                         "unit_conversion": singleValue["unit_conversion"],
                         "enabled_units": singleValue["enabled_units"]
-                        # "vertical" : singleValue["vertical"]
-                        # "horizontal" : singleValue["horizontal"]
                     }
         dataList, dataName = {}, "data"
         dataInfo = {
@@ -332,11 +332,12 @@ def start(path, update = False) :
         screenNumber = num + 1
         screenName = "screen" + str(screenNumber)
         screen = confData["screen_info"][screenName]
-        getScreenInfo(screen, screenName, update)
+        screenFileName = "screen_" + str(screenNumber)
+        getScreenInfo(screen, screenFileName, update)
     return {"response" : "OK"}
 
 def refresh_data() :
-    start("../resources/configuration.json", update = True)
+    start("../resources/configuration.json", update = False)
 
 
 if __name__ == "__main__" :

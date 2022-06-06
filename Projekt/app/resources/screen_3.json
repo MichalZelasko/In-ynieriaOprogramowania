@@ -6,10 +6,10 @@
     "charts": {
         "chart1": {
             "name": "nazwa wykresu",
-            "type": "linechart",
+            "type": "line",
             "is_chart": true,
             "vertical": {
-                "size": "470px",
+                "size": "570px",
                 "position": "120px"
             },
             "horizontal": {
@@ -27,13 +27,13 @@
                 "K"
             ],
             "data_list": {
-                "color": "papaj",
+                "color": "color_set_name",
                 "data1": {
-                    "file_name": "../resources/screen3_chart_1_data_1.json",
+                    "file_name": "../resources/screen_3_chart_1_data_1.json",
                     "data_name": "tempSet"
                 },
                 "data2": {
-                    "file_name": "../resources/screen3_chart_1_data_2.json",
+                    "file_name": "../resources/screen_3_chart_1_data_2.json",
                     "data_name": "tempRead"
                 }
             }
@@ -43,27 +43,25 @@
             "type": "histogram",
             "is_chart": true,
             "vertical": {
-                "size": "470",
+                "size": "570px",
                 "position": "120px"
             },
             "horizontal": {
-                "size": "700",
-                "position": "1050px"
+                "size": "900px",
+                "position": "1000px"
             },
             "x_name": "date",
             "y_name": "temperature",
             "unit": null,
             "original_unit": "C",
-            "unit_conversion": "enabled",
+            "unit_conversion": "disabled",
             "enabled_units": [
-                "C",
-                "F",
-                "K"
+                "C"
             ],
             "data_list": {
-                "color": "royalFrog",
+                "color": "color_set_name",
                 "data1": {
-                    "file_name": "../resources/screen3_chart_2_data_1.json",
+                    "file_name": "../resources/screen_3_chart_2_data_1.json",
                     "data_name": "tempSet"
                 }
             }

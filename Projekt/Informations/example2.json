@@ -107,6 +107,14 @@
         },
         "displayed_live_values" : {
             "value1" : {
+                    "vertical" : {
+                        "size" : "rozmiar w kafelkach",
+                        "position" : "polozenie tez w kafelkach"
+                    },
+                    "horizontal" : {
+                        "size" : "rozmiar w kafelkach",
+                        "position" : "polozenie tez w kafelkach"
+                    },
                     "url" : "https://datahub.ki.agh.edu.pl/api/endpoints/73/data/",
                     "data_destination" : [
                             {

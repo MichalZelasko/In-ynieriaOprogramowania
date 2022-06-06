@@ -27,13 +27,13 @@
                 "K"
             ],
             "data_list": {
-                "color": "royalFrog",
+                "color": "color_set_name",
                 "data1": {
-                    "file_name": "../resources/screen1_chart_1_data_1.json",
+                    "file_name": "../resources/screen_1_chart_1_data_1.json",
                     "data_name": "tempSet"
                 },
                 "data2": {
-                    "file_name": "../resources/screen1_chart_1_data_2.json",
+                    "file_name": "../resources/screen_1_chart_1_data_2.json",
                     "data_name": "tempRead"
                 }
             }

@@ -116,6 +116,14 @@
             },
             "displayed_live_values" : {
                 "value1" : {
+                    "vertical" : {
+                        "size" : "rozmiar w kafelkach",
+                        "position" : "polozenie tez w kafelkach"
+                    },
+                    "horizontal" : {
+                        "size" : "rozmiar w kafelkach",
+                        "position" : "polozenie tez w kafelkach"
+                    },
                     "url" : "adres url",
                     "data_destination" : [
                             {
@@ -135,6 +143,14 @@
                     "enabled_units" : "None | lista dozwolonych jednostek"
                 },
                 "value2" : {
+                    "vertical" : {
+                        "size" : "rozmiar w kafelkach",
+                        "position" : "polozenie tez w kafelkach"
+                    },
+                    "horizontal" : {
+                        "size" : "rozmiar w kafelkach",
+                        "position" : "polozenie tez w kafelkach"
+                    },
                     "url" : "adres url",
                     "data_destination" : [
                             {
@@ -362,6 +378,14 @@
             },
             "displayed_live_values" : {
                 "value1" : {
+                    "vertical" : {
+                        "size" : "rozmiar w kafelkach",
+                        "position" : "polozenie tez w kafelkach"
+                    },
+                    "horizontal" : {
+                        "size" : "rozmiar w kafelkach",
+                        "position" : "polozenie tez w kafelkach"
+                    },
                     "url" : "adres url",
                     "data_destination" : [
                             {

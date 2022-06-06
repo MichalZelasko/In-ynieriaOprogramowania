@@ -5,6 +5,14 @@
     "chart_on_screen_number": 1,
     "charts": {
         "chart1": {
+            "vertical": {
+                "size": "rozmiar w kafelkach",
+                "position": "polozenie tez w kafelkach"
+            },
+            "horizontal": {
+                "size": "rozmiar w kafelkach",
+                "position": "polozenie tez w kafelkach"
+            },
             "is_chart": false,
             "unit": "C",
             "unit_conversion": "enabled",
@@ -15,7 +23,7 @@
             ],
             "data_list": {
                 "data": {
-                    "file_name": "../resources/screen2_chart_1_data.json",
+                    "file_name": "../resources/screen_2_chart_1_data_1.json",
                     "data_name": "nazwa zmiennej"
                 }
             }
