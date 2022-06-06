@@ -17,12 +17,12 @@
             "charts": {
                 "chart1": {
                     "vertical": {
-                        "size": "rozmiar w kafelkach",
-                        "position": "polozenie tez w kafelkach"
+                        "size": "500px",
+                        "position": "120px"
                     },
                     "horizontal": {
-                        "size": "rozmiar w kafelkach",
-                        "position": "polozenie tez w kafelkach"
+                        "size": "700px",
+                        "position": "70px"
                     },
                     "url_list": {
                         "url1": "https://datahub.ki.agh.edu.pl/api/endpoints/72/data/",
@@ -137,12 +137,12 @@
             "charts": {
                 "chart1": {
                     "vertical": {
-                        "size": "rozmiar w kafelkach",
-                        "position": "polozenie tez w kafelkach"
+                        "size": "700px",
+                        "position": "120px"
                     },
                     "horizontal": {
-                        "size": "rozmiar w kafelkach",
-                        "position": "polozenie tez w kafelkach"
+                        "size": "900px",
+                        "position": "70px"
                     },
                     "url_list": {
                         "url1": "https://datahub.ki.agh.edu.pl/api/endpoints/74/data/",
@@ -219,12 +219,12 @@
                 },
                 "chart2": {
                     "vertical": {
-                        "size": "rozmiar w kafelkach",
-                        "position": "polozenie tez w kafelkach"
+                        "size": "570px",
+                        "position": "120px"
                     },
                     "horizontal": {
-                        "size": "rozmiar w kafelkach",
-                        "position": "polozenie tez w kafelkach"
+                        "size": "900px",
+                        "position": "1000px"
                     },
                     "url_list": {
                         "url1": "https://datahub.ki.agh.edu.pl/api/endpoints/72/data/"
