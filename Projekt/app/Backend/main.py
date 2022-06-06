@@ -58,7 +58,8 @@ def get_data(screen_id: int, chart_id: int, data_id: int) :
     return JSONResponse(content=js, status_code=200)
 
 @app.get("/api/chart/convert/{screen_id}/{chart_id}/to/{destinationUnit}", response_class=JSONResponse)
-def convert_data(chart_id: int, screen_id: int, destinationUnit: str) :
+def convert_data(chart_id: str, screen_id: str, destinationUnit: str) :
+    print(f"/api/chart/convert/{screen_id}/{chart_id}/to/{destinationUnit}")
     try:
         convertFileData(chart_id, screen_id, destinationUnit)
     except FileNotFoundError as err:
