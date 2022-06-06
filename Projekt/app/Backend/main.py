@@ -2,7 +2,7 @@ from urllib.request import Request
 from fastapi import FastAPI, HTTPException, Request 
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
-from utils import get_json_object_from_file
+from utils import get_json_object_from_file, modifyPath
 from dataConverter import convertFileData
 from DataDownloader import refresh_data, start
 import json
@@ -91,16 +91,9 @@ def restart() :
 async def configuration(body: Request) :
     body = await body.body()
     body = body.decode("utf-8")
-    i, path = 5, ""
-    while i < len(body) :
-        if body[i] == '%' : 
-            path += "/"
-            i += 3
-        else :
-            path += body[i]
-            i += 1
+    path = modifyPath(body)
     try :
         result = start("../../Informations/" + path)
     except Exception as err :
-        raise HTTPException(status_code=404, detail="Error")
+        raise HTTPException(status_code=404, detail="Error" + err)
     return result
