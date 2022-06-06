@@ -9,7 +9,7 @@
             "type": "line",
             "is_chart": true,
             "vertical": {
-                "size": "700px",
+                "size": "570px",
                 "position": "120px"
             },
             "horizontal": {

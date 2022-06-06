@@ -98,7 +98,7 @@ export class FirstScreenComponent implements OnInit {
         let newdomElem = appendComponentToBody(this, SingleValueComponent, barc, screenHTML!);
 
         newdomElem.style.position = 'absolute';
-        newdomElem.style.top = '700px';
+        newdomElem.style.top = '120px';
         newdomElem.style.left = '70px';
         newdomElem.style.backgroundColor = "#ebebeb";
         newdomElem.style.padding = "1%";
@@ -140,9 +140,9 @@ export class FirstScreenComponent implements OnInit {
                             this.actualUnit);
             var newdomElem = appendComponentToBody(this, BarChartsComponent, barc, screenHTML!);
       
-            newdomElem.style.position = 'relative';
+            newdomElem.style.position = 'absolute';
             newdomElem.style.top = this.chart_data.vertical.position;
-          newdomElem.style.left = this.chart_data.horizontal.position;
+            newdomElem.style.left = this.chart_data.horizontal.position;
             newdomElem.style.height = '100%';
             newdomElem.style.width = '100%';
       
@@ -155,7 +155,7 @@ export class FirstScreenComponent implements OnInit {
       }
       else{
         if(this.chart_data.type == "linechart"){
-          let colors = schemes[this.chart_data.data_list.color];
+          let colors = schemes[this.chart_data.data_list.color].domain;
           console.log(this.chart_data.data_list.color);
           let results: LooseObject = {}; 
           let result: any = {datasets: []}; 
@@ -203,7 +203,7 @@ export class FirstScreenComponent implements OnInit {
         }
       
         if(this.chart_data.type == "scatter"){ 
-          let colors = schemes[this.chart_data.data_list.color];
+          let colors = schemes[this.chart_data.data_list.color].domain;
           let results: LooseObject = {}; 
           let result: any = {datasets: []}; 
           for(let i = 1; i < numberOfDatas; i++){
@@ -213,6 +213,8 @@ export class FirstScreenComponent implements OnInit {
               for(let element of Object.keys(res.data)){
                 renameProperties(res.data[element]);
               }
+              console.log("Kolory:");
+              console.log(colors[i-1]);
               results[i] = {label: name, data: res.data, borderColor: colors[i-1], backgroundColor: colors[i-1]};
               result['datasets'][i-1] = results[i];
             });

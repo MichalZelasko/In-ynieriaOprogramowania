@@ -98,7 +98,7 @@ export class SecondScreenComponent implements OnInit {
         let newdomElem = appendComponentToBody(this, SingleValueComponent, barc, screenHTML!);
 
         newdomElem.style.position = 'absolute';
-        newdomElem.style.top = '700px';
+        newdomElem.style.top = '120px';
         newdomElem.style.left = '70px';
         newdomElem.style.backgroundColor = "#ebebeb";
         newdomElem.style.padding = "1%";
@@ -106,21 +106,46 @@ export class SecondScreenComponent implements OnInit {
       });
     } else {
       if(numberOfDatas == 1){
-        if(this.chart_data.type == "barchart"){
+        if(this.chart_data.type == "histogram"){
           this.appService.getData(2, chartNumber, 1).subscribe(res => {
           
             let screenHTML = document.getElementById("screen");
-  
+      
+            let unit = "";
+            if(this.chart_data.unit != null){
+              unit = " [" + this.chart_data.unit + "]";
+            }
+      
             var barc = new BarChartsComponent(this.appService);
-            barc.setValues(undefined, undefined, undefined, undefined, undefined, undefined, false, undefined, undefined, undefined, undefined, undefined, false, undefined, undefined, res.data, this.unitsList, chartNumber, 1, this.actualUnit);
+            barc.setValues([this.chart_data.horizontal.size, this.chart_data.vertical.size], 
+                            schemes[this.chart_data.data_list.color], 
+                            undefined, 
+                            undefined, 
+                            undefined, 
+                            undefined, 
+                            false, 
+                            true, 
+                            true, 
+                            this.
+                            chart_data.x_name, 
+                            this.chart_data.y_name + unit, 
+                            undefined, 
+                            false, 
+                            undefined, 
+                            undefined, 
+                            res.data, 
+                            this.unitsList, 
+                            chartNumber, 
+                            1, 
+                            this.actualUnit);
             var newdomElem = appendComponentToBody(this, BarChartsComponent, barc, screenHTML!);
-    
-            newdomElem.style.position = 'relative';
-            newdomElem.style.top = '0%';
-            newdomElem.style.left = '0%';
+      
+            newdomElem.style.position = 'absolute';
+            newdomElem.style.top = this.chart_data.vertical.position;
+            newdomElem.style.left = this.chart_data.horizontal.position;
             newdomElem.style.height = '100%';
             newdomElem.style.width = '100%';
-
+      
             newdomElem.style.display = 'inline-block';
             newdomElem.style.backgroundColor = "#ebebeb";
             newdomElem.style.padding = "1%";
@@ -130,7 +155,7 @@ export class SecondScreenComponent implements OnInit {
       }
       else{
         if(this.chart_data.type == "linechart"){
-          let colors = schemes[this.chart_data.data_list.color];
+          let colors = schemes[this.chart_data.data_list.color].domain;
           console.log(this.chart_data.data_list.color);
           let results: LooseObject = {}; 
           let result: any = {datasets: []}; 
@@ -148,14 +173,29 @@ export class SecondScreenComponent implements OnInit {
           }
 
           let screenHTML = document.getElementById("screen");
-
+      
+          let unit = "";
+          if(this.chart_data.unit != null){
+            unit = " [" + this.chart_data.unit + "]";
+          }
+      
           let barc = new LineChartsComponent(this.appService);
-          barc.setValues(chartNumber.toString(), "900px", "500px", this.chart_data.name, this.chart_data.x_name, this.chart_data.y_name + " [" + this.chart_data.unit + "]", result, this.unitsList, chartNumber, 1, this.actualUnit);
+          barc.setValues(chartNumber.toString(), 
+                         this.chart_data.horizontal.size, 
+                         this.chart_data.vertical.size, 
+                         this.chart_data.name, 
+                         this.chart_data.x_name, 
+                         this.chart_data.y_name + unit, 
+                         result, 
+                         this.unitsList, 
+                         chartNumber, 
+                         1, 
+                         this.actualUnit);
           let newdomElem = appendComponentToBody(this, LineChartsComponent, barc, screenHTML!);
-
+      
           newdomElem.style.position = 'absolute';
-          newdomElem.style.top = '100px';
-          newdomElem.style.left = '850px';
+          newdomElem.style.top = this.chart_data.vertical.position;
+          newdomElem.style.left = this.chart_data.horizontal.position;
           newdomElem.style.display = 'inline-block';
           newdomElem.style.backgroundColor = "#ebebeb";
           newdomElem.style.padding = "1%";
@@ -179,14 +219,29 @@ export class SecondScreenComponent implements OnInit {
           }
 
           let screenHTML = document.getElementById("screen");
-
+      
+          let unit = "";
+          if(this.chart_data.unit != null){
+            unit = " [" + this.chart_data.unit + "]";
+          }
+      
           let barc = new ScatterChartsComponent(this.appService);
-          barc.setValues(chartNumber.toString(), "700px", "500px", this.chart_data.name, this.chart_data.x_name, this.chart_data.y_name, result, this.unitsList, chartNumber, 1, this.actualUnit);
+          barc.setValues(chartNumber.toString(), 
+                         this.chart_data.horizontal.size, 
+                         this.chart_data.vertical.size, 
+                         this.chart_data.name, 
+                         this.chart_data.x_name, 
+                         this.chart_data.y_name + unit, 
+                         result, 
+                         this.unitsList, 
+                         chartNumber, 
+                         1, 
+                         this.actualUnit);
           let newdomElem = appendComponentToBody(this, ScatterChartsComponent, barc, screenHTML!);
-  
+      
           newdomElem.style.position = 'absolute';
-          newdomElem.style.top = '10%';
-          newdomElem.style.left = '70px';
+          newdomElem.style.top = this.chart_data.vertical.position;
+          newdomElem.style.left = this.chart_data.horizontal.position;
           newdomElem.style.display = 'inline-block';
           newdomElem.style.backgroundColor = "#ebebeb";
           newdomElem.style.padding = "1%";
@@ -196,6 +251,8 @@ export class SecondScreenComponent implements OnInit {
     }
   }
   refresh(){
+    let myNode = document.getElementById("screen");
+    myNode!.replaceChildren();
     this.appService.refresh().subscribe(() => this.getSecondScreenInfo())
   }
 

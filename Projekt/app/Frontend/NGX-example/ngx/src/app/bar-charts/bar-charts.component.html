@@ -1,15 +1,14 @@
 <div fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="3vh">
-
-<ngx-charts-bar-vertical [results]="actualData" [view]="view" [xAxis]="xAxis" [yAxis]="yAxis" [legend]="legend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
-[xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" [scheme]="colorScheme" [legendTitle]="legendTitle" [showGridLines]="showGridLines"
-[showDataLabel]="showDataLabel" [barPadding]="barPadding" [tooltipDisabled]="tooltipDisabled"></ngx-charts-bar-vertical>
-
-<div id="form">
-    <mat-form-field appearance="fill">
-        <mat-label>Jednostka</mat-label>
-        <mat-select [(value)]="actualUnit" (selectionChange)="setUnit($event.value)">
-          <mat-option *ngFor="let unit of unitsList" [value]="unit">{{ unit }} </mat-option>
-        </mat-select>
-      </mat-form-field>
+    <div id="form">
+        <mat-form-field appearance="fill">
+            <mat-label>Jednostka</mat-label>
+            <mat-select [(value)]="actualUnit" (selectionChange)="setUnit($event.value)">
+              <mat-option *ngFor="let unit of unitsList" [value]="unit">{{ unit }} </mat-option>
+            </mat-select>
+          </mat-form-field>
     </div>
+
+    <ngx-charts-bar-vertical [results]="actualData" [view]="view" [xAxis]="xAxis" [yAxis]="yAxis" [legend]="legend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" [scheme]="colorScheme" [legendTitle]="legendTitle" [showGridLines]="showGridLines"
+    [showDataLabel]="showDataLabel" [barPadding]="barPadding" [tooltipDisabled]="tooltipDisabled"></ngx-charts-bar-vertical>
 </div>

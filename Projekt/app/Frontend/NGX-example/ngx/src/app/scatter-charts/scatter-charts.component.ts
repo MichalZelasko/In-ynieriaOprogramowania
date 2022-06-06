@@ -84,7 +84,7 @@ export class ScatterChartsComponent implements OnInit {
     var ctx = <CanvasRenderingContext2D> canvas.getContext("2d");
     const myChart = new Chart(ctx, {
       type: 'scatter',
-      data: /* this.data, */{
+       data: /* this.data, */{
         datasets: [
           {
             label: 'Dataset 1',

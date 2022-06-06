@@ -6,15 +6,15 @@
     "charts": {
         "chart1": {
             "name": "nazwa wykresu",
-            "type": "line",
+            "type": "linechart",
             "is_chart": true,
             "vertical": {
-                "size": "rozmiar w kafelkach",
-                "position": "polozenie tez w kafelkach"
+                "size": "470px",
+                "position": "120px"
             },
             "horizontal": {
-                "size": "rozmiar w kafelkach",
-                "position": "polozenie tez w kafelkach"
+                "size": "900px",
+                "position": "70px"
             },
             "x_name": "date",
             "y_name": "temperature",
@@ -27,7 +27,7 @@
                 "K"
             ],
             "data_list": {
-                "color": "color_set_name",
+                "color": "papaj",
                 "data1": {
                     "file_name": "../resources/screen3_chart_1_data_1.json",
                     "data_name": "tempSet"
@@ -43,12 +43,12 @@
             "type": "histogram",
             "is_chart": true,
             "vertical": {
-                "size": "rozmiar w kafelkach",
-                "position": "polozenie tez w kafelkach"
+                "size": "470",
+                "position": "120px"
             },
             "horizontal": {
-                "size": "rozmiar w kafelkach",
-                "position": "polozenie tez w kafelkach"
+                "size": "700",
+                "position": "1050px"
             },
             "x_name": "date",
             "y_name": "temperature",
@@ -61,7 +61,7 @@
                 "K"
             ],
             "data_list": {
-                "color": "color_set_name",
+                "color": "royalFrog",
                 "data1": {
                     "file_name": "../resources/screen3_chart_2_data_1.json",
                     "data_name": "tempSet"

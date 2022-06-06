@@ -81,7 +81,7 @@ export class LineChartsComponent implements OnInit {
         scales: {
           y: {
             grid: {
-              drawBorder: false, // <-- this removes y-axis line
+              drawBorder: true, // <-- this removes y-axis line
               lineWidth: 0.5,
             },
             ticks: {
@@ -99,7 +99,7 @@ export class LineChartsComponent implements OnInit {
           },
           x: {
             grid: {
-              drawBorder: false, // <-- this removes y-axis line
+              drawBorder: true, // <-- this removes y-axis line
               lineWidth: 0.5,
             },
             ticks: {

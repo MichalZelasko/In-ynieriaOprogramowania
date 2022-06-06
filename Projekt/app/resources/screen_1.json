@@ -27,7 +27,7 @@
                 "K"
             ],
             "data_list": {
-                "color": "color_set_name",
+                "color": "royalFrog",
                 "data1": {
                     "file_name": "../resources/screen1_chart_1_data_1.json",
                     "data_name": "tempSet"

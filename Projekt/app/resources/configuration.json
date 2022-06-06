@@ -137,7 +137,7 @@
             "charts": {
                 "chart1": {
                     "vertical": {
-                        "size": "700px",
+                        "size": "570px",
                         "position": "120px"
                     },
                     "horizontal": {
