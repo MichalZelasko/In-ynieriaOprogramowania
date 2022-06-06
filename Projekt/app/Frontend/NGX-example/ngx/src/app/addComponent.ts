@@ -21,7 +21,7 @@ export function appendComponentToBody(ths: any, component: any, componentInstanc
     
     // 4. Append DOM element to the body
     //ths.document.body.appendChild(domElem);
-    htmlElem.parentNode!.appendChild(domElem);
+    htmlElem.appendChild(domElem);
     
     // 5. Wait some time and remove it from the component tree and from the DOM
     // setTimeout(() => {

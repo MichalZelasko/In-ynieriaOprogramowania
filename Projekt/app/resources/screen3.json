@@ -9,12 +9,12 @@
             "type": "line",
             "is_chart": true,
             "vertical": {
-                "size": "rozmiar w kafelkach",
-                "position": "polozenie tez w kafelkach"
+                "size": "700px",
+                "position": "120px"
             },
             "horizontal": {
-                "size": "rozmiar w kafelkach",
-                "position": "polozenie tez w kafelkach"
+                "size": "900px",
+                "position": "70px"
             },
             "x_name": "date",
             "y_name": "temperature",
@@ -43,12 +43,12 @@
             "type": "histogram",
             "is_chart": true,
             "vertical": {
-                "size": "rozmiar w kafelkach",
-                "position": "polozenie tez w kafelkach"
+                "size": "570px",
+                "position": "120px"
             },
             "horizontal": {
-                "size": "rozmiar w kafelkach",
-                "position": "polozenie tez w kafelkach"
+                "size": "900px",
+                "position": "1000px"
             },
             "x_name": "date",
             "y_name": "temperature",

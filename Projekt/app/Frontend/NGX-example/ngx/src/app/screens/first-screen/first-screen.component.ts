@@ -251,6 +251,8 @@ export class FirstScreenComponent implements OnInit {
       }
       }
       refresh(){
+      let myNode = document.getElementById("screen");
+      myNode!.replaceChildren();
       this.appService.refresh().subscribe(() => this.getFirstScreenInfo())
       }
       
