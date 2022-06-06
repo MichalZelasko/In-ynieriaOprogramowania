@@ -59,13 +59,14 @@ def convert(value, sourceUnit, destinationUnit) :
         return prefixConvert(value, getPrefix(sourceUnit), getPrefix(destinationUnit))
 
 def convertFileData(chartNumber, screenNumber, destinationUnit) :
-    screenFilePath, i = f"../resources/screen{screenNumber}.json", 1
+    desUnit = destinationUnit
+    screenFilePath, i = f"../resources/screen_{screenNumber}.json", 1
     screen = get_json_object_from_file(screenFilePath)
     sourceUnit = screen["charts"][f"chart{chartNumber}"]["unit"]
     if not destinationUnit in screen["charts"][f"chart{chartNumber}"]["enabled_units"] :
         raise Exception(f"Inconsistent units: {sourceUnit} and {destinationUnit}")
     while i > 0 :
-        filePath = f"../resources/chart_{str(chartNumber)}_data_{str(i)}.json"
+        filePath = f"../resources/screen_{str(screenNumber)}_chart_{str(chartNumber)}_data_{str(i)}.json"
         try :
             json_source = get_json_object_from_file(filePath)
             data = json_source["data"]
@@ -75,7 +76,7 @@ def convertFileData(chartNumber, screenNumber, destinationUnit) :
             create_json_file(filePath, converted_json)
         except :
             i = 0
-    screen["charts"][f"chart{chartNumber}"]["unit"] = destinationUnit
+    screen["charts"][f"chart{chartNumber}"]["unit"] = desUnit
     create_json_file(screenFilePath, screen)
 
 def convertTest() :
@@ -111,8 +112,8 @@ def convertTest() :
     print(value, sourceUnit, "=", convert(value, sourceUnit, destinationUnit), destinationUnit)
 
 if __name__ == "__main__" :
-    convertTest()
-    #   convertFileData(1, 1, "F")
+    #   convertTest()
+    convertFileData(1, 3, "F")
     #   convertFileData(1, 1, "C")
     ############################################Test uruchamiania##############################################
 
