@@ -30,7 +30,7 @@ export class AppService {
         return this.http.get<any>(REFRESH_API_PATH);
     }
 
-    uploadFile(file: any): Observable<any>{
-        return this.http.post<any>(FILE_UPLOAD_API_PATH, {file});
+    uploadFile(name: any): Observable<any>{
+        return this.http.post<any>(FILE_UPLOAD_API_PATH, {'name': name});
     }
 }

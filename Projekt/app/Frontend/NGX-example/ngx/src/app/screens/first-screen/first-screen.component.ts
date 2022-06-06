@@ -157,7 +157,7 @@ export class FirstScreenComponent implements OnInit {
           console.log(this.chart_data.data_list.color);
           let results: LooseObject = {}; 
           let result: any = {datasets: []}; 
-          for(let i = 1; i < numberOfDatas; i++){
+          for(let i = 1; i <= numberOfDatas; i++){
             console.log("WYKRES NUMER: " + chartNumber + " DANA NUMER: " + i);
             let name = this.chart_data.data_list["data" + i].data_name;
             this.appService.getData(1, chartNumber, i).subscribe(res => {
@@ -205,7 +205,7 @@ export class FirstScreenComponent implements OnInit {
           let colors = schemes[this.chart_data.data_list.color].domain;
           let results: LooseObject = {}; 
           let result: any = {datasets: []}; 
-          for(let i = 1; i < numberOfDatas; i++){
+          for(let i = 1; i <= numberOfDatas; i++){
             console.log("WYKRES NUMER: " + chartNumber + " DANA NUMER: " + i);
             let name = this.chart_data.data_list["data" + i].data_name;
             this.appService.getData(1, chartNumber, i).subscribe(res => {

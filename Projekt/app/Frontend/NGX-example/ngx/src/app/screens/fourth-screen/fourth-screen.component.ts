@@ -34,7 +34,6 @@ export class FourthScreenComponent implements OnInit {
   datas: any;
   reload: boolean = true;
   actualUnit: any;
-  actualRoute: any;
 
 
   view: [number, number] = [900,570];
@@ -59,7 +58,6 @@ export class FourthScreenComponent implements OnInit {
       this.getFourthScreenInfo();
       this.reload = false;
     }
-    this.actualRoute = this.router.url;
   }
 
   getFourthScreenInfo(){
@@ -96,33 +94,56 @@ export class FourthScreenComponent implements OnInit {
         let screenHTML = document.getElementById("screen");
 
         let barc = new SingleValueComponent();
-        barc.setValues("Wartość: " + res.data[0].value, "20px", "300px", "15px");
+        barc.setValues("Wartość: " + res.data[0].value, "20px", this.chart_data.horizontal.size, this.chart_data.vertical.size);
         let newdomElem = appendComponentToBody(this, SingleValueComponent, barc, screenHTML!);
 
         newdomElem.style.position = 'absolute';
-        newdomElem.style.top = '700px';
-        newdomElem.style.left = '70px';
+        newdomElem.style.top = this.chart_data.vertical.position;
+        newdomElem.style.left = this.chart_data.horizontal.position;
         newdomElem.style.backgroundColor = "#ebebeb";
         newdomElem.style.padding = "1%";
         newdomElem.style.borderRadius = "4%";
       });
     } else {
       if(numberOfDatas == 1){
-        if(this.chart_data.type == "barchart"){
+        if(this.chart_data.type == "histogram"){
           this.appService.getData(4, chartNumber, 1).subscribe(res => {
           
             let screenHTML = document.getElementById("screen");
-  
+      
+            let unit = "";
+            if(this.chart_data.unit != null){
+              unit = " [" + this.chart_data.unit + "]";
+            }
+      
             var barc = new BarChartsComponent(this.appService);
-            barc.setValues(undefined, undefined, undefined, undefined, undefined, undefined, false, undefined, undefined, undefined, undefined, undefined, false, undefined, undefined, res.data, this.unitsList, chartNumber, 1, this.actualUnit);
+            barc.setValues([Math.floor(this.chart_data.horizontal.size.substring(0, this.chart_data.horizontal.size.length - 2)), Math.floor(this.chart_data.vertical.size.substring(0, this.chart_data.vertical.size.length - 2)) - 100], 
+                            schemes[this.chart_data.data_list.color], 
+                            undefined, 
+                            undefined, 
+                            undefined, 
+                            undefined, 
+                            false, 
+                            true, 
+                            true, 
+                            this.
+                            chart_data.x_name, 
+                            this.chart_data.y_name + unit, 
+                            undefined, 
+                            false, 
+                            undefined, 
+                            undefined, 
+                            res.data, 
+                            this.unitsList, 
+                            chartNumber, 
+                            4, 
+                            this.actualUnit);
             var newdomElem = appendComponentToBody(this, BarChartsComponent, barc, screenHTML!);
-    
-            newdomElem.style.position = 'relative';
-            newdomElem.style.top = '0%';
-            newdomElem.style.left = '0%';
-            newdomElem.style.height = '100%';
-            newdomElem.style.width = '100%';
-
+      
+            newdomElem.style.position = 'absolute';
+            newdomElem.style.top = this.chart_data.vertical.position;
+            newdomElem.style.left = this.chart_data.horizontal.position;
+            newdomElem.style.height = this.chart_data.vertical.size;
             newdomElem.style.display = 'inline-block';
             newdomElem.style.backgroundColor = "#ebebeb";
             newdomElem.style.padding = "1%";
@@ -132,11 +153,11 @@ export class FourthScreenComponent implements OnInit {
       }
       else{
         if(this.chart_data.type == "linechart"){
-          let colors = schemes[this.chart_data.data_list.color];
+          let colors = schemes[this.chart_data.data_list.color].domain;
           console.log(this.chart_data.data_list.color);
           let results: LooseObject = {}; 
           let result: any = {datasets: []}; 
-          for(let i = 1; i < numberOfDatas; i++){
+          for(let i = 1; i <= numberOfDatas; i++){
             console.log("WYKRES NUMER: " + chartNumber + " DANA NUMER: " + i);
             let name = this.chart_data.data_list["data" + i].data_name;
             this.appService.getData(4, chartNumber, i).subscribe(res => {
@@ -144,20 +165,37 @@ export class FourthScreenComponent implements OnInit {
               for(let element of Object.keys(res.data)){
                 renameProperties(res.data[element]);
               }
+              console.log(colors);
               results[i] = {label: name, data: res.data, borderColor: colors[i-1], backgroundColor: colors[i-1]};
               result['datasets'][i-1] = results[i];
             });
           }
 
           let screenHTML = document.getElementById("screen");
-
+      
+          let unit = "";
+          if(this.chart_data.unit != null){
+            unit = " [" + this.chart_data.unit + "]";
+          }
+      
           let barc = new LineChartsComponent(this.appService);
-          barc.setValues(chartNumber.toString(), "900px", "500px", this.chart_data.name, this.chart_data.x_name, this.chart_data.y_name + " [" + this.chart_data.unit + "]", result, this.unitsList, chartNumber, 1, this.actualUnit);
+          barc.setValues(chartNumber.toString(), 
+                         this.chart_data.horizontal.size, 
+                         Math.floor(this.chart_data.vertical.size.substring(0, this.chart_data.vertical.size.length - 2)) - 100 + "px", 
+                         this.chart_data.name, 
+                         this.chart_data.x_name, 
+                         this.chart_data.y_name + unit, 
+                         result, 
+                         this.unitsList, 
+                         chartNumber, 
+                         4, 
+                         this.actualUnit);
           let newdomElem = appendComponentToBody(this, LineChartsComponent, barc, screenHTML!);
-
+      
           newdomElem.style.position = 'absolute';
-          newdomElem.style.top = '100px';
-          newdomElem.style.left = '850px';
+          newdomElem.style.top = this.chart_data.vertical.position;
+          newdomElem.style.left = this.chart_data.horizontal.position;
+          newdomElem.style.height = this.chart_data.vertical.size;
           newdomElem.style.display = 'inline-block';
           newdomElem.style.backgroundColor = "#ebebeb";
           newdomElem.style.padding = "1%";
@@ -165,7 +203,7 @@ export class FourthScreenComponent implements OnInit {
         }
 
         if(this.chart_data.type == "scatter"){ 
-          let colors = schemes[this.chart_data.data_list.color];
+          let colors = schemes[this.chart_data.data_list.color].domain;
           let results: LooseObject = {}; 
           let result: any = {datasets: []}; 
           for(let i = 1; i < numberOfDatas; i++){
@@ -181,14 +219,30 @@ export class FourthScreenComponent implements OnInit {
           }
 
           let screenHTML = document.getElementById("screen");
-
+      
+          let unit = "";
+          if(this.chart_data.unit != null){
+            unit = " [" + this.chart_data.unit + "]";
+          }
+      
           let barc = new ScatterChartsComponent(this.appService);
-          barc.setValues(chartNumber.toString(), "700px", "500px", this.chart_data.name, this.chart_data.x_name, this.chart_data.y_name, result, this.unitsList, chartNumber, 1, this.actualUnit);
+          barc.setValues(chartNumber.toString(), 
+                         this.chart_data.horizontal.size, 
+                         Math.floor(this.chart_data.vertical.size.substring(0, this.chart_data.vertical.size.length - 2)) - 100 + "px",
+                         this.chart_data.name, 
+                         this.chart_data.x_name, 
+                         this.chart_data.y_name + unit, 
+                         result, 
+                         this.unitsList, 
+                         chartNumber, 
+                         4, 
+                         this.actualUnit);
           let newdomElem = appendComponentToBody(this, ScatterChartsComponent, barc, screenHTML!);
-  
+      
           newdomElem.style.position = 'absolute';
-          newdomElem.style.top = '10%';
-          newdomElem.style.left = '70px';
+          newdomElem.style.top = this.chart_data.vertical.position;
+          newdomElem.style.left = this.chart_data.horizontal.position;
+          newdomElem.style.height = this.chart_data.vertical.size;
           newdomElem.style.display = 'inline-block';
           newdomElem.style.backgroundColor = "#ebebeb";
           newdomElem.style.padding = "1%";
@@ -197,8 +251,9 @@ export class FourthScreenComponent implements OnInit {
       }
     }
   }
-
   refresh(){
+    let myNode = document.getElementById("screen");
+    myNode!.replaceChildren();
     this.appService.refresh().subscribe(() => this.getFourthScreenInfo())
   }
 

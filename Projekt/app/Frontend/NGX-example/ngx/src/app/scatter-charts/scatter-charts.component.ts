@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { colorSets } from '@swimlane/ngx-charts';
 import { Chart, registerables} from 'chart.js';
 import { AppService } from '../app.service';
 
@@ -144,7 +143,7 @@ export class ScatterChartsComponent implements OnInit {
   
   }
   setUnit(unit: string){
-    this.appService.chartConvert(unit, this.screenNumber, this.chartNumber).subscribe(res => {
+    this.appService.chartConvert(unit, this.screenNumber, this.chartNumber).subscribe(() => {
       window.location.reload();
     });
   }

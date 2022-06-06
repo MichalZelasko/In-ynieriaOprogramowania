@@ -28,6 +28,7 @@ export class LineChartsComponent implements OnInit {
   data: any;
 
   constructor(private appSerivce: AppService) { 
+
     Chart.register(...registerables);
     this.idHTML = "test";
     this.width = "0%";
@@ -146,7 +147,7 @@ export class LineChartsComponent implements OnInit {
   });
   }
   setUnit(unit: string){
-    this.appSerivce.chartConvert(unit, this.screenNumber, this.chartNumber).subscribe(res => {
+    this.appSerivce.chartConvert(unit, this.screenNumber, this.chartNumber).subscribe(() => {
       window.location.reload();
     });
   }

@@ -37,8 +37,8 @@ export class StartAppComponent implements OnInit {
           this.flag = false;
         }
         else{
-          // this.appService.uploadFile(res).subscribe(() => this.router.navigateByUrl('app'))
-          this.router.navigateByUrl('app');
+          // this.appService.uploadFile(res).subscribe(() => this.router.navigateByUrl('app/' + FIRST_SCREEN_PATH))
+          this.router.navigateByUrl('app/' + FIRST_SCREEN_PATH);
         }        
       }
      })

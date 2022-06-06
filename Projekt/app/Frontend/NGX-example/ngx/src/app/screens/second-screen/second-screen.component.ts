@@ -6,6 +6,7 @@ import { BarChartsComponent } from 'src/app/bar-charts/bar-charts.component';
 import { LineChartsComponent } from 'src/app/line-charts/line-charts.component';
 import { ScatterChartsComponent } from 'src/app/scatter-charts/scatter-charts.component';
 import { SingleValueComponent } from 'src/app/single-value/single-value.component';
+import { Router } from '@angular/router';
 
 
 function renameProperties(obj) {
@@ -46,7 +47,7 @@ export class SecondScreenComponent implements OnInit {
   yAxisLabel: string = "Tepmerature";
   showDataLabel: boolean = false;
 
-  constructor(private appService: AppService, private componentFactoryResolver: ComponentFactoryResolver, private appRef: ApplicationRef, private injector: Injector) { 
+  constructor(private appService: AppService, private componentFactoryResolver: ComponentFactoryResolver, private appRef: ApplicationRef, private injector: Injector, private router: Router) { 
     this.actualData = [];
     this.chartsData = [];
     this.unitsList = [];
@@ -136,7 +137,7 @@ export class SecondScreenComponent implements OnInit {
                             res.data, 
                             this.unitsList, 
                             chartNumber, 
-                            1, 
+                            2, 
                             this.actualUnit);
             var newdomElem = appendComponentToBody(this, BarChartsComponent, barc, screenHTML!);
       
@@ -157,7 +158,7 @@ export class SecondScreenComponent implements OnInit {
           console.log(this.chart_data.data_list.color);
           let results: LooseObject = {}; 
           let result: any = {datasets: []}; 
-          for(let i = 1; i < numberOfDatas; i++){
+          for(let i = 1; i <= numberOfDatas; i++){
             console.log("WYKRES NUMER: " + chartNumber + " DANA NUMER: " + i);
             let name = this.chart_data.data_list["data" + i].data_name;
             this.appService.getData(2, chartNumber, i).subscribe(res => {
@@ -187,7 +188,7 @@ export class SecondScreenComponent implements OnInit {
                          result, 
                          this.unitsList, 
                          chartNumber, 
-                         1, 
+                         2, 
                          this.actualUnit);
           let newdomElem = appendComponentToBody(this, LineChartsComponent, barc, screenHTML!);
       
@@ -205,7 +206,7 @@ export class SecondScreenComponent implements OnInit {
           let colors = schemes[this.chart_data.data_list.color].domain;
           let results: LooseObject = {}; 
           let result: any = {datasets: []}; 
-          for(let i = 1; i < numberOfDatas; i++){
+          for(let i = 1; i <= numberOfDatas; i++){
             console.log("WYKRES NUMER: " + chartNumber + " DANA NUMER: " + i);
             let name = this.chart_data.data_list["data" + i].data_name;
             this.appService.getData(2, chartNumber, i).subscribe(res => {
@@ -234,7 +235,7 @@ export class SecondScreenComponent implements OnInit {
                          result, 
                          this.unitsList, 
                          chartNumber, 
-                         1, 
+                         2, 
                          this.actualUnit);
           let newdomElem = appendComponentToBody(this, ScatterChartsComponent, barc, screenHTML!);
       

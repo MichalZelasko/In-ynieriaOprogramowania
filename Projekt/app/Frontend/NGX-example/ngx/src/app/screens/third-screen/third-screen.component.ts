@@ -6,7 +6,6 @@ import { BarChartsComponent } from 'src/app/bar-charts/bar-charts.component';
 import { LineChartsComponent } from 'src/app/line-charts/line-charts.component';
 import { ScatterChartsComponent } from 'src/app/scatter-charts/scatter-charts.component';
 import { SingleValueComponent } from 'src/app/single-value/single-value.component';
-import { productSales, productSalesMulti, testjson } from '../../data/products';
 import * as schemes from 'src/app/esthetics/colorSchemes';
 
 function renameProperties(obj) {
@@ -35,7 +34,6 @@ export class ThirdScreenComponent implements OnInit {
   datas: any;
   reload: boolean = true;
   actualUnit: any;
-  actualRoute: any;
 
 
   view: [number, number] = [900,570];
@@ -60,7 +58,6 @@ export class ThirdScreenComponent implements OnInit {
       this.getThirdScreenInfo();
       this.reload = false;
     }
-    this.actualRoute = this.router.url;
   }
 
   getThirdScreenInfo(){
@@ -139,7 +136,7 @@ export class ThirdScreenComponent implements OnInit {
                             res.data, 
                             this.unitsList, 
                             chartNumber, 
-                            1, 
+                            3, 
                             this.actualUnit);
             var newdomElem = appendComponentToBody(this, BarChartsComponent, barc, screenHTML!);
       
@@ -160,7 +157,7 @@ export class ThirdScreenComponent implements OnInit {
           console.log(this.chart_data.data_list.color);
           let results: LooseObject = {}; 
           let result: any = {datasets: []}; 
-          for(let i = 1; i < numberOfDatas; i++){
+          for(let i = 1; i <= numberOfDatas; i++){
             console.log("WYKRES NUMER: " + chartNumber + " DANA NUMER: " + i);
             let name = this.chart_data.data_list["data" + i].data_name;
             this.appService.getData(3, chartNumber, i).subscribe(res => {
@@ -191,7 +188,7 @@ export class ThirdScreenComponent implements OnInit {
                          result, 
                          this.unitsList, 
                          chartNumber, 
-                         1, 
+                         3, 
                          this.actualUnit);
           let newdomElem = appendComponentToBody(this, LineChartsComponent, barc, screenHTML!);
       
@@ -238,7 +235,7 @@ export class ThirdScreenComponent implements OnInit {
                          result, 
                          this.unitsList, 
                          chartNumber, 
-                         1, 
+                         3, 
                          this.actualUnit);
           let newdomElem = appendComponentToBody(this, ScatterChartsComponent, barc, screenHTML!);
       

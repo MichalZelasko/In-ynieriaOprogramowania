@@ -25,6 +25,7 @@ export class TabsConfigurationComponent implements OnInit {
   datas: any;
   reload: boolean = true;
   flag: boolean = true;
+  refreshTime: any;
 
   constructor(private appService: AppService,  private componentFactoryResolver: ComponentFactoryResolver, private appRef: ApplicationRef, private injector: Injector, public dialog: MatDialog, private router: Router) { }
 
@@ -32,13 +33,14 @@ export class TabsConfigurationComponent implements OnInit {
     this.getGeneralInfo();
     setInterval(() => {
       this.appService.refresh().subscribe(() => window.location.reload());
-    }, 900000); 
+    }, 900000); //this.refreshTime
   }
 
   getGeneralInfo() {
     this.appService.getGeneralInfo().subscribe(
       res => {
         this.generalInfo = res;
+        this.refreshTime = this.generalInfo.refresh_time;
         this.numberOfScreens = this.generalInfo.number_of_screens;
         this.createScreens(this.numberOfScreens)
       });
@@ -49,7 +51,6 @@ export class TabsConfigurationComponent implements OnInit {
       const path = this.makePath(i);
       this.tabs.push(new Tab('Ekran ' + i, path + '-screen'));
     }
-    this.router.navigateByUrl('app/' + FIRST_SCREEN_PATH);
   }
 
   uploadFile(){
