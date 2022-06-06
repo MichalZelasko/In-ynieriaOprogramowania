@@ -6,12 +6,12 @@
     "charts": {
         "chart1": {
             "vertical": {
-                "size": "rozmiar w kafelkach",
-                "position": "polozenie tez w kafelkach"
+                "size": "15px",
+                "position": "120px"
             },
             "horizontal": {
-                "size": "rozmiar w kafelkach",
-                "position": "polozenie tez w kafelkach"
+                "size": "300px",
+                "position": "70px"
             },
             "is_chart": false,
             "unit": "C",

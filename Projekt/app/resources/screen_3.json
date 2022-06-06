@@ -6,10 +6,10 @@
     "charts": {
         "chart1": {
             "name": "nazwa wykresu",
-            "type": "line",
+            "type": "linechart",
             "is_chart": true,
             "vertical": {
-                "size": "570px",
+                "size": "470px",
                 "position": "120px"
             },
             "horizontal": {
@@ -27,7 +27,7 @@
                 "K"
             ],
             "data_list": {
-                "color": "color_set_name",
+                "color": "royalFrog",
                 "data1": {
                     "file_name": "../resources/screen_3_chart_1_data_1.json",
                     "data_name": "tempSet"
@@ -59,7 +59,7 @@
                 "C"
             ],
             "data_list": {
-                "color": "color_set_name",
+                "color": "papaj",
                 "data1": {
                     "file_name": "../resources/screen_3_chart_2_data_1.json",
                     "data_name": "tempSet"

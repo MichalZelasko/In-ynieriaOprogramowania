@@ -97,12 +97,12 @@ export class ThirdScreenComponent implements OnInit {
         let screenHTML = document.getElementById("screen");
 
         let barc = new SingleValueComponent();
-        barc.setValues("Wartość: " + res.data[0].value, "20px", "300px", "15px");
+        barc.setValues("Wartość: " + res.data[0].value, "20px", this.chart_data.horizontal.size, this.chart_data.vertical.size);
         let newdomElem = appendComponentToBody(this, SingleValueComponent, barc, screenHTML!);
 
         newdomElem.style.position = 'absolute';
-        newdomElem.style.top = '120px';
-        newdomElem.style.left = '70px';
+        newdomElem.style.top = this.chart_data.vertical.position;
+        newdomElem.style.left = this.chart_data.horizontal.position;
         newdomElem.style.backgroundColor = "#ebebeb";
         newdomElem.style.padding = "1%";
         newdomElem.style.borderRadius = "4%";
