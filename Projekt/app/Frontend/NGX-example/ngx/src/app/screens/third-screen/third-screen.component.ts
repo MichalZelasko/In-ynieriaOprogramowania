@@ -120,7 +120,7 @@ export class ThirdScreenComponent implements OnInit {
             }
       
             var barc = new BarChartsComponent(this.appService);
-            barc.setValues([this.chart_data.horizontal.size, this.chart_data.vertical.size - 100], 
+            barc.setValues([Math.floor(this.chart_data.horizontal.size.substring(0, this.chart_data.horizontal.size.length - 2)), Math.floor(this.chart_data.vertical.size.substring(0, this.chart_data.vertical.size.length - 2)) - 100], 
                             schemes[this.chart_data.data_list.color], 
                             undefined, 
                             undefined, 
@@ -147,12 +147,9 @@ export class ThirdScreenComponent implements OnInit {
             newdomElem.style.top = this.chart_data.vertical.position;
             newdomElem.style.left = this.chart_data.horizontal.position;
             newdomElem.style.height = this.chart_data.vertical.size;
-            // newdomElem.style.height = '100%';
-            // newdomElem.style.width = '100%';
-      
             newdomElem.style.display = 'inline-block';
             newdomElem.style.backgroundColor = "#ebebeb";
-            newdomElem.style.padding = "3%";
+            newdomElem.style.padding = "1%";
             newdomElem.style.borderRadius = "7%";
           });
         }
@@ -234,7 +231,7 @@ export class ThirdScreenComponent implements OnInit {
           let barc = new ScatterChartsComponent(this.appService);
           barc.setValues(chartNumber.toString(), 
                          this.chart_data.horizontal.size, 
-                         this.chart_data.vertical.size, 
+                         Math.floor(this.chart_data.vertical.size.substring(0, this.chart_data.vertical.size.length - 2)) - 100 + "px",
                          this.chart_data.name, 
                          this.chart_data.x_name, 
                          this.chart_data.y_name + unit, 
@@ -248,6 +245,7 @@ export class ThirdScreenComponent implements OnInit {
           newdomElem.style.position = 'absolute';
           newdomElem.style.top = this.chart_data.vertical.position;
           newdomElem.style.left = this.chart_data.horizontal.position;
+          newdomElem.style.height = this.chart_data.vertical.size;
           newdomElem.style.display = 'inline-block';
           newdomElem.style.backgroundColor = "#ebebeb";
           newdomElem.style.padding = "1%";

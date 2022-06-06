@@ -43,12 +43,12 @@
             "type": "histogram",
             "is_chart": true,
             "vertical": {
-                "size": "570px",
+                "size": "470px",
                 "position": "120px"
             },
             "horizontal": {
-                "size": "900px",
-                "position": "1000px"
+                "size": "700px",
+                "position": "1050px"
             },
             "x_name": "date",
             "y_name": "temperature",

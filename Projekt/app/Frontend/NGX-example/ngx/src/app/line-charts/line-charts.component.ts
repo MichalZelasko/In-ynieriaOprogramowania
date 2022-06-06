@@ -65,13 +65,13 @@ export class LineChartsComponent implements OnInit {
     var canvas = <HTMLCanvasElement> document.getElementById("test");
     canvas.setAttribute('id', this.idHTML + this.idHTML);
     var container = <HTMLElement> document.getElementById("di");
+    container.setAttribute('padding', '0%');
     container.setAttribute('id', "di"+ this.idHTML + this.idHTML);
     container.setAttribute('style', "width: " + this.width + "; height: " + this.height + ";");
     canvas.setAttribute('width', this.width);
     canvas.setAttribute('height', this.height);
     var form = <HTMLElement> document.getElementById("form");
     form.style.position = "relative";
-    form.style.top = "30px";
 
     var ctx = <CanvasRenderingContext2D> canvas.getContext("2d");
     const myChart = new Chart(ctx, {
