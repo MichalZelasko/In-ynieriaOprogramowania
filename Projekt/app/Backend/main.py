@@ -95,7 +95,6 @@ async def configuration(body: Request) :
     body = body.decode("utf-8")
     print(body)
     # path = modifyPath(body)
-    # print(path)
     try :
         result = start("../../Informations/" + body)
     except Exception as err :
