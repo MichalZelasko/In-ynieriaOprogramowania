@@ -47,6 +47,7 @@ export class TabsConfigurationComponent implements OnInit {
   }
 
   createScreens(numberOfScreens: number){
+  
     for(var i = 1; i <= numberOfScreens && i <= 4; i++){
       const path = this.makePath(i);
       this.tabs.push(new Tab('Ekran ' + i, path + '-screen'));
@@ -69,12 +70,11 @@ export class TabsConfigurationComponent implements OnInit {
           this.flag = false;
         }
         else{
-          // this.appService.uploadFile(res).subscribe(() => {
-          //   this.tabs = [];
-          //   this.getGeneralInfo();
-          // })
-          this.tabs = [];
-          this.getGeneralInfo();
+          this.appService.uploadFile(res).subscribe(() => {
+            this.tabs = [];
+            this.getGeneralInfo();
+            this.router.navigateByUrl('app/' + FIRST_SCREEN_PATH);
+          })
         }        
       }
      })
