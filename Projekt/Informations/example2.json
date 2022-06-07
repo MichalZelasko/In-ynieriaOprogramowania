@@ -1,34 +1,34 @@
 {
-    "general_info" : {
-        "chart_number" : 4,
-        "number_of_screens" : 3,
-        "zooming" : false,
-        "scale_changeable" : false,
-        "automatic_refresh" : true,
-        "refresh_time" : "900 s(15 min)",
-        "user_refresh" : true
+    "general_info": {
+        "chart_number": 4,
+        "number_of_screens": 3,
+        "zooming": false,
+        "scale_changeable": false,
+        "automatic_refresh": true,
+        "refresh_time": "900 s(15 min)",
+        "user_refresh": true
     },
-    "screen_info" : {
-        "screen1" : {
-            "name" : "nazwa ekranu",
-            "layout" : "vertcial",
-            "tile_size" : "w procentach całego ekranu",
-            "chart_on_screen_number" : 1,
-            "charts" : {
-                "chart1" : {
-                    "vertical" : {
-                        "size" : "rozmiar w kafelkach",
-                        "position" : "polozenie tez w kafelkach"
+    "screen_info": {
+        "screen1": {
+            "name": "nazwa ekranu",
+            "layout": "vertcial",
+            "tile_size": "w procentach ca\u0139\u201aego ekranu",
+            "chart_on_screen_number": 1,
+            "charts": {
+                "chart1": {
+                    "vertical": {
+                        "size": "500px",
+                        "position": "120px"
                     },
-                    "horizontal" : {
-                        "size" : "rozmiar w kafelkach",
-                        "position" : "polozenie tez w kafelkach"
+                    "horizontal": {
+                        "size": "700px",
+                        "position": "70px"
                     },
-                    "url_list" : {
-                        "url1" : "https://datahub.ki.agh.edu.pl/api/endpoints/72/data/",
-                        "url2" : "https://datahub.ki.agh.edu.pl/api/endpoints/72/data/"
+                    "url_list": {
+                        "url1": "https://datahub.ki.agh.edu.pl/api/endpoints/72/data/",
+                        "url2": "https://datahub.ki.agh.edu.pl/api/endpoints/72/data/"
                     },
-                    "data_destination_list" : {
+                    "data_destination_list": {
                         "data_destination1": [
                             {
                                 "dest": "heater"
@@ -37,7 +37,7 @@
                                 "dest": "tempSet"
                             }
                         ],
-                        "data_destination2" : [
+                        "data_destination2": [
                             {
                                 "dest": "heater"
                             },
@@ -46,112 +46,117 @@
                             }
                         ]
                     },
-                    "color_list" : {
-                        "color1" : "color_set_name"
+                    "color_list": {
+                        "color1": "papaj"
                     },
-                    "data_names" : {
-                            "data_name1": "tempSet",
-                            "data_name2": "tempRead"
-                        },
-                    "period_of_time_to_download_data" : {
+                    "data_names": {
+                        "data_name1": "tempSet",
+                        "data_name2": "tempRead"
+                    },
+                    "period_of_time_to_download_data": {
                         "data_time1": {
-                            "weeks" : 0,
-                            "days" : 0,
-                            "hours" : 5,
+                            "weeks": 0,
+                            "days": 0,
+                            "hours": 5,
                             "minutes": 15
                         },
                         "data_time2": {
-                            "weeks" : 0,
-                            "days" : 0,
-                            "hours" : 5,
+                            "weeks": 0,
+                            "days": 0,
+                            "hours": 5,
                             "minutes": 15
                         }
                     },
-                    "min_max_values":{
+                    "min_max_values": {
                         "data1": {
-                            "min" : 0,
-                            "max" : 25
+                            "min": 0,
+                            "max": 25
                         },
                         "data2": {
-                            "min" : 0,
-                            "max" : 50
+                            "min": 0,
+                            "max": 50
                         }
                     },
-                    "name" : "nazwa wykresu",
-                    "type" : "scatter",
-                    "date" : {
-                        "date_start" : "od kiedy dane wyswietlac",
-                        "date_end" : "do kiedy dane wyswietlac, default: teraz"
+                    "name": "nazwa wykresu",
+                    "type": "scatter",
+                    "date": {
+                        "date_start": "od kiedy dane wyswietlac",
+                        "date_end": "do kiedy dane wyswietlac, default: teraz"
                     },
-                    "scale" : {
-                        "low" : "zakres wartosci na wykresie",
-                        "high" : ""
+                    "scale": {
+                        "low": "zakres wartosci na wykresie",
+                        "high": ""
                     },
-                    "x_name" : "date",
-                    "y_name" : "temperature",
-                    "unit" : "C",
-                    "unit_conversion" : "enabled",
-                    "enabled_units" : ["C", "F", "K"]
+                    "x_name": "date",
+                    "y_name": "temperature",
+                    "unit": "C",
+                    "unit_conversion": "enabled",
+                    "enabled_units": [
+                        "C",
+                        "F",
+                        "K"
+                    ]
                 }
             },
-            "displayed_live_values" : {
-
+            "displayed_live_values": {}
+        },
+        "screen2": {
+            "name": "nazwa ekranu",
+            "layout": "vertcial",
+            "tile_size": "w procentach ca\u0139\u201aego ekranu",
+            "chart_on_screen_number": 1,
+            "charts": {},
+            "displayed_live_values": {
+                "value1": {
+                    "vertical": {
+                        "size": "15px",
+                        "position": "120px"
+                    },
+                    "horizontal": {
+                        "size": "300px",
+                        "position": "70px"
+                    },
+                    "url": "https://datahub.ki.agh.edu.pl/api/endpoints/73/data/",
+                    "data_destination": [
+                        {
+                            "dest": "envSensor"
+                        },
+                        {
+                            "dest": "temperature"
+                        }
+                    ],
+                    "name": "nazwa zmiennej",
+                    "scale": "zakres warto\u0139\u203aci na wykresie",
+                    "unit": "C",
+                    "unit_conversion": "enabled",
+                    "enabled_units": [
+                        "C",
+                        "F",
+                        "K"
+                    ]
+                }
             }
         },
-      "screen2": {
-        "name" : "nazwa ekranu",
-        "layout" : "vertcial",
-        "tile_size" : "w procentach całego ekranu",
-        "chart_on_screen_number" : 1,
-        "charts": {
-        },
-        "displayed_live_values" : {
-            "value1" : {
-                    "vertical" : {
-                        "size" : "rozmiar w kafelkach",
-                        "position" : "polozenie tez w kafelkach"
+        "screen3": {
+            "name": "nazwa ekranu",
+            "layout": "vertcial",
+            "tile_size": "w procentach ca\u0139\u201aego ekranu",
+            "chart_on_screen_number": 2,
+            "charts": {
+                "chart1": {
+                    "vertical": {
+                        "size": "470px",
+                        "position": "120px"
                     },
-                    "horizontal" : {
-                        "size" : "rozmiar w kafelkach",
-                        "position" : "polozenie tez w kafelkach"
+                    "horizontal": {
+                        "size": "900px",
+                        "position": "70px"
                     },
-                    "url" : "https://datahub.ki.agh.edu.pl/api/endpoints/73/data/",
-                    "data_destination" : [
-                            {
-                                "dest": "envSensor"
-                            },
-                            {
-                                "dest": "temperature"
-                            }
-                    ],
-                    "name" : "nazwa zmiennej",
-                    "scale" : "zakres wartości na wykresie",
-                    "unit" : "C",
-                    "unit_conversion" : "enabled",
-                    "enabled_units" : ["C", "F", "K"]
-                }
-        }
-      },
-      "screen3": {
-        "name" : "nazwa ekranu",
-        "layout" : "vertcial",
-        "tile_size" : "w procentach całego ekranu",
-        "chart_on_screen_number" : 2,
-        "charts": {
-            "chart1" : {
-                    "vertical" : {
-                        "size" : "rozmiar w kafelkach",
-                        "position" : "polozenie tez w kafelkach"
+                    "url_list": {
+                        "url1": "https://datahub.ki.agh.edu.pl/api/endpoints/74/data/",
+                        "url2": "https://datahub.ki.agh.edu.pl/api/endpoints/74/data/"
                     },
-                    "horizontal" : {
-                        "size" : "rozmiar w kafelkach",
-                        "position" : "polozenie tez w kafelkach"
-                    },
-                    "url_list" : {
-                        "url1" : "https://datahub.ki.agh.edu.pl/api/endpoints/74/data/",
-                        "url2" : "https://datahub.ki.agh.edu.pl/api/endpoints/74/data/"
-                    },
-                    "data_destination_list" : {
+                    "data_destination_list": {
                         "data_destination1": [
                             {
                                 "dest": "heater"
@@ -160,7 +165,7 @@
                                 "dest": "tempSet"
                             }
                         ],
-                        "data_destination2" : [
+                        "data_destination2": [
                             {
                                 "dest": "heater"
                             },
@@ -169,66 +174,70 @@
                             }
                         ]
                     },
-                    "color_list" : {
-                        "color1" : "color_set_name"
+                    "color_list": {
+                        "color1": "royalFrog"
                     },
-                    "data_names" : {
-                            "data_name1": "tempSet",
-                            "data_name2": "tempRead"
-                        },
-                    "period_of_time_to_download_data" : {
+                    "data_names": {
+                        "data_name1": "tempSet",
+                        "data_name2": "tempRead"
+                    },
+                    "period_of_time_to_download_data": {
                         "data_time1": {
-                            "weeks" : 0,
-                            "days" : 0,
-                            "hours" : 5,
+                            "weeks": 0,
+                            "days": 0,
+                            "hours": 5,
                             "minutes": 15
                         },
                         "data_time2": {
-                            "weeks" : 0,
-                            "days" : 0,
-                            "hours" : 5,
+                            "weeks": 0,
+                            "days": 0,
+                            "hours": 5,
                             "minutes": 15
                         }
                     },
-                    "min_max_values":{
+                    "min_max_values": {
                         "data1": {
-                            "min" : 0,
-                            "max" : 25
+                            "min": 0,
+                            "max": 25
                         },
                         "data2": {
-                            "min" : 0,
-                            "max" : 50
+                            "min": 0,
+                            "max": 50
                         }
                     },
-                    "name" : "nazwa wykresu",
-                    "type" : "line",
-                    "date" : {
-                        "date_start" : "od kiedy dane wyswietlac",
-                        "date_end" : "do kiedy dane wyswietlac, default: teraz"
+                    "name": "nazwa wykresu",
+                    "type": "linechart",
+                    "date": {
+                        "date_start": "od kiedy dane wyswietlac",
+                        "date_end": "do kiedy dane wyswietlac, default: teraz"
                     },
-                    "scale" : {
-                        "low" : "zakres wartosci na wykresie",
-                        "high" : ""
+                    "scale": {
+                        "low": "zakres wartosci na wykresie",
+                        "high": ""
                     },
-                    "x_name" : "date",
-                    "y_name" : "temperature",
-                    "unit" : "C",
-                    "unit_conversion" : "enabled",
-                    "enabled_units" : ["C", "F", "K"]
-            },
-            "chart2" : {
-                    "vertical" : {
-                        "size" : "rozmiar w kafelkach",
-                        "position" : "polozenie tez w kafelkach"
+                    "x_name": "date",
+                    "y_name": "temperature",
+                    "unit": "C",
+                    "unit_conversion": "enabled",
+                    "enabled_units": [
+                        "C",
+                        "F",
+                        "K"
+                    ]
+                },
+                "chart2": {
+                    "vertical": {
+                        "size": "470px",
+                        "position": "120px"
                     },
-                    "horizontal" : {
-                        "size" : "rozmiar w kafelkach",
-                        "position" : "polozenie tez w kafelkach"
+                    "horizontal": {
+                        "size": "700px",
+                        "position": "1050px"
                     },
-                    "url_list" : {
-                        "url1" : "https://datahub.ki.agh.edu.pl/api/endpoints/72/data/"
+                    "url_list": {
+                        "url1": "https://datahub.ki.agh.edu.pl/api/endpoints/72/data/"
                     },
-                    "data_destination_list" : {
+                    "data_destination_list": {
                         "data_destination1": [
                             {
                                 "dest": "particleConcentrationSensor"
@@ -237,50 +246,50 @@
                                 "dest": "concentration"
                             },
                             {
-                                "dest" : "pm1"
+                                "dest": "pm1"
                             }
                         ]
                     },
-                    "color_list" : {
-                        "color1" : "color_set_name"
+                    "color_list": {
+                        "color1": "papaj"
                     },
-                    "data_names" : {
-                            "data_name1": "tempSet"
-                        },
-                    "period_of_time_to_download_data" : {
+                    "data_names": {
+                        "data_name1": "tempSet"
+                    },
+                    "period_of_time_to_download_data": {
                         "data_time1": {
-                            "weeks" : 0,
-                            "days" : 0,
-                            "hours" : 5,
+                            "weeks": 0,
+                            "days": 0,
+                            "hours": 5,
                             "minutes": 15
                         }
                     },
-                    "min_max_values":{
+                    "min_max_values": {
                         "data1": {
-                            "min" : 0,
-                            "max" : 25
+                            "min": 0,
+                            "max": 25
                         }
                     },
-                    "name" : "nazwa wykresu",
-                    "type" : "histogram",
-                    "date" : {
-                        "date_start" : "od kiedy dane wyswietlac",
-                        "date_end" : "do kiedy dane wyswietlac, default: teraz"
+                    "name": "nazwa wykresu",
+                    "type": "histogram",
+                    "date": {
+                        "date_start": "od kiedy dane wyswietlac",
+                        "date_end": "do kiedy dane wyswietlac, default: teraz"
                     },
-                    "scale" : {
-                        "low" : "zakres wartosci na wykresie",
-                        "high" : ""
+                    "scale": {
+                        "low": "zakres wartosci na wykresie",
+                        "high": ""
                     },
-                    "x_name" : "date",
-                    "y_name" : "temperature",
-                    "unit" : "C",
-                    "unit_conversion" : "disabled",
-                    "enabled_units" : ["C"]
-            }
-        },
-        "displayed_live_values" : {
-
+                    "x_name": "date",
+                    "y_name": "temperature",
+                    "unit": "C",
+                    "unit_conversion": "disabled",
+                    "enabled_units": [
+                        "C"
+                    ]
+                }
+            },
+            "displayed_live_values": {}
         }
-      }
     }
 }

@@ -17,12 +17,12 @@
             "charts" : {
                 "chart1" : {
                     "vertical" : {
-                        "size" : "rozmiar w kafelkach",
-                        "position" : "polozenie tez w kafelkach"
+                        "size": "500px",
+                        "position": "120px"
                     },
-                    "horizontal" : {
-                        "size" : "rozmiar w kafelkach",
-                        "position" : "polozenie tez w kafelkach"
+                    "horizontal": {
+                        "size": "700px",
+                        "position": "70px"
                     },
                     "url_list" : {
                         "url1" : "https://datahub.ki.agh.edu.pl/api/endpoints/72/data/",
@@ -47,7 +47,7 @@
                         ]
                     },
                     "color_list" : {
-                        "color1" : "color_set_name"
+                        "color1" : "nonsense"
                     },
                     "data_names" : {
                             "data_name1": "tempSet",
@@ -96,13 +96,13 @@
             },
             "displayed_live_values" : {
                 "value1" : {
-                    "vertical" : {
-                        "size" : "rozmiar w kafelkach",
-                        "position" : "polozenie tez w kafelkach"
+                    "vertical": {
+                        "size": "15px",
+                        "position": "570px"
                     },
-                    "horizontal" : {
-                        "size" : "rozmiar w kafelkach",
-                        "position" : "polozenie tez w kafelkach"
+                    "horizontal": {
+                        "size": "300px",
+                        "position": "70px"
                     },
                     "url" : "https://datahub.ki.agh.edu.pl/api/endpoints/72/data/",
                     "data_destination" : [
