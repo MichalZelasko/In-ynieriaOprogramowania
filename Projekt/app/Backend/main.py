@@ -90,11 +90,14 @@ def restart() :
 
 @app.post("/api/configuration")
 async def configuration(body: Request) :
+    
     body = await body.body()
     body = body.decode("utf-8")
-    path = modifyPath(body)
+    print(body)
+    # path = modifyPath(body)
+    # print(path)
     try :
-        result = start("../../Informations/" + path)
+        result = start("../../Informations/" + body)
     except Exception as err :
         raise HTTPException(status_code=404, detail="Error" + err)
     return result

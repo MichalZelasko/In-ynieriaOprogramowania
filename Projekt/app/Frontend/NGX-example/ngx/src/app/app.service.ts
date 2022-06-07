@@ -31,6 +31,6 @@ export class AppService {
     }
 
     uploadFile(name: any): Observable<any>{
-        return this.http.post<any>(FILE_UPLOAD_API_PATH, {'name': name});
+        return this.http.post<any>(FILE_UPLOAD_API_PATH, name);
     }
 }
