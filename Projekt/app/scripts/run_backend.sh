@@ -1,3 +1,3 @@
-#/bin/bash
+#!/bin/bash
 
-cd ../Backend && uvicorn main:app --reload
+cd ../Backend && ../python/uvicorn main:app --reload
