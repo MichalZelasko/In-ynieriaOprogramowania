@@ -327,6 +327,8 @@ def start(path, update = False) :
     confData = json.load(confJsonFile)
     with open("../resources/configuration.json", "w") as write_file :
         json.dump(confData, write_file, indent=4)
+    with open("../resources/general_info.json", "w") as write_file :
+        json.dump(confData["general_info"], write_file, indent=4)
     screenAmount = confData["general_info"]["number_of_screens"]
     for num in range(screenAmount):
         screenNumber = num + 1
