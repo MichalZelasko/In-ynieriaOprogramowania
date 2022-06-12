@@ -84,8 +84,8 @@ export class BarChartsComponent implements OnInit {
   }
 
   setUnit(unit: string){
-    this.appSerivce.chartConvert(unit, this.screenNumber, this.chartNumber).subscribe(res => {
-      console.log(res)
+    this.appSerivce.chartConvert(unit, this.screenNumber, this.chartNumber).subscribe(() => {
+      window.location.reload();
     });
   }
 }

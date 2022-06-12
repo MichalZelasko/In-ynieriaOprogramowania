@@ -74,6 +74,7 @@ export class TabsConfigurationComponent implements OnInit {
             this.tabs = [];
             this.getGeneralInfo();
             this.router.navigateByUrl('app/' + FIRST_SCREEN_PATH);
+            window.location.reload();
           })
         }        
       }
