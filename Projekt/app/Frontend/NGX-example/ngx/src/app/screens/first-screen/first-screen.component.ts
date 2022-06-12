@@ -34,7 +34,6 @@ export class FirstScreenComponent implements OnInit {
   datas: any;
   reload: boolean = true;
   actualUnit: any;
-  actualRoute: any;
 
 
   view: [number, number] = [900,570];
@@ -59,7 +58,6 @@ export class FirstScreenComponent implements OnInit {
       this.getFirstScreenInfo();
       this.reload = false;
     }
-    this.actualRoute = this.router.url;
   }
 
   getFirstScreenInfo(){

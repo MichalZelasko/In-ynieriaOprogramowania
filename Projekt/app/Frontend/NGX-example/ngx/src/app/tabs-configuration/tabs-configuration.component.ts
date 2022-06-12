@@ -31,9 +31,6 @@ export class TabsConfigurationComponent implements OnInit {
 
   ngOnInit(): void {
     this.getGeneralInfo();
-    setInterval(() => {
-      this.appService.refresh().subscribe(() => window.location.reload());
-    }, this.refreshTime); 
   }
 
   getGeneralInfo() {
@@ -43,6 +40,9 @@ export class TabsConfigurationComponent implements OnInit {
         this.refreshTime = this.generalInfo.refresh_time;
         this.numberOfScreens = this.generalInfo.number_of_screens;
         this.createScreens(this.numberOfScreens)
+        setInterval(() => {
+          this.appService.refresh().subscribe(() => window.location.reload());
+        }, this.refreshTime); 
       });
   }
 
