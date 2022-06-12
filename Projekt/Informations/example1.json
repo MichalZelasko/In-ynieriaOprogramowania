@@ -5,7 +5,7 @@
         "zooming" : false,
         "scale_changeable" : false,
         "automatic_refresh" : true,
-        "refresh_time" : "900 s(15 min)",
+        "refresh_time" : "900000",
         "user_refresh" : true
     },
     "screen_info" : {
