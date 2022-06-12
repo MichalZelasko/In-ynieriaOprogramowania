@@ -33,7 +33,7 @@ export class TabsConfigurationComponent implements OnInit {
     this.getGeneralInfo();
     setInterval(() => {
       this.appService.refresh().subscribe(() => window.location.reload());
-    }, 900000); //this.refreshTime
+    }, this.refreshTime); 
   }
 
   getGeneralInfo() {

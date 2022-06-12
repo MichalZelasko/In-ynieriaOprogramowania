@@ -155,14 +155,11 @@ export class SecondScreenComponent implements OnInit {
       else{
         if(this.chart_data.type == "linechart"){
           let colors = schemes[this.chart_data.data_list.color].domain;
-          console.log(this.chart_data.data_list.color);
           let results: LooseObject = {}; 
           let result: any = {datasets: []}; 
           for(let i = 1; i <= numberOfDatas; i++){
-            console.log("WYKRES NUMER: " + chartNumber + " DANA NUMER: " + i);
             let name = this.chart_data.data_list["data" + i].data_name;
             this.appService.getData(2, chartNumber, i).subscribe(res => {
-              console.log(res);
               for(let element of Object.keys(res.data)){
                 renameProperties(res.data[element]);
               }
@@ -207,7 +204,6 @@ export class SecondScreenComponent implements OnInit {
           let results: LooseObject = {}; 
           let result: any = {datasets: []}; 
           for(let i = 1; i <= numberOfDatas; i++){
-            console.log("WYKRES NUMER: " + chartNumber + " DANA NUMER: " + i);
             let name = this.chart_data.data_list["data" + i].data_name;
             this.appService.getData(2, chartNumber, i).subscribe(res => {
               for(let element of Object.keys(res.data)){
