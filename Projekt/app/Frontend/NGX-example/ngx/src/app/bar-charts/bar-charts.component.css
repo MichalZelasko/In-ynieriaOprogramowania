@@ -1,5 +1,6 @@
 ngx-charts-bar-vertical {
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+    font-size: 20px;
 }
 
 .chart-legend {
