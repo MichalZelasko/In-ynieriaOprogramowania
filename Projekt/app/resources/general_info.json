@@ -1,9 +1,9 @@
 {
-    "chart_number": 2,
-    "number_of_screens": 1,
+    "chart_number": 4,
+    "number_of_screens": 3,
     "zooming": false,
     "scale_changeable": false,
     "automatic_refresh": true,
-    "refresh_time": "900 s(15 min)",
+    "refresh_time": "900000",
     "user_refresh": true
 }

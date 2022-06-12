@@ -2,7 +2,7 @@
     "name": "nazwa ekranu",
     "layout": "vertcial",
     "tile_size": "w procentach ca\u0139\u201aego ekranu",
-    "chart_on_screen_number": 2,
+    "chart_on_screen_number": 1,
     "charts": {
         "chart1": {
             "name": "nazwa wykresu",
@@ -13,7 +13,7 @@
                 "position": "120px"
             },
             "horizontal": {
-                "size": "700px",
+                "size": "900px",
                 "position": "70px"
             },
             "x_name": "date",
@@ -35,30 +35,6 @@
                 "data2": {
                     "file_name": "../resources/screen_1_chart_1_data_2.json",
                     "data_name": "tempRead"
-                }
-            }
-        },
-        "chart2": {
-            "vertical": {
-                "size": "15px",
-                "position": "570px"
-            },
-            "horizontal": {
-                "size": "300px",
-                "position": "70px"
-            },
-            "is_chart": false,
-            "unit": "C",
-            "unit_conversion": "enabled",
-            "enabled_units": [
-                "C",
-                "F",
-                "K"
-            ],
-            "data_list": {
-                "data": {
-                    "file_name": "../resources/screen_1_chart_2_data_1.json",
-                    "data_name": "nazwa zmiennej"
                 }
             }
         }
