@@ -7,6 +7,7 @@ import { LineChartsComponent } from 'src/app/line-charts/line-charts.component';
 import { ScatterChartsComponent } from 'src/app/scatter-charts/scatter-charts.component';
 import { SingleValueComponent } from 'src/app/single-value/single-value.component';
 import { Router } from '@angular/router';
+import { NewScatterComponent } from 'src/app/new-scatter/new-scatter.component';
 
 
 function renameProperties(obj) {
@@ -103,7 +104,7 @@ export class SecondScreenComponent implements OnInit {
         newdomElem.style.left = this.chart_data.horizontal.position;
         newdomElem.style.backgroundColor = "#ebebeb";
         newdomElem.style.padding = "1%";
-        newdomElem.style.borderRadius = "4%";
+        newdomElem.style.borderRadius = "2%";
       });
     } else {
       if(numberOfDatas == 1){
@@ -148,7 +149,7 @@ export class SecondScreenComponent implements OnInit {
             newdomElem.style.display = 'inline-block';
             newdomElem.style.backgroundColor = "#ebebeb";
             newdomElem.style.padding = "1%";
-            newdomElem.style.borderRadius = "7%";
+            newdomElem.style.borderRadius = "2%";
           });
         }
       }
@@ -196,16 +197,18 @@ export class SecondScreenComponent implements OnInit {
           newdomElem.style.display = 'inline-block';
           newdomElem.style.backgroundColor = "#ebebeb";
           newdomElem.style.padding = "1%";
-          newdomElem.style.borderRadius = "7%";
+          newdomElem.style.borderRadius = "2%";
         }
 
-        if(this.chart_data.type == "scatter"){ 
+        if(this.chart_data.type == "scatter"){
           let colors = schemes[this.chart_data.data_list.color].domain;
+          console.log(this.chart_data.data_list.color);
           let results: LooseObject = {}; 
           let result: any = {datasets: []}; 
           for(let i = 1; i <= numberOfDatas; i++){
             let name = this.chart_data.data_list["data" + i].data_name;
-            this.appService.getData(2, chartNumber, i).subscribe(res => {
+            this.appService.getData(1, chartNumber, i).subscribe(res => {
+              console.log(res);
               for(let element of Object.keys(res.data)){
                 renameProperties(res.data[element]);
               }
@@ -213,7 +216,7 @@ export class SecondScreenComponent implements OnInit {
               result['datasets'][i-1] = results[i];
             });
           }
-
+      
           let screenHTML = document.getElementById("screen");
       
           let unit = "";
@@ -221,7 +224,7 @@ export class SecondScreenComponent implements OnInit {
             unit = " [" + this.chart_data.unit + "]";
           }
       
-          let barc = new ScatterChartsComponent(this.appService);
+          let barc = new NewScatterComponent(this.appService);
           barc.setValues(chartNumber.toString(), 
                          this.chart_data.horizontal.size, 
                          Math.floor(this.chart_data.vertical.size.substring(0, this.chart_data.vertical.size.length - 2)) - 100 + "px",
@@ -231,9 +234,9 @@ export class SecondScreenComponent implements OnInit {
                          result, 
                          this.unitsList, 
                          chartNumber, 
-                         2, 
+                         1, 
                          this.actualUnit);
-          let newdomElem = appendComponentToBody(this, ScatterChartsComponent, barc, screenHTML!);
+          let newdomElem = appendComponentToBody(this, NewScatterComponent, barc, screenHTML!);
       
           newdomElem.style.position = 'absolute';
           newdomElem.style.top = this.chart_data.vertical.position;
@@ -242,7 +245,7 @@ export class SecondScreenComponent implements OnInit {
           newdomElem.style.display = 'inline-block';
           newdomElem.style.backgroundColor = "#ebebeb";
           newdomElem.style.padding = "1%";
-          newdomElem.style.borderRadius = "7%";
+          newdomElem.style.borderRadius = "2%";
         }
       }
     }

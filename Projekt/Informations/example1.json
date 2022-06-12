@@ -21,7 +21,7 @@
                         "position": "120px"
                     },
                     "horizontal": {
-                        "size": "700px",
+                        "size": "900px",
                         "position": "70px"
                     },
                     "url_list" : {
@@ -98,7 +98,7 @@
                 "value1" : {
                     "vertical": {
                         "size": "15px",
-                        "position": "570px"
+                        "position": "670px"
                     },
                     "horizontal": {
                         "size": "300px",

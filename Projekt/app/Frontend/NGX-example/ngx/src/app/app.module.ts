@@ -23,6 +23,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatDialogModule} from '@angular/material/dialog';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { StartAppComponent } from './start-app/start-app.component';
+import { NewScatterComponent } from './new-scatter/new-scatter.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { StartAppComponent } from './start-app/start-app.component';
     SingleValueComponent,
     ScatterChartsComponent,
     FileUploadComponent,
-    StartAppComponent
+    StartAppComponent,
+    NewScatterComponent
   ],
   imports: [
     BrowserModule,
