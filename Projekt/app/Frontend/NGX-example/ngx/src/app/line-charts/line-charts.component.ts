@@ -43,8 +43,6 @@ export class LineChartsComponent implements OnInit {
   ngOnInit(): void {
     setTimeout(() =>{
       this.createChart();
-      console.log("Line: ");
-      console.log(this.data);
     }, 200);
   }
 

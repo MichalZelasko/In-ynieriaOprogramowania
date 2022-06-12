@@ -51,9 +51,6 @@ export class ScatterChartsComponent implements OnInit {
           }
         ]
       }
-      console.log("Scatter: ");
-      console.log(dat);
-      console.log(this.data);
     }, 200);
   }
 
