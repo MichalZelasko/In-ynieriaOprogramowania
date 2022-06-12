@@ -21,7 +21,7 @@
                         "position": "120px"
                     },
                     "horizontal": {
-                        "size": "700px",
+                        "size": "900px",
                         "position": "70px"
                     },
                     "url_list": {
@@ -47,7 +47,7 @@
                         ]
                     },
                     "color_list": {
-                        "color1": "papaj"
+                        "color1": "nonsense"
                     },
                     "data_names": {
                         "data_name1": "tempSet",
