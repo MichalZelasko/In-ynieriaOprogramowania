@@ -12,6 +12,7 @@ password_message = "Podaj hasło: "
 while True:
     password = tkinter.simpledialog.askstring("Wymagana autoryzacja", password_message, show="*")
     if password is None:
+        tkinter.messagebox.showinfo("DATAHUB-IO", "Instalacja została przerwana.")
         print("Aborting...")
         exit(-1)
 

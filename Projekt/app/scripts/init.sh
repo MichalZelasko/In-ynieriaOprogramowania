@@ -1,14 +1,14 @@
 #!/bin/bash
 
-scripts_dir=$(pwd)
+scripts_dir="$(pwd)/app/scripts"
 icon_dir="${scripts_dir}/../resources/graphics/icon_datahub.png"
 exe_dir="${scripts_dir}/run.sh"
 file=/home/$USERNAME/.local/share/applications/DATAHUB.desktop
 file_usr=/usr/share/applications/DATAHUB.desktop
 
 create_desktop_entry() {
-    touch /home/$USERNAME/.local/share/applications/DATAHUB.desktop
-    echo "[Desktop Entry]" >> /home/$USERNAME/.local/share/applications/DATAHUB.desktop
+    # touch /home/$USERNAME/.local/share/applications/DATAHUB.desktop
+    echo "[Desktop Entry]" > /home/$USERNAME/.local/share/applications/DATAHUB.desktop
     echo "Encoding=UTF-8" >> /home/$USERNAME/.local/share/applications/DATAHUB.desktop
     echo "Name=DATAHUB-IO" >> /home/$USERNAME/.local/share/applications/DATAHUB.desktop
     echo "Icon=${icon_dir}" >> /home/$USERNAME/.local/share/applications/DATAHUB.desktop
@@ -32,5 +32,6 @@ create_desktop_entry_usr() {
 
 create_desktop_entry
 sudo chmod +x $file
+sudo chmod +x $exe_dir
 
-sudo apt-get install parallel
+sudo apt-get --yes install parallel

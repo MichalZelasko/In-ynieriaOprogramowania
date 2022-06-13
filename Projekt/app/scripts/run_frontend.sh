@@ -1,3 +1,3 @@
-#/bin/bash
+#!/bin/bash
 
-cd ../Frontend/NGX-example/ngx && ng serve --open
+cd ../Frontend/NGX-example/ngx && ng serve
