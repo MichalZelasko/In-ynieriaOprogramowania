@@ -12,7 +12,6 @@
         "screen1" : {
             "name" : "Temperature and ID",
             "layout" : "vertcial",
-            "tile_size" : "w procentach całego ekranu",
             "chart_on_screen_number" : 2,
             "charts" : {
                 "chart1" : {

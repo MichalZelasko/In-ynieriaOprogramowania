@@ -269,8 +269,7 @@ def getScreenInfo(screen, screenName, update = False) :
     fileName = "../resources/" + screenName + ".json"
     info =  {
             "name" : screen["name"],
-            "layout" : screen["layout"], 
-            "tile_size" : screen["tile_size"], 
+            "layout" : screen["layout"],
             "chart_on_screen_number" : screen["chart_on_screen_number"]
             }
     chartsInfo, chartNum = getCharts(screen, fileName, screenName, update)

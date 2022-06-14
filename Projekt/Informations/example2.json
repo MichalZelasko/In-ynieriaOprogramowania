@@ -12,7 +12,6 @@
         "screen1": {
             "name": "Temperature for OT/MLYNNE",
             "layout": "vertcial",
-            "tile_size": "w procentach ca\u0139\u201aego ekranu",
             "chart_on_screen_number": 1,
             "charts": {
                 "chart1": {
@@ -103,7 +102,6 @@
         "screen2": {
             "name": "temperature now for OT/SUCHARSKIEGO",
             "layout": "vertcial",
-            "tile_size": "w procentach ca\u0139\u201aego ekranu",
             "chart_on_screen_number": 1,
             "charts": {},
             "displayed_live_values": {
@@ -140,7 +138,6 @@
         "screen3": {
             "name": "temperature and pm1 concentration",
             "layout": "vertcial",
-            "tile_size": "w procentach ca\u0139\u201aego ekranu",
             "chart_on_screen_number": 2,
             "charts": {
                 "chart1": {
