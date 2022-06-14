@@ -82,10 +82,6 @@
                         "date_start": "od kiedy dane wyswietlac",
                         "date_end": "do kiedy dane wyswietlac, default: teraz"
                     },
-                    "scale": {
-                        "low": "zakres wartosci na wykresie",
-                        "high": ""
-                    },
                     "x_name": "date",
                     "y_name": "temperature",
                     "unit": "C",
@@ -124,7 +120,6 @@
                         }
                     ],
                     "name": "temperature",
-                    "scale": "zakres warto\u0139\u203aci na wykresie",
                     "unit": "C",
                     "unit_conversion": "enabled",
                     "enabled_units": [
@@ -208,10 +203,6 @@
                         "date_start": "od kiedy dane wyswietlac",
                         "date_end": "do kiedy dane wyswietlac, default: teraz"
                     },
-                    "scale": {
-                        "low": "zakres wartosci na wykresie",
-                        "high": ""
-                    },
                     "x_name": "date",
                     "y_name": "temperature",
                     "unit": "C",
@@ -272,10 +263,6 @@
                     "date": {
                         "date_start": "od kiedy dane wyswietlac",
                         "date_end": "do kiedy dane wyswietlac, default: teraz"
-                    },
-                    "scale": {
-                        "low": "zakres wartosci na wykresie",
-                        "high": ""
                     },
                     "x_name": "date",
                     "y_name": "temperature",

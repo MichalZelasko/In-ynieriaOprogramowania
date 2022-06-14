@@ -82,10 +82,6 @@
                         "date_start" : "od kiedy dane wyswietlac",
                         "date_end" : "do kiedy dane wyswietlac, default: teraz"
                     },
-                    "scale" : {
-                        "low" : "zakres wartosci na wykresie",
-                        "high" : ""
-                    },
                     "x_name" : "date",
                     "y_name" : "temperature",
                     "unit" : "C",
@@ -110,7 +106,6 @@
                             }
                         ],
                     "name" : "id",
-                    "scale" : "zakres wartości na wykresie",
                     "unit" : "C",
                     "unit_conversion" : "enabled",
                     "enabled_units" : ["C", "F", "K"]
