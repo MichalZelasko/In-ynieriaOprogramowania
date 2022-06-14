@@ -10,7 +10,7 @@
     },
     "screen_info": {
         "screen1": {
-            "name": "nazwa ekranu",
+            "name": "Temperature for OT/MLYNNE",
             "layout": "vertcial",
             "tile_size": "w procentach ca\u0139\u201aego ekranu",
             "chart_on_screen_number": 1,
@@ -77,7 +77,7 @@
                             "max": 50
                         }
                     },
-                    "name": "nazwa wykresu",
+                    "name": "heater temperature set, temperature read",
                     "type": "scatter",
                     "date": {
                         "date_start": "od kiedy dane wyswietlac",
@@ -101,7 +101,7 @@
             "displayed_live_values": {}
         },
         "screen2": {
-            "name": "nazwa ekranu",
+            "name": "temperature now for OT/SUCHARSKIEGO",
             "layout": "vertcial",
             "tile_size": "w procentach ca\u0139\u201aego ekranu",
             "chart_on_screen_number": 1,
@@ -125,7 +125,7 @@
                             "dest": "temperature"
                         }
                     ],
-                    "name": "nazwa zmiennej",
+                    "name": "temperature",
                     "scale": "zakres warto\u0139\u203aci na wykresie",
                     "unit": "C",
                     "unit_conversion": "enabled",
@@ -138,7 +138,7 @@
             }
         },
         "screen3": {
-            "name": "nazwa ekranu",
+            "name": "temperature and pm1 concentration",
             "layout": "vertcial",
             "tile_size": "w procentach ca\u0139\u201aego ekranu",
             "chart_on_screen_number": 2,
@@ -205,7 +205,7 @@
                             "max": 50
                         }
                     },
-                    "name": "nazwa wykresu",
+                    "name": "temperature set and read",
                     "type": "linechart",
                     "date": {
                         "date_start": "od kiedy dane wyswietlac",
@@ -270,7 +270,7 @@
                             "max": 25
                         }
                     },
-                    "name": "nazwa wykresu",
+                    "name": "concentration",
                     "type": "histogram",
                     "date": {
                         "date_start": "od kiedy dane wyswietlac",
