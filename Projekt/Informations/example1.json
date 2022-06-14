@@ -10,7 +10,7 @@
     },
     "screen_info" : {
         "screen1" : {
-            "name" : "nazwa ekranu",
+            "name" : "Temperature and ID",
             "layout" : "vertcial",
             "tile_size" : "w procentach całego ekranu",
             "chart_on_screen_number" : 2,
@@ -77,7 +77,7 @@
                             "max" : 50
                         }
                     },
-                    "name" : "nazwa wykresu",
+                    "name" : "heater temperature set, temperature read",
                     "type" : "scatter",
                     "date" : {
                         "date_start" : "od kiedy dane wyswietlac",
@@ -110,7 +110,7 @@
                                 "dest": "id"
                             }
                         ],
-                    "name" : "nazwa zmiennej",
+                    "name" : "id",
                     "scale" : "zakres wartości na wykresie",
                     "unit" : "C",
                     "unit_conversion" : "enabled",
